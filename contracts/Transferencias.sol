@@ -2,19 +2,32 @@ pragma solidity ^0.5.0;
 
 contract Transferencias {
 
-    address[10] public participantes;
+    address[] public participantes;
     string public owner;
+
+
+
     
-      /// The smart contract's constructor
+    /// The smart contract's constructor
     constructor() public {
         owner = "primeiro";
     
     }
+    event Instructor(
+       string name,
+       uint age
+    );
 
-    function mudar() public{
-        owner = "segundo";
+    function adicionarParticipante() public{
+        participantes.push(msg.sender);
+        emit Instructor("ola",123); 
+
     }
 
+    function getLength() public view returns (uint count) {
+        return participantes.length;
+    }
+    
 
 
 }
