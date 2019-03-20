@@ -5,22 +5,37 @@ contract Transferencias {
     address[] public participantes;
     string public owner;
 
+    struct Venda {
+        uint contribuinteOri;
+        uint contribuinteDest;
+        uint valorTotal;
+        uint valorIva;
+        string nomeJogador;
+        uint data;  
+    }
 
+    struct Fatura{
+        uint hashVenda;
+        Venda venda;
+        uint estadoVenda;
+    }
 
+    mapping (address => Fatura) transacoes;
+    
     
     /// The smart contract's constructor
     constructor() public {
         owner = "primeiro";
     
     }
-    event Instructor(
+    event Exemplo(
        string name,
        uint age
     );
 
     function adicionarParticipante() public{
         participantes.push(msg.sender);
-        emit Instructor("ola",123); 
+        emit Exemplo("ola",123); 
 
     }
 
