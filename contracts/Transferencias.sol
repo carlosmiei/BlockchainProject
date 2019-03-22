@@ -3,14 +3,21 @@ pragma solidity ^0.5.0;
 contract Transferencias {
 
     address[] public participantes;
-    string public owner;
+    string  owner;
+
+    struct Jogador{
+        uint id;
+        string nome;
+        uint idade;
+        string nascimento;
+    }
 
     struct Venda {
         uint contribuinteOri;
         uint contribuinteDest;
         uint valorTotal;
         uint valorIva;
-        string nomeJogador;
+        Jogador jogador;
         uint data;  
     }
 
@@ -20,8 +27,11 @@ contract Transferencias {
         uint estadoVenda;
     }
 
-    mapping (address => Fatura) transacoes;
     
+    mapping (address => Fatura) transacoes;
+    mapping (uint => Jogador) jogadores;
+
+
     
     /// The smart contract's constructor
     constructor() public {
