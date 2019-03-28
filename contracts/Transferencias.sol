@@ -12,7 +12,7 @@ contract Transferencias {
     }
 
     uint[] KeysFaturas;
-    mapping (address => Fatura) transacoes;
+    mapping (uint => Fatura) transacoes;
     
     //eventos teste 
     event Exemplo(
@@ -32,14 +32,35 @@ contract Transferencias {
 
     }
 
+    function adicionarFatura(uint hash2,uint estado) public  {
+        require(isMember(msg.sender) == true,"Sender not authorized.");
+        
+        Fatura  memory myStruct = Fatura({hashVenda:hash2, estadoVenda:estado});
+        KeysFaturas.push(hash2);
+        transacoes[hash2]=myStruct;
+    }
+
+    function alterarEstadoFatura(uint hash2, uint estado) public{
+
+            require(isMember(msg.sender) == true,"Sender not authorized.");
+            transacoes[hash2].estadoVenda=estado;
+            //emitir aqui qqr coisa dependentemente disto        
+    }
+
+    function getEstado(uint hash2) public view returns (uint estado) {
+            require(isMember(msg.sender) == true,"Sender not authorized.");
+            Fatura memory fatura = transacoes[hash2];
+            return fatura.estadoVenda;
+    }
+
     function adicionarParticipante() public{
+        require(isMember(msg.sender) == true,"Sender not authorized.");
         participantes.push(msg.sender);
         emit Exemplo("ola",123); 
 
     }
 
     function getLength() public  view returns (uint count) {
-
         require(isMember(msg.sender) == true,"Sender not authorized.");
         return participantes.length;
     }
