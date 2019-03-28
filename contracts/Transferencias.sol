@@ -6,49 +6,30 @@ contract Transferencias {
     string public owner;
     bytes32 public owner2;
 
-    struct Jogador{
-        uint id;
-        string nome;
-        uint idade;
-        string nascimento;
-    }
-
-    struct Venda {
-        uint contribuinteOri;
-        uint contribuinteDest;
-        uint valorTotal;
-        uint valorIva;
-        Jogador jogador;
-        uint data;  
-    }
-
     struct Fatura{
         uint hashVenda;
-        Venda venda;
         uint estadoVenda;
     }
 
-    uint[] KeysJogadores;
+    uint[] KeysFaturas;
     mapping (address => Fatura) transacoes;
-    mapping (uint => Jogador) jogadores;
     
     //eventos teste 
     event Exemplo(
        string name,
        uint age
     );
-
-
     
     /// The smart contract's constructor
     constructor() public {
         owner = "primeiro";
         owner2= calculateHash("primeiro");
+        
 
-        //adicionar um jogador
-        adicionaJogador(1,20,"Carlos Gonçalves","02/01/1997");
-        adicionaJogador(2,20,"Ricardo Peixoto","01/11/1977");
-    
+        //adicionar os participantes
+        participantes.push(0x1Fb4C08AeA29A6642D8C963F1ca01c15C63385bc);
+        participantes.push(0xdB254AFdcaCEa500C4f7449c4b9F9DA3e1224F81);
+
     }
 
     function adicionarParticipante() public{
@@ -57,28 +38,27 @@ contract Transferencias {
 
     }
 
-    function adicionaJogador(uint id, uint idade, string memory nome, string  memory nascimento) private{
-            //fazer isto porque nao da para ter o tamanho dos maps aqui
-            KeysJogadores.push(id);
-            jogadores[id] = Jogador({id:id,nome:nome,idade:idade,nascimento:nascimento});
-   
-    }
+    function getLength() public  view returns (uint count) {
 
-    function getLength() public view returns (uint count) {
+        require(isMember(msg.sender) == true,"Sender not authorized.");
         return participantes.length;
     }
 
-    function getJogador(uint id) public view returns (string memory count) {
-        return jogadores[id].nome;
-    }
-    
-    function getLengthJogadores() public view returns (uint num){
-        return KeysJogadores.length;
-    }
 
     function calculateHash(string memory s )  private  returns (bytes32 res) 
     {
         return keccak256(abi.encodePacked(s));
+    }
+
+    function isMember(address add) private view returns (bool res) {
+        res=false;
+        for (uint i=0; i<participantes.length; i++) {
+            if (participantes[i] == msg.sender) {
+                res=true;
+                break;
+            }
+        }
+        return res;
     }
 
 }
