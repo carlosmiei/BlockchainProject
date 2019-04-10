@@ -10,7 +10,7 @@
       Owner: <b>{{owner}}</b>
     </div>
      <div>
-    <v-btn color="success">Success</v-btn>
+    <v-btn color="success" @click="adicionarFatura">Success</v-btn>
     <v-btn color="error">Error</v-btn>
     <v-btn color="warning">Warning</v-btn>
     <v-btn color="info">Info</v-btn>
@@ -21,6 +21,7 @@
 <script>
 import Users from '@/js/users'
 import Transferencias from '@/js/transferencias'
+import BlockTransfer from  '@/js/BlockTransfer'
 import { sep } from 'path';
 /* eslint-disable indent */
 export default {
@@ -36,36 +37,59 @@ export default {
     }
   },
   beforeCreate(){
-
-
-     
-
+    Transferencias.init()
+    Users.init()
+    BlockTransfer.init()
   },
-   created () {
+    created () {
+   
     this.account = window.web3.eth.accounts[0]
+
     web3.eth.getBalance(this.account, (error, result)=>{
         if(!error){
-          
            this.saldo=result.c[0]/10000;
-           
         }else{
             console.error(error)
         }
     })
+    //var res = await this.getOwner()
+   // this.owner=res;
+   
+    let hashF='212e69f1138c6664a662b65d471acf509c1cdf31'
 
-      Transferencias.init().then(() => {
-        Transferencias.owner(window.web3.eth.accounts[0]).then((exists) => {
-          this.owner=exists;
-       console.log('ownert')
-       console.log(exists)
-      })
-    }).catch(err => {
-      console.log(err)
-    })
+    BlockTransfer.init().then(()=>{
+        BlockTransfer.adicionarFatura("ola",1).then(tx=>{
+      console.log('dentro de BlockTransfer')
+      console.dir(tx)
+    }).catch(e=>{console.log('erroT' + e)})})
+
+  /*
+    Users.init().then(()=>{
+        Users.create("ola2").then(tx=>{
+      console.log('dentro de Users')
+      console.dir(tx)
+    }).catch(e=>{console.log('erroT' + e)})})*/
+   //this.adicionarFatura();
+
 
     },
   methods: {
+    
+    getOwner: async function (){
+      let self = this
+      var res = await Transferencias.owner()
+      return res
+    },
+    adicionarFatura: async function(){
+      let self=this
 
+    Users.init().then(()=>{
+        Users.create("ola",1).then(tx=>{
+      console.log('dentro de Users')
+      console.dir(tx)
+    }).catch(e=>{console.log('erroT' + e)})})
+
+    }
   }
 }
 </script>

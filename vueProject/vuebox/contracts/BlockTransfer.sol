@@ -1,21 +1,7 @@
 pragma solidity ^0.5.0;
 
-contract Users {
-
-  mapping(address => bytes32) public users;
-
-  struct Fatura{
-        bytes32 hashVenda;
-        uint estadoVenda;
-        uint valorTotal;
-    }
-
-  bytes32[] KeysFaturas;
-  mapping (bytes32 => Fatura) transacoes;
-
-  event PagamentoEfetuado(
-       bytes32 hash
-    );
+contract BlockTransfer {
+ mapping(address => bytes32) public users;
 
   event UserCreated(address indexed _address, bytes32 _pseudo);
   event UserDestroyed(address indexed _address);
@@ -44,14 +30,4 @@ contract Users {
     require(exists(_address));
     return (users[_address]);
   }
-
-  function adicionarFatura(bytes32 _hash2) public  {
-        //require(isMember(msg.sender) == true,"Sender not authorized.");
-        
-        Fatura  memory myStruct = Fatura({hashVenda:_hash2, estadoVenda:1,valorTotal:50});
-        KeysFaturas.push(_hash2);
-        transacoes[_hash2]=myStruct;
-        emit PagamentoEfetuado(_hash2);
-    }
-
 }

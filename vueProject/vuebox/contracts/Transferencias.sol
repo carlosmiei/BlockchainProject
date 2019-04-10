@@ -7,17 +7,17 @@ contract Transferencias {
     bytes32 public owner2;
 
     struct Fatura{
-        uint hashVenda;
+        bytes32 hashVenda;
         uint estadoVenda;
         uint valorTotal;
     }
 
-    uint[] KeysFaturas;
-    mapping (uint => Fatura) transacoes;
+    bytes32[] KeysFaturas;
+    mapping (bytes32 => Fatura) transacoes;
     
     //eventos teste 
     event PagamentoEfetuado(
-       uint hash
+       bytes32 hash
     );
     
     /// The smart contract's constructor
@@ -31,15 +31,16 @@ contract Transferencias {
 
     }
 
-    function adicionarFatura(uint hash2,uint estado) public  {
-        require(isMember(msg.sender) == true,"Sender not authorized.");
+    function adicionarFatura(bytes32 _hash2) public  {
+        //require(isMember(msg.sender) == true,"Sender not authorized.");
         
-        Fatura  memory myStruct = Fatura({hashVenda:hash2, estadoVenda:estado,valorTotal:50});
-        KeysFaturas.push(hash2);
-        transacoes[hash2]=myStruct;
+        Fatura  memory myStruct = Fatura({hashVenda:_hash2, estadoVenda:1,valorTotal:50});
+        KeysFaturas.push(_hash2);
+        transacoes[_hash2]=myStruct;
+        emit PagamentoEfetuado(_hash2);
     }
 
-    function alterarEstadoFatura(uint hash2, uint estado) public{
+    function alterarEstadoFatura(bytes32 hash2, uint estado) public{
 
             require(isMember(msg.sender) == true,"Sender not a  uthorized.");
             transacoes[hash2].estadoVenda=estado;
@@ -47,7 +48,7 @@ contract Transferencias {
             //emitir aqui qqr coisa dependentemente disto        
     }
 
-    function getEstado(uint hash2) public view returns (uint estado) {
+    function getEstado(bytes32 hash2) public view returns (uint estado) {
             require(isMember(msg.sender) == true,"Sender not authorized.");
             Fatura memory fatura = transacoes[hash2];
             return fatura.estadoVenda;
@@ -60,7 +61,7 @@ contract Transferencias {
     function adicionarParticipante() public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
         participantes.push(msg.sender);
-        emit PagamentoEfetuado(111); 
+        //emit PagamentoEfetuado(bytes32(111)); 
 
     }
 

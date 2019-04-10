@@ -1,7 +1,7 @@
 import contract from 'truffle-contract'
-import UsersContract from '@contracts/Transferencias.json'
+import BlockTransferContract from '@contracts/BlockTransfer.json'
 
-const Transferencias = {
+const BlockTransfer = {
 
   contract: null,
   instance: null,
@@ -10,7 +10,7 @@ const Transferencias = {
     let self = this
 
     return new Promise(function (resolve, reject) {
-      self.contract = contract(UsersContract)
+      self.contract = contract(BlockTransferContract)
       self.contract.setProvider(window.web3.currentProvider)
 
       self.contract.deployed().then(instance => {
@@ -40,10 +40,10 @@ const Transferencias = {
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.adicionarFatura.call(
+      self.instance.create.call(
         hashF,{from: window.web3.eth.accounts[0]}
       ).then(exists => {
-        console.log("dentro transferencias")
+        console.log("dentro BlockTransfer")
         console.dir(exists)
         resolve(exists)
       }).catch(err => {
@@ -56,4 +56,4 @@ const Transferencias = {
 
 }
 
-export default Transferencias
+export default BlockTransfer

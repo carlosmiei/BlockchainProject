@@ -4,7 +4,6 @@ import UsersContract from '@contracts/Users.json'
 const Users = {
 
   contract: null,
-
   instance: null,
 
   init: function () {
@@ -61,6 +60,8 @@ const Users = {
         pseudo,
         {from: window.web3.eth.accounts[0]}
       ).then(tx => {
+        console.log('dentro do create')
+        console.dir(JSON.stringify(tx))
         resolve(tx)
       }).catch(err => {
         reject(err)
@@ -80,6 +81,22 @@ const Users = {
         reject(err)
       })
     })
+  },  adicionarFatura: function(hashF,estado){
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.adicionarFatura(
+        hashF,{from: window.web3.eth.accounts[0]}
+      ).then(exists => {
+        console.log("dentro transferencias")
+        console.dir(exists)
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
   }
 }
 
