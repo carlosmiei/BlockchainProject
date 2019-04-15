@@ -1,5 +1,7 @@
 <template>
   <div>
+
+<!-- Inicio Loading -->
 <!-- v-if="show != true" -->
     <div v-if="loading == true"  class="loader">
 
@@ -13,9 +15,10 @@
       </v-container>
     </v-dialog>
   </v-layout>
-
     </div>
+<!-- Fim do loading -->
 
+<!-- Inicio do form -->
   <form-wizard v-if="show" color="#5DBCD2" shape="square" title="Adicionar uma Transferencia" @on-complete="adicionarTransacao">
   <tab-content title="Hash da transação">
     <v-form v-model="valid">
@@ -75,14 +78,49 @@
         <v-flex
           xs12  
         >
-
         </v-flex>
       </v-layout>
     </v-container>
   </v-form>
-   </tab-content>
+   </tab-content>   
 </form-wizard>
-Recibo da fatura: {{recibo}}
+   <!-- Fim do form -->
+<!-- Inicio do recibo -->
+   <div v-if="showRecibo" class="fatura">
+     <v-spacer></v-spacer>
+     <v-layout row>
+    <v-flex xs12 >
+      <v-card>
+        <v-img
+          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+          height="100px"
+        >
+        </v-img>
+
+        <v-card-title primary-title>
+          <div>
+            <div class="headline">Transação adicionada com sucesso!</div>
+            <span class="grey--text">Clique na seta para ver os detalhes</span>
+          </div>
+        </v-card-title>
+
+        <v-card-actions>
+          <v-btn icon @click="showR = !showR">
+            <v-icon>{{ showR ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+          </v-btn>
+        </v-card-actions>
+
+        <v-slide-y-transition>
+          <v-card-text v-show="showR">
+            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+          </v-card-text>
+        </v-slide-y-transition>
+      </v-card>
+    </v-flex>
+  </v-layout>
+   </div>
+<!-- fim do recibo -->
+<!-- Recibo da fatura: {{recibo}} -->
   </div>
 </template>
 
@@ -98,7 +136,9 @@ export default {
             show:true,
             value:'ol',
             loading:false,
-            recibo:''
+            recibo:'',
+            showR:true,
+            showRecibo:false
     }
   },created (){
     Transferencias.init()
@@ -110,6 +150,7 @@ export default {
       this.loading=false
       this.show=false
       this.recibo=res
+      this.showRecibo=true
 
     }
   }
