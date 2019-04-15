@@ -1,73 +1,26 @@
 <template>
     <div>
-      
-            <v-navigation-drawer
-
-    
-    stateless
-    value="true"
+       <v-navigation-drawer
+    class="primary"
+    dark
+    permanent
   >
     <v-list>
-      <v-list-tile>
-        <v-list-tile-action>
-          <v-icon>home</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-title>Home</v-list-tile-title>
-      </v-list-tile>
-
-      <v-list-group
-        prepend-icon="account_circle"
-        value="true"
+      <v-list-tile
+        v-for="item in items"
+        :key="item.title"
+        @click=""
+        :to="item.route"
+        active-class="blue lighten-1"
       >
-        <template v-slot:activator>
-          <v-list-tile>
-            <v-list-tile-title>Users</v-list-tile-title>
-          </v-list-tile>
-        </template>
-        <v-list-group
-          no-action
-          sub-group
-          value="true"
-        >
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-title>Admin</v-list-tile-title>
-            </v-list-tile>
-          </template>
+        <v-list-tile-action >
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-tile-action>
 
-          <v-list-tile
-            v-for="(admin, i) in admins"
-            :key="i"
-            @click=""
-          >
-            <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon v-text="admin[1]"></v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list-group>
-
-        <v-list-group
-          sub-group
-          no-action
-        >
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-title>Actions</v-list-tile-title>
-            </v-list-tile>
-          </template>
-          <v-list-tile
-            v-for="(crud, i) in cruds"
-            :key="i"
-            @click=""
-          >
-            <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon v-text="crud[1]"></v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list-group>
-      </v-list-group>
+        <v-list-tile-content>
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list>
   </v-navigation-drawer>
  
@@ -80,6 +33,16 @@ export default {
       data () {
             return {
             msg: 'Bem vindo!',
+            items: [
+          { title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'},
+          { title: 'Adicionar Transação', icon: 'dashboard',route:'/addTransfer' },
+          { title: 'Alterar Transação', icon: 'dashboard' },
+          { title: 'Consultar Transação', icon: 'dashboard' },
+          { title: 'Perfil', icon: 'dashboard' },
+          { title: 'Jogadores', icon: 'dashboard' },
+          { title: 'Account', icon: 'account_box' },
+          { title: 'Admin', icon: 'gavel' }
+        ]
     }
   },
 }

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-toolbar  color="#5DBCD2" >
+    <v-toolbar height="50px" color="#327CCB" >
     <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title>BlockTransfer</v-toolbar-title>
+    <v-toolbar-title class="white--text">BlockTransfer</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat>Link One</v-btn>

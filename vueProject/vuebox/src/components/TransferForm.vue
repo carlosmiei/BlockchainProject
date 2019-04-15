@@ -19,7 +19,7 @@
 <!-- Fim do loading -->
 
 <!-- Inicio do form -->
-  <form-wizard v-if="show" color="#5DBCD2" shape="square" title="Adicionar uma Transferencia" @on-complete="adicionarTransacao">
+  <form-wizard v-if="show" color="#327CCB" shape="square" title="Adicionar uma Transferencia" @on-complete="adicionarTransacao">
   <tab-content title="Hash da transação">
     <v-form v-model="valid">
     <v-container>
@@ -89,7 +89,7 @@
    <div v-if="showRecibo" class="fatura">
      <v-spacer></v-spacer>
      <v-layout row>
-    <v-flex xs12 >
+    <v-flex xs6 >
       <v-card>
         <v-img
           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -99,7 +99,7 @@
 
         <v-card-title primary-title>
           <div>
-            <div class="headline">Transação adicionada com sucesso!</div>
+            <div class="headline">Transação adicionada com sucesso! <v-icon color="green" x-large>check</v-icon> </div>
             <span class="grey--text">Clique na seta para ver os detalhes</span>
           </div>
         </v-card-title>

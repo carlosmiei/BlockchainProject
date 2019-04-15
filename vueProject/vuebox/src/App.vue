@@ -10,7 +10,7 @@
         <SideBar/>
       </v-flex>
       <v-flex xs9 class="car" >
-         <!-- <v-card max-height="8%" dark color="#5DBCD2"> -->
+         <!-- <v-card max-height="8%" dark color="#327CCB"> -->
           <Bread/>
            <router-view/>
         </v-flex>
@@ -49,7 +49,7 @@ export default {
 } */
 
 .side{
-  background-color: lightblue;
+  background-color: #327CCB;
  
 
 }

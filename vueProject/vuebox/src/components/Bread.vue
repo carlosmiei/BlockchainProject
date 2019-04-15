@@ -11,22 +11,25 @@ export default {
             return {
             msg: 'Bem vindo!',
             items:[{
-          text: 'Dashboard',
-          disabled: true,
-          href: 'breadcrumbs_dashboard'
-        },
-        {
-          text: 'Link 1',
-          disabled: true,
-          href: 'breadcrumbs_link_1'
-        },
-        {
-          text: 'Link 2',
-          disabled: true,
-          href: 'breadcrumbs_link_2'
+                  text: 'Menu',
+                  disabled: true,
+                  href: 'breadcrumbs_dashboard'
         }]
     }
-  },
+  },created(){
+    console.log('Entrei bread')
+    var path = this.$route.fullPath
+    path = path.substring(1);
+    
+    var obj = {
+      text: path,
+      disabled: true,
+      href: 'breadcrumbs_link_2'
+    }
+    this.items.push(obj)
+
+    console.dir(this.$route.fullPath)
+  }
 }
 </script>
 

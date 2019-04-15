@@ -4,9 +4,12 @@
   <div>    
     <!-- teste -->
             <v-container>
-                <div>
-                  Welcome conta: <b>{{ account }} </b> <br>
-                </div>
+              <v-flex xs12>
+                 <v-card dark color="primary">
+                    <v-card-text class="px-0">Utilizador: <b>{{ account }} </b> </v-card-text>
+                  </v-card>
+              </v-flex>
+
                 <TransferForm/>
                 <div> <p> Hash da transação: {{this.recibo}} </p>
 
