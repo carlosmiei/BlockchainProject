@@ -40,7 +40,7 @@ const Transferencias = {
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.adicionarFatura.call(
+      self.instance.adicionarFatura(
         hashF,{from: window.web3.eth.accounts[0]}
       ).then(exists => {
         console.log("dentro transferencias")

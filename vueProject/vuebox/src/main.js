@@ -2,14 +2,14 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import './plugins/vuetify'
-import './plugins/vuetify'
-import './plugins/vuetify'
-import './plugins/vuetify'
 import App from './App'
 import Web3 from 'web3'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' 
+import VueFormWizard from 'vue-form-wizard'
+import 'vue-form-wizard/dist/vue-form-wizard.min.css'
+Vue.use(VueFormWizard)
 
 
 Vue.use(Vuetify)

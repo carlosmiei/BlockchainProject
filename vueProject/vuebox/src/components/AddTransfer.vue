@@ -1,0 +1,113 @@
+
+<template>
+
+  <div>    
+    <!-- teste -->
+            <v-container>
+                <div>
+                  Welcome conta: <b>{{ account }} </b> <br>
+                </div>
+                <TransferForm/>
+                <div> <p> Hash da transação: {{this.recibo}} </p>
+
+                </div>
+                 <div>
+                   <v-btn color="success" @click="adicionarFatura">Success</v-btn>
+                   <v-btn color="error">Error</v-btn>
+                   <v-btn color="warning">Warning</v-btn>
+                  <v-btn color="info">Info</v-btn>
+                   </div>
+             </v-container>
+<!--- PopUp --->
+
+<!--- Footer --->
+
+  </div>
+</template>
+
+<script>
+import Transferencias from '@/js/transferencias'
+import BlockTransfer from  '@/js/BlockTransfer'
+import TransferForm from './TransferForm.vue'
+/* eslint-disable indent */
+export default {
+  name: 'dashboard',
+  components:{
+      TransferForm
+  },
+  data () {
+    return {
+      msg: 'Bem vindo!',
+      pseudo: undefined,
+      account: window.web3.eth.accounts[0],
+      saldo:0,
+      owner:'',
+      recibo:''
+
+    }
+  },
+  beforeCreate(){
+    Transferencias.init()
+    BlockTransfer.init()
+  },
+    created () {
+   
+    this.account = window.web3.eth.accounts[0]
+
+    web3.eth.getBalance(this.account, (error, result)=>{
+        if(!error){
+           this.saldo=result.c[0]/10000;
+        }else{
+            console.error(error)
+        }
+    })
+    //var res = await this.getOwner()
+   // this.owner=res;
+   
+    let hashF='212e69f1138c6664a662b65d471acf509c1cdf31'
+
+    BlockTransfer.init().then(()=>{
+        BlockTransfer.adicionarFatura("ola",1).then(tx=>{
+      console.log('dentro de BlockTransfer')
+      console.dir(tx)
+    }).catch(e=>{console.log('erroT' + e)})})
+
+
+
+  /*
+    Users.init().then(()=>{
+        Users.create("ola2").then(tx=>{
+      console.log('dentro de Users')
+      console.dir(tx)
+    }).catch(e=>{console.log('erroT' + e)})})*/
+   //this.adicionarFatura();
+
+
+    },
+  methods: {
+    
+    getOwner: async function (){
+      let self = this
+      var res = await Transferencias.owner()
+      return res
+    },
+    adicionarFatura: async function(){
+      let self=this
+      Transferencias.adicionarFatura("ola",1).then(tx =>{
+        console.log(tx)
+        this.recibo=tx
+      })
+    
+
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+
+
+
+</style>
