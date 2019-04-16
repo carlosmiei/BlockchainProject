@@ -27,8 +27,17 @@ export default {
     }
   },methods:{
       efetuarLogin(){
-          alert('boi')
-      }
+        var x = window.web3.eth.accounts[0]
+        if (x== undefined){
+            alert("Certifique-se que tem o metamask ativo!")
+        } else {
+            alert("Wallet: " +  x)
+            this.$router.push('/')
+        }
+
+
+
+}
   }
 }
 </script>
