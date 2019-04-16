@@ -16,7 +16,7 @@ export default {
                   href: 'breadcrumbs_dashboard'
         }]
     }
-  },created(){
+  },computed(){
     console.log('Entrei bread')
     var path = this.$route.fullPath
     path = path.substring(1);
