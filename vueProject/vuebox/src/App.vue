@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="main">
-    <v-app id="app" class="main">
+    <v-app v-if="$route.path!='/login'" id="app" class="main">
      <div>
       <NavBar/>
     </div>
@@ -17,6 +17,9 @@
         </v-layout>
         </v-container>
         <Footer/>
+    </v-app>
+    <v-app v-else>
+      <router-view></router-view>
     </v-app>
     
   </div>
