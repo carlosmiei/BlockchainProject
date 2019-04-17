@@ -14,7 +14,24 @@
     <img src="../assets/logo_transparent.png" alt="Avatar man" style=" height: 100%;width: 100%">
   </div>
 </div>
+
+<div v-if="loading == true" class="loader">
+<v-layout row justify-center>
+    <v-dialog v-model="value" persistent content content-class="centered-dialog">
+      <v-container fill-height>
+        <v-layout column justify-center align-center>
+          <v-progress-circular indeterminate :size="90" :width="7" color="blue"></v-progress-circular>
+          <h1>Aguarde a conexão com todos os sistemas!</h1>
+        </v-layout>
+      </v-container>
+    </v-dialog>
+  </v-layout>
+  </div>
+
     </div>
+
+
+    
 </template>
 
 <script>
@@ -24,6 +41,7 @@ export default {
   },
   data () {
     return {
+      loading: true
     }
   },methods:{
       efetuarLogin(){
@@ -31,7 +49,10 @@ export default {
         if (x == undefined){
             alert("Certifique-se que tem o metamask ativo!")
         } else {
-            alert("Wallet: " +  x)
+            this.loading=true;
+            alert('entrei else')
+            setTimeout(function(){this.loading=false; }, 2000);
+            
             this.$store.commit('changeWallet',x)
             this.$store.commit('changeLogged',true)
             this.$router.push('/')
