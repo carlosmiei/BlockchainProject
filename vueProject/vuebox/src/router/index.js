@@ -3,9 +3,11 @@ import Router from 'vue-router'
 import Init from '@/components/Init'
 import AddTransfer from '@/components/AddTransfer'
 import Login from '@/components/Login'
+import { store } from '@/store/store'
+
 Vue.use(Router)
 
-export default new Router({
+let router =  new Router({
   routes: [
 
     {
@@ -25,3 +27,26 @@ export default new Router({
     }
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+
+  if (to.fullPath != '/login' && !store.getters.isLogged) {
+    console.log("nao estou logado")
+    next('/login') 
+    return
+  }
+  if (to.fullPath == '/login' && store.getters.isLogged ) {
+    console.log('!!!!1estou logafo!!')
+    next('/') 
+    return
+
+  }
+  next()
+  return
+})
+
+
+
+
+export default router

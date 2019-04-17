@@ -17,7 +17,7 @@ export const store = new Vuex.Store({
               state.wallet=wallet
           }
       }, getters:{
-        walltet: state => state.walltet,
+        wallet: state => state.wallet,
         isLogged: state => state.isLogged
  
  

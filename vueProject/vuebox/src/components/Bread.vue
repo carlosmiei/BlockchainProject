@@ -17,18 +17,18 @@ export default {
         }]
     }
   },computed(){
-    console.log('Entrei bread')
-    var path = this.$route.fullPath
-    path = path.substring(1);
+    // console.log('Entrei bread')
+    // var path = this.$route.fullPath
+    // path = path.substring(1);
     
-    var obj = {
-      text: path,
-      disabled: true,
-      href: 'breadcrumbs_link_2'
-    }
-    this.items.push(obj)
+    // var obj = {
+      // text: path,
+      // disabled: true,
+      // href: 'breadcrumbs_link_2'
+    // }
+    // this.items.push(obj)
 
-    console.dir(this.$route.fullPath)
+    // console.dir(this.$route.fullPath)
   }
 }
 </script>

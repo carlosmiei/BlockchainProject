@@ -28,10 +28,12 @@ export default {
   },methods:{
       efetuarLogin(){
         var x = window.web3.eth.accounts[0]
-        if (x== undefined){
+        if (x == undefined){
             alert("Certifique-se que tem o metamask ativo!")
         } else {
             alert("Wallet: " +  x)
+            this.$store.commit('changeWallet',x)
+            this.$store.commit('changeLogged',true)
             this.$router.push('/')
         }
 

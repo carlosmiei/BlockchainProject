@@ -5,9 +5,9 @@
     <v-toolbar-title class="white--text">BlockTransfer</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat>Link One</v-btn>
-      <v-btn flat>Link Two</v-btn>
-      <v-btn flat>Link Three</v-btn>
+      <v-btn class="white--text" flat>Log Out</v-btn>
+      <v-btn class="white--text" flat>Link Two</v-btn>
+      <v-btn class="white--text" flat>Link Three</v-btn>
     </v-toolbar-items>
     </v-toolbar>
     </div>
