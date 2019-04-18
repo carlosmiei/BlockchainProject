@@ -6,12 +6,12 @@
     </div>
     <v-container grid-list-md text-xs-center class="main">
     <v-layout row wrap>
-      <v-flex xs3 class="side">
+      <v-flex xs3  class="side">
         <SideBar/>
       </v-flex>
-      <v-flex xs9 class="car" >
+      <v-flex xs9 md9 class="car" >
          <!-- <v-card max-height="8%" dark color="#327CCB"> -->
-          <Bread/>
+          <!-- <Bread/> -->
            <router-view/>
         </v-flex>
         </v-layout>
@@ -53,7 +53,6 @@ export default {
 
 .side{
   background-color: #327CCB;
- 
 
 }
 

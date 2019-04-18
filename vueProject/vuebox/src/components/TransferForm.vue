@@ -3,8 +3,7 @@
 
 <!-- Inicio Loading -->
 <!-- v-if="show != true" -->
-    <div v-if="loading == true"  class="loader">
-
+<div v-if="loading == true"  class="loader">
 <v-layout row justify-center>
     <v-dialog v-model="value" persistent content content-class="centered-dialog">
       <v-container fill-height>

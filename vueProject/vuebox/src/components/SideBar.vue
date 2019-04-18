@@ -1,10 +1,10 @@
 <template>
     <div>
        <v-navigation-drawer
-    class="primary"
-    dark
-    permanent
-  >
+          class="primary"
+          dark
+          permanent
+        >
     <v-list>
       <v-list-tile
         v-for="item in items"
@@ -35,11 +35,11 @@ export default {
             msg: 'Bem vindo!',
             items: [
           { title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'},
-          { title: 'Adicionar Transação', icon: 'dashboard',route:'/addTransfer' },
-          { title: 'Alterar Transação', icon: 'dashboard' },
-          { title: 'Consultar Transação', icon: 'dashboard' },
+          { title: 'Adicionar Transação', icon: 'transfer_within_a_station',route:'/addTransfer' },
+          { title: 'Alterar Transação', icon: 'touch_app' },
+          { title: 'Consultar Transação', icon: 'list' },
           { title: 'Perfil', icon: 'dashboard' },
-          { title: 'Jogadores', icon: 'dashboard' },
+          { title: 'Jogadores', icon: 'person' },
           { title: 'Account', icon: 'account_box' },
           { title: 'Admin', icon: 'gavel' }
         ]
