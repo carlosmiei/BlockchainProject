@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Init from '@/components/Init'
 import AddTransfer from '@/components/AddTransfer'
 import Login from '@/components/Login'
+import DashBoard from '@/components/DashBoard'
 import { store } from '@/store/store'
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ let router =  new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/dashboard',
+      name: 'DashBoard',
+      component: DashBoard
     }
   ]
 })
