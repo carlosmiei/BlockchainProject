@@ -161,7 +161,7 @@
 <!-- inicio popup -->
     <v-dialog
       v-model="dialog"
-      width="500"
+      width="600"
     >
       <v-card>
         <v-card-title
@@ -169,10 +169,14 @@
           primary-title
         >
           Transação Adicionada!   &nbsp;  <v-icon color="green" x-large >check</v-icon>
+
         </v-card-title>
 
         <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <b>Hash Transação: </b> {{this.trHash}} <br>
+        <b>Gas utilizado: </b> {{this.gas}} <br>
+        <b>Número do bloco: </b> {{this.block}} <br>
+        <b>Evento acionado: </b> {{this.event}}
         </v-card-text>
 
         <v-divider></v-divider>
@@ -191,6 +195,7 @@
     </v-dialog>
 <!-- fim do popup -->
 <!-- Recibo da fatura: {{recibo}} -->
+  <!-- {{recibo}} -->
   </div>
 </template>
 
@@ -217,7 +222,11 @@ export default {
            showRecibo:false,
            estado:'',
            hashT:'',
-           dialog:false
+           dialog:false,
+           trHash:'',
+           gas:'',
+           block:'',
+           event:''
     }
   },created (){
     Transferencias.init()
@@ -226,10 +235,20 @@ export default {
     async adicionarTransacao(){
       this.loading=true
       var res = await Transferencias.adicionarFatura(this.hashT,this.ValorT)
+      //alert((JSON.stringify(res)))
       this.loading=false
       this.show=false
       this.recibo=res
       this.showRecibo=true
+
+      //campos do popup
+      this.trHash= res["receipt"].transactionHash
+      this.gas= res["receipt"].gasUsed
+      this.block = res["receipt"].blockNumber
+      var array = res["logs"]
+      //console.log("ARRAYYYYYYYYYYY")
+      //console.dir(array)
+      this.event = array[0].event
       this.dialog=true
       // reset Form
       this.contribuinteD=''
