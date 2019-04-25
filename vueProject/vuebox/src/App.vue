@@ -4,8 +4,8 @@
      <div>
       <NavBar/>
     </div>
-    <v-container grid-list-md text-xs-center class="main">
-    <v-layout row wrap>
+    <v-container grid-list-md text-xs-center class="main2">
+    <v-layout row wrap class="main3">
       <v-flex xs3  class="side">
         <SideBar/>
       </v-flex>
@@ -62,5 +62,15 @@ export default {
 
 .main {
   background-color: #E9EAEE;
+
+}
+
+.main2 {
+   
+    background-color: #E9EAEE;
+}
+
+.main3{
+  min-height: 700px;
 }
 </style>

@@ -18,7 +18,7 @@
 <!-- Fim do loading -->
 
 <!-- Inicio do form -->
-  <form-wizard v-if="show" color="#327CCB" shape="square" title="Adicionar uma Transferencia" @on-complete="adicionarTransacao">
+  <form-wizard  color="#327CCB" shape="square" title="Adicionar uma Transferencia" @on-complete="adicionarTransacao" ref="wizard">
   
   <!-- primeiro form -->
   <tab-content title="Informações Transação"  :before-change="teste" >
@@ -158,41 +158,38 @@
    </tab-content>   
 </form-wizard>
    <!-- Fim do form -->
-<!-- Inicio do recibo -->
-   <div v-if="showRecibo" class="fatura">
-     <v-spacer></v-spacer>
-     <v-layout row>
-    <v-flex xs6 >
+<!-- inicio popup -->
+    <v-dialog
+      v-model="dialog"
+      width="500"
+    >
       <v-card>
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-          height="100px"
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
         >
-        </v-img>
-
-        <v-card-title primary-title>
-          <div>
-            <div class="headline">Transação adicionada com sucesso! <v-icon color="green" x-large>check</v-icon> </div>
-            <span class="grey--text">Clique na seta para ver os detalhes</span>
-          </div>
+          Transação Adicionada!   &nbsp;  <v-icon color="green" x-large >check</v-icon>
         </v-card-title>
 
+        <v-card-text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
         <v-card-actions>
-          <v-btn icon @click="showR = !showR">
-            <v-icon>{{ showR ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            flat
+            @click="dialog = false"
+          >
+            I accept
           </v-btn>
         </v-card-actions>
-
-        <v-slide-y-transition>
-          <v-card-text v-show="showR">
-            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
-          </v-card-text>
-        </v-slide-y-transition>
       </v-card>
-    </v-flex>
-  </v-layout>
-   </div>
-<!-- fim do recibo -->
+    </v-dialog>
+<!-- fim do popup -->
 <!-- Recibo da fatura: {{recibo}} -->
   </div>
 </template>
@@ -219,7 +216,8 @@ export default {
            showR:true,
            showRecibo:false,
            estado:'',
-           hashT:''
+           hashT:'',
+           dialog:false
     }
   },created (){
     Transferencias.init()
@@ -232,6 +230,16 @@ export default {
       this.show=false
       this.recibo=res
       this.showRecibo=true
+      this.dialog=true
+      // reset Form
+      this.contribuinteD=''
+      this.contribuinteO= ''
+      this.numFatura= ''
+      this.dataE=''
+      this.nomeJogador= ''
+      this.valorT= '' 
+      this.valorI= '' 
+      this.$refs.wizard.navigateToTab(0)
 
     }, teste(){
       //alert('top')
