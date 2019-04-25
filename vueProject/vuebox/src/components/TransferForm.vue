@@ -19,25 +19,89 @@
 
 <!-- Inicio do form -->
   <form-wizard v-if="show" color="#327CCB" shape="square" title="Adicionar uma Transferencia" @on-complete="adicionarTransacao">
-  <tab-content title="Hash da transação">
+  
+  <!-- primeiro form -->
+  <tab-content title="Informações Transação"  :before-change="teste" >
     <v-form v-model="valid">
     <v-container>
       <v-layout>
         <v-flex
-          xs12  
+          xs4  
         >
           <v-text-field
-            v-model="hashT"
-            :counter="256"
-            label="Hash da transação"
+            v-model="contribuinteO"
+            :counter="9"
+            label="Contribuinte Originante"
             required
           ></v-text-field>
         </v-flex>
-      </v-layout>
-    </v-container>
-  </v-form>
+
+        <v-flex
+          xs4  
+        >
+          <v-text-field
+            v-model="contribuinteD"
+            :counter="9"
+            label="Contribuinte Destinário"
+            required
+          ></v-text-field>
+        </v-flex>
+        <v-flex
+          xs4  
+        >
+          <v-text-field
+            v-model="numFatura"
+            :counter="256"
+            label="Número da Fatura"
+            required
+          ></v-text-field>
+        </v-flex>
+        </v-layout>
+        <v-layout>
+        <v-flex
+          xs6  
+        >
+          <v-text-field
+            v-model="dataE"
+            :counter="256"
+            label="Data Emissão"
+            required
+          ></v-text-field>
+        </v-flex>
+        <v-flex
+          xs6  
+        >
+          <v-text-field
+            v-model="nomeJogador"
+            :counter="256"
+            label="Nome do Jogador"
+            required
+          ></v-text-field>
+        </v-flex>
+        </v-layout>
+        <v-layout>
+          
+          <v-text-field
+            v-model="valorT"
+            :counter="256"
+            label="Valor Total"
+            required
+          ></v-text-field>
+
+                    <v-text-field
+            v-model="valorI"
+            :counter="256"
+            label="Valor Iva"
+            required
+          ></v-text-field>
+
+        </v-layout>
+    </v-container> 
+      </v-form>
+
   </tab-content>
-  <tab-content title="Valor da transação">
+  <!-- segundo form -->
+  <tab-content title="Hash da transação">
         <v-form v-model="valid">
     <v-container>
       <v-layout>
@@ -45,9 +109,10 @@
           xs12  
         >
           <v-text-field
-            v-model="ValorT"
+            :value="hashT"
             :counter="256"
-            label="Valor da transação (euros)"
+            label="Hash da transação"
+            readonly="ola"
             required
           ></v-text-field>
         </v-flex>
@@ -55,20 +120,29 @@
     </v-container>
   </v-form>
    </tab-content>
-     <tab-content title="Confirmação">
+
+   <!-- terceiro form -->
+     <tab-content title="Informação a registar">
         
         <v-form v-model="valid">
             <v-text-field
-            v-model="hashT"
+            :value="hashT"
             :counter="256"
             label="Hash da transação"
             readonly="ola"
           ></v-text-field>
          
             <v-text-field
-            v-model="hashT"
+            :value="valorT"
             :counter="256"
-            label="Valor da transação"
+            label="Valor Total da transação"
+            readonly="ola"
+          ></v-text-field>
+
+            <v-text-field
+            :value="estado"
+            :counter="256"
+            label="Estado da Transação"
             readonly="ola"
           ></v-text-field>
     
@@ -125,19 +199,27 @@
 
 <script>
 import Transferencias from '../js/transferencias.js'
+var sha256 = require('js-sha256');
 export default {
     name: 'TransferForm',
       data () {
             return {
-            msg: 'Bem vindo!',
-            hashT: '',
-            ValorT:'' ,
-            show:true,
-            value:'ol',
-            loading:false,
-            recibo:'',
-            showR:true,
-            showRecibo:false
+           msg: 'Bem vindo!',
+           contribuinteD:'',
+           contribuinteO: '',
+           numFatura: '',
+           dataE:'',
+           nomeJogador: '',
+           valorT: '' ,
+           valorI: '' , 
+           show:true,
+           value:'ol',
+           loading:false,
+           recibo:'',
+           showR:true,
+           showRecibo:false,
+           estado:'',
+           hashT:''
     }
   },created (){
     Transferencias.init()
@@ -151,6 +233,12 @@ export default {
       this.recibo=res
       this.showRecibo=true
 
+    }, teste(){
+      //alert('top')
+      var res = sha256(this.contribuinteD + this.contribuinteO + this.numFatura + this.valorT + this.nomeJogador + this.dataE)
+      this.hashT = res;
+      this.estado='Emitida'
+      return true
     }
   }
 }
