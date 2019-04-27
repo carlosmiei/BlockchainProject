@@ -15,7 +15,7 @@
 
                 </div>
                  <div>
-                   <v-btn color="success" @click="adicionarFatura">Success</v-btn>
+                   <v-btn color="success">Success</v-btn>
                    <v-btn color="error">Error</v-btn>
                    <v-btn color="warning">Warning</v-btn>
                   <v-btn color="info">Info</v-btn>
@@ -64,27 +64,6 @@ export default {
             console.error(error)
         }
     })
-    //var res = await this.getOwner()
-   // this.owner=res;
-   
-    let hashF='212e69f1138c6664a662b65d471acf509c1cdf31'
-
-    BlockTransfer.init().then(()=>{
-        BlockTransfer.adicionarFatura("ola",1).then(tx=>{
-      console.log('dentro de BlockTransfer')
-      console.dir(tx)
-    }).catch(e=>{console.log('erroT' + e)})})
-
-
-
-  /*
-    Users.init().then(()=>{
-        Users.create("ola2").then(tx=>{
-      console.log('dentro de Users')
-      console.dir(tx)
-    }).catch(e=>{console.log('erroT' + e)})})*/
-   //this.adicionarFatura();
-
 
     },
   methods: {
@@ -93,15 +72,6 @@ export default {
       let self = this
       var res = await Transferencias.owner()
       return res
-    },
-    adicionarFatura: async function(){
-      let self=this
-      Transferencias.adicionarFatura("ola",1).then(tx =>{
-        console.log(tx)
-        this.recibo=tx
-      })
-    
-
     }
   }
 }

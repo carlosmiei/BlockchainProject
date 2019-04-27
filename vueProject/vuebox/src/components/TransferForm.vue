@@ -112,7 +112,7 @@
             :value="hashT"
             :counter="256"
             label="Hash da transação"
-            readonly="ola"
+            readonly
             required
           ></v-text-field>
         </v-flex>
@@ -129,21 +129,21 @@
             :value="hashT"
             :counter="256"
             label="Hash da transação"
-            readonly="ola"
+            readonly
           ></v-text-field>
          
             <v-text-field
             :value="valorT"
             :counter="256"
             label="Valor Total da transação"
-            readonly="ola"
+            readonly
           ></v-text-field>
 
             <v-text-field
             :value="estado"
             :counter="256"
             label="Estado da Transação"
-            readonly="ola"
+            readonly
           ></v-text-field>
     
     <v-container>
@@ -234,7 +234,7 @@ export default {
   ,methods:{
     async adicionarTransacao(){
       this.loading=true
-      var res = await Transferencias.adicionarFatura(this.hashT,this.ValorT)
+      var res = await Transferencias.adicionaFatura(this.ValorT,"27/04/2019",this.hashT)
       //alert((JSON.stringify(res)))
       this.loading=false
       this.show=false

@@ -1,5 +1,5 @@
 import contract from 'truffle-contract'
-import BlockTransferContract from '@contracts/BlockTransfer.json'
+import BlockTransferContract from '@contracts/Transferencias.json'
 
 const BlockTransfer = {
 
@@ -36,12 +36,12 @@ const BlockTransfer = {
       })
     })
   },
-  adicionarFatura: function(hashF,estado){
+  adicionaFatura: function(valor,data,hashF){
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.create.call(
-        hashF,{from: window.web3.eth.accounts[0]}
+      self.instance.adicionaFatura.call(
+        valor,data,hashF,{from: window.web3.eth.accounts[0]}
       ).then(exists => {
         console.log("dentro BlockTransfer")
         console.dir(exists)

@@ -36,15 +36,18 @@ const Transferencias = {
       })
     })
   },
-  adicionarFatura: function(hashF,estado){
+  adicionaFatura: function(valor,data,hashF){
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.adicionarFatura(
-        hashF,{from: window.web3.eth.accounts[0]}
+      self.instance.adicionaFatura(
+        'valor',valor,
+        'emitData',data,
+        'hash',hashF,
+        {from: window.web3.eth.accounts[0]}
       ).then(exists => {
-        console.log("dentro transferencias")
-        console.dir(exists)
+        //console.log("dentro BlockTransfer")
+        //console.dir(exists)
         resolve(exists)
       }).catch(err => {
         reject(err)
