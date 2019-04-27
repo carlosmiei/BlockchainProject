@@ -69,14 +69,15 @@
       "signature": "0x0900f010"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610314806100606000396000f3fe608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630900f01014610067578063445df0ac146100b85780638da5cb5b146100e3578063fdacd5761461013a575b600080fd5b34801561007357600080fd5b506100b66004803603602081101561008a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610175565b005b3480156100c457600080fd5b506100cd61025d565b6040518082815260200191505060405180910390f35b3480156100ef57600080fd5b506100f8610263565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561014657600080fd5b506101736004803603602081101561015d57600080fd5b8101908080359060200190929190505050610288565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561025a5760008190508073ffffffffffffffffffffffffffffffffffffffff1663fdacd5766001546040518263ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040180828152602001915050600060405180830381600087803b15801561024057600080fd5b505af1158015610254573d6000803e3d6000fd5b50505050505b50565b60015481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614156102e557806001819055505b5056fea165627a7a72305820cbf639ed6e1814271398145da6ffa81399f9a02050be2331a0d55340780ae4970029",
-  "deployedBytecode": "0x608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630900f01014610067578063445df0ac146100b85780638da5cb5b146100e3578063fdacd5761461013a575b600080fd5b34801561007357600080fd5b506100b66004803603602081101561008a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610175565b005b3480156100c457600080fd5b506100cd61025d565b6040518082815260200191505060405180910390f35b3480156100ef57600080fd5b506100f8610263565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561014657600080fd5b506101736004803603602081101561015d57600080fd5b8101908080359060200190929190505050610288565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561025a5760008190508073ffffffffffffffffffffffffffffffffffffffff1663fdacd5766001546040518263ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040180828152602001915050600060405180830381600087803b15801561024057600080fd5b505af1158015610254573d6000803e3d6000fd5b50505050505b50565b60015481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614156102e557806001819055505b5056fea165627a7a72305820cbf639ed6e1814271398145da6ffa81399f9a02050be2331a0d55340780ae4970029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"new_address\",\"type\":\"address\"}],\"name\":\"upgrade\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"last_completed_migration\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"completed\",\"type\":\"uint256\"}],\"name\":\"setCompleted\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/ricardo/Desktop/LEI/BlockchainProject/contracts/Migrations.sol\":\"Migrations\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/ricardo/Desktop/LEI/BlockchainProject/contracts/Migrations.sol\":{\"keccak256\":\"0xa6412de0fd28be756a5285c81d766694618d52a40ebb5e8533bd0b96784c4d51\",\"urls\":[\"bzzr://a27701e4cc14cc09d074149ad8cb08e0ec531d5e229be0e19d35492248471e67\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610314806100606000396000f3fe608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630900f01014610067578063445df0ac146100b85780638da5cb5b146100e3578063fdacd5761461013a575b600080fd5b34801561007357600080fd5b506100b66004803603602081101561008a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610175565b005b3480156100c457600080fd5b506100cd61025d565b6040518082815260200191505060405180910390f35b3480156100ef57600080fd5b506100f8610263565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561014657600080fd5b506101736004803603602081101561015d57600080fd5b8101908080359060200190929190505050610288565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561025a5760008190508073ffffffffffffffffffffffffffffffffffffffff1663fdacd5766001546040518263ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040180828152602001915050600060405180830381600087803b15801561024057600080fd5b505af1158015610254573d6000803e3d6000fd5b50505050505b50565b60015481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614156102e557806001819055505b5056fea165627a7a72305820d6816cb03fc9cecccccf4cef96c74bc243e34225039836e645cf2807ff584dc20029",
+  "deployedBytecode": "0x608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630900f01014610067578063445df0ac146100b85780638da5cb5b146100e3578063fdacd5761461013a575b600080fd5b34801561007357600080fd5b506100b66004803603602081101561008a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610175565b005b3480156100c457600080fd5b506100cd61025d565b6040518082815260200191505060405180910390f35b3480156100ef57600080fd5b506100f8610263565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561014657600080fd5b506101736004803603602081101561015d57600080fd5b8101908080359060200190929190505050610288565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561025a5760008190508073ffffffffffffffffffffffffffffffffffffffff1663fdacd5766001546040518263ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040180828152602001915050600060405180830381600087803b15801561024057600080fd5b505af1158015610254573d6000803e3d6000fd5b50505050505b50565b60015481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614156102e557806001819055505b5056fea165627a7a72305820d6816cb03fc9cecccccf4cef96c74bc243e34225039836e645cf2807ff584dc20029",
   "sourceMap": "34:460:0:-;;;120:47;8:9:-1;5:2;;;30:1;27;20:12;5:2;120:47:0;153:10;145:5;;:18;;;;;;;;;;;;;;;;;;34:460;;;;;;",
   "deployedSourceMap": "34:460:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;332:160;;8:9:-1;5:2;;;30:1;27;20:12;5:2;332:160:0;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;332:160:0;;;;;;;;;;;;;;;;;;;;;;80:36;;8:9:-1;5:2;;;30:1;27;20:12;5:2;80:36:0;;;;;;;;;;;;;;;;;;;;;;;57:20;;8:9:-1;5:2;;;30:1;27;20:12;5:2;57:20:0;;;;;;;;;;;;;;;;;;;;;;;;;;;229:100;;8:9:-1;5:2;;;30:1;27;20:12;5:2;229:100:0;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;229:100:0;;;;;;;;;;;;;;;;;;;;332:160;214:5;;;;;;;;;;;200:19;;:10;:19;;;196:26;;;392:19;425:11;392:45;;441:8;:21;;;463:24;;441:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;441:47:0;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;441:47:0;;;;221:1;196:26;332:160;:::o;80:36::-;;;;:::o;57:20::-;;;;;;;;;;;;;:::o;229:100::-;214:5;;;;;;;;;;;200:19;;:10;:19;;;196:26;;;316:9;289:24;:36;;;;196:26;229:100;:::o",
   "source": "pragma solidity >=0.4.21 <0.6.0;\n\ncontract Migrations {\n\taddress public owner;\n\tuint public last_completed_migration;\n\n\tconstructor() public {\n\t\towner = msg.sender;\n\t}\n\n\tmodifier restricted() {\n\t\tif (msg.sender == owner) _;\n\t}\n\n\tfunction setCompleted(uint completed) public restricted {\n\t\tlast_completed_migration = completed;\n\t}\n\n\tfunction upgrade(address new_address) public restricted {\n\t\tMigrations upgraded = Migrations(new_address);\n\t\tupgraded.setCompleted(last_completed_migration);\n\t}\n}\n",
-  "sourcePath": "/home/pc/Desktop/2semestre/Eng_seg/BlockchainProject/contracts/Migrations.sol",
+  "sourcePath": "/home/ricardo/Desktop/LEI/BlockchainProject/contracts/Migrations.sol",
   "ast": {
-    "absolutePath": "/home/pc/Desktop/2semestre/Eng_seg/BlockchainProject/contracts/Migrations.sol",
+    "absolutePath": "/home/ricardo/Desktop/LEI/BlockchainProject/contracts/Migrations.sol",
     "exportedSymbols": {
       "Migrations": [
         56
@@ -202,7 +203,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 155,
+                        "referencedDeclaration": 602,
                         "src": "153:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -286,7 +287,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 155,
+                        "referencedDeclaration": 602,
                         "src": "200:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -725,7 +726,7 @@
     "src": "0:495:0"
   },
   "legacyAST": {
-    "absolutePath": "/home/pc/Desktop/2semestre/Eng_seg/BlockchainProject/contracts/Migrations.sol",
+    "absolutePath": "/home/ricardo/Desktop/LEI/BlockchainProject/contracts/Migrations.sol",
     "exportedSymbols": {
       "Migrations": [
         56
@@ -851,7 +852,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 155,
+                        "referencedDeclaration": 602,
                         "src": "153:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -935,7 +936,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 155,
+                        "referencedDeclaration": 602,
                         "src": "200:3:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -1381,12 +1382,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x44f03Ab2dbba5243dcD9Ec54F6F2987c50E287D5",
-      "transactionHash": "0x8b3276708380e9bbe328b895e52290a4aac7e2dc83624a0be609809b56bb3c3b"
+      "address": "0xDcb51B2aAa4a6B01083Ed5c79256FFAfD5Df43DF",
+      "transactionHash": "0xf8ccdc0e54e7f2bc16151272ad74298e6ade67355056a36d2ea4ec7ed3231f00"
     }
   },
-  "schemaVersion": "3.0.5",
-  "updatedAt": "2019-03-28T08:17:42.695Z",
+  "schemaVersion": "3.0.8",
+  "updatedAt": "2019-04-27T14:50:43.359Z",
   "devdoc": {
     "methods": {}
   },
