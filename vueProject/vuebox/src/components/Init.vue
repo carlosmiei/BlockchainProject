@@ -1,44 +1,57 @@
 
 <template>
 
-  <div class="dashboard">
-    <img src="../assets/log4.png" >
-    <h1>{{ msg }}</h1>
-    <div>
-      Welcome conta: <b>{{ account }} </b> <br>
-      Saldo da conta: <b>{{saldo}}</b> eth <br>
-      Owner: <b>{{owner}}</b>
-    </div>
-     <div>
-    <v-btn color="success" @click="adicionarFatura">Success</v-btn>
-    <v-btn color="error">Error</v-btn>
-    <v-btn color="warning">Warning</v-btn>
-    <v-btn color="info">Info</v-btn>
-  </div>
+  <div>    
+    <!-- teste -->
+            <v-container  >
+              <img src="../assets/log4.png" >
+                <h1>{{ msg }}</h1>
+                <div>
+                  Welcome conta: <b>{{ account }} </b> <br>
+                  Saldo da conta: <b>{{saldo}}</b> eth <br>
+                  Owner: <b>{{owner}}</b>
+                </div>
+                <div> Hash da transação: {{this.recibo}}</div>
+                 <div>
+                   <v-btn color="success" @click="adicionarFatura">Success</v-btn>
+                   <v-btn color="error">Error</v-btn>
+                   <v-btn color="warning">Warning</v-btn>
+                  <v-btn color="info">Info</v-btn>
+                   </div>
+             </v-container>
+<!--- PopUp --->
+
+<!--- Footer --->
+
   </div>
 </template>
 
 <script>
-import Users from '@/js/users'
 import Transferencias from '@/js/transferencias'
 import BlockTransfer from  '@/js/BlockTransfer'
 import { sep } from 'path';
+import SideBar from './SideBar.vue'
+import Bread from './Bread.vue'
 /* eslint-disable indent */
 export default {
   name: 'dashboard',
+  components:{
+    SideBar,
+    Bread
+  },
   data () {
     return {
       msg: 'Bem vindo!',
       pseudo: undefined,
       account: window.web3.eth.accounts[0],
       saldo:0,
-      owner:''
+      owner:'',
+      recibo:''
 
     }
   },
   beforeCreate(){
     Transferencias.init()
-    Users.init()
     BlockTransfer.init()
   },
     created () {
@@ -63,6 +76,8 @@ export default {
       console.dir(tx)
     }).catch(e=>{console.log('erroT' + e)})})
 
+
+
   /*
     Users.init().then(()=>{
         Users.create("ola2").then(tx=>{
@@ -82,12 +97,11 @@ export default {
     },
     adicionarFatura: async function(){
       let self=this
-
-    Users.init().then(()=>{
-        Users.create("ola",1).then(tx=>{
-      console.log('dentro de Users')
-      console.dir(tx)
-    }).catch(e=>{console.log('erroT' + e)})})
+      Transferencias.adicionarFatura("ola",1).then(tx =>{
+        console.log(tx)
+        this.recibo=tx
+      })
+    
 
     }
   }
@@ -96,5 +110,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+
+
 
 </style>
