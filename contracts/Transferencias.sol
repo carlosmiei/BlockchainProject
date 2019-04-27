@@ -2,12 +2,16 @@ pragma solidity ^0.5.0;
 
 contract Transferencias {
 
-    address[] public participantes;
+    address[] public equipas;
+    address[] public bancos;
+    address[] public federacao;
+    address public ownerAcc;
     string public owner;
     bytes32 public owner2;
 
     struct Fatura{
-        uint hashVenda;
+        uint valorTotal;
+        string data;
         uint estadoVenda;
     }
 
@@ -25,61 +29,128 @@ contract Transferencias {
         owner = "primeiro";
         owner2= calculateHash("primeiro");
         
-
         //adicionar os participantes
-        participantes.push(0x1Fb4C08AeA29A6642D8C963F1ca01c15C63385bc);
-        participantes.push(0xdB254AFdcaCEa500C4f7449c4b9F9DA3e1224F81);
+        equipas.push(0x1Fb4C08AeA29A6642D8C963F1ca01c15C63385bc);
+        equipas.push(0xdB254AFdcaCEa500C4f7449c4b9F9DA3e1224F81);
 
     }
 
-    function adicionarFatura(uint hash2,uint estado) public  {
-        require(isMember(msg.sender) == true,"Sender not authorized.");
+    function adicionaFatura(uint valor, string memory emitData, uint hash) public {
+        require(isTeam(msg.sender) == true,"Sender not authorized.");
         
-        Fatura  memory myStruct = Fatura({hashVenda:hash2, estadoVenda:estado});
-        KeysFaturas.push(hash2);
-        transacoes[hash2]=myStruct;
+        Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
+        KeysFaturas.push(hash);
+        transacoes[hash] = myStruct;
     }
 
-    function alterarEstadoFatura(uint hash2, uint estado) public{
+    function recebeFatura(uint hash) public{
+        require(isTeam(msg.sender) == true,"Sender not authorized.");
 
-            require(isMember(msg.sender) == true,"Sender not authorized.");
-            transacoes[hash2].estadoVenda=estado;
-            //emitir aqui qqr coisa dependentemente disto        
+        if(transacoes[hash].estadoVenda == 1)
+            transacoes[hash].estadoVenda = 2;        
     }
 
-    function getEstado(uint hash2) public view returns (uint estado) {
-            require(isMember(msg.sender) == true,"Sender not authorized.");
-            Fatura memory fatura = transacoes[hash2];
-            return fatura.estadoVenda;
+    function validaFatura(uint hash, bool aceitar) public{
+        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        
+        if(transacoes[hash].estadoVenda == 2)
+            if(aceitar)
+                transacoes[hash].estadoVenda = 3; 
+            else
+                transacoes[hash].estadoVenda = 0; 
     }
 
-    function adicionarParticipante() public{
+    function pagaFatura(uint hash) public{
+        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        
+        if(transacoes[hash].estadoVenda == 3)
+            transacoes[hash].estadoVenda = 4; 
+    }
+
+
+    function validaPagamento(uint hash) public{
+        require(isBank(msg.sender) == true,"Sender not authorized.");
+        
+        if(transacoes[hash].estadoVenda == 4)
+            transacoes[hash].estadoVenda = 5; 
+    }
+
+
+    function pagaPercentagem(uint hash) public{
+        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        
+        if(transacoes[hash].estadoVenda == 5)
+            transacoes[hash].estadoVenda = 6; 
+    }
+
+
+    function getEstado(uint hash) public view returns (uint estado) {
         require(isMember(msg.sender) == true,"Sender not authorized.");
-        participantes.push(msg.sender);
+        Fatura memory fatura = transacoes[hash];
+        return fatura.estadoVenda;
+    }
+
+    function adicionarEquipa() public{
+        require(msg.sender == ownerAcc, "Sender not authorized.");
+        equipas.push(msg.sender);
         emit Exemplo("ola",123); 
-
     }
 
-    function getLength() public  view returns (uint count) {
+    function adicionarBanco() public{
+        require(msg.sender == ownerAcc, "Sender not authorized.");
+        bancos.push(msg.sender);
+        emit Exemplo("ola",123); 
+    }
+
+    function getTeamsLength() public view returns (uint count) {
         require(isMember(msg.sender) == true,"Sender not authorized.");
-        return participantes.length;
+        return equipas.length;
     }
 
+    function getBanksLength() public view returns (uint count) {
+        require(isMember(msg.sender) == true,"Sender not authorized.");
+        return bancos.length;
+    }
 
-    function calculateHash(string memory s )  private  returns (bytes32 res) 
-    {
+    function calculateHash(string memory s ) internal pure returns (bytes32 res) {
         return keccak256(abi.encodePacked(s));
     }
 
-    function isMember(address add) private view returns (bool res) {
+    function isTeam(address add) private view returns (bool res) {
         res=false;
-        for (uint i=0; i<participantes.length; i++) {
-            if (participantes[i] == msg.sender) {
+        for (uint i=0; i<equipas.length; i++) {
+            if (equipas[i] == add) {
                 res=true;
                 break;
             }
         }
         return res;
+    }
+
+    function isBank(address add) private view returns (bool res) {
+        res=false;
+        for (uint i=0; i<bancos.length; i++) {
+            if (bancos[i] == add) {
+                res=true;
+                break;
+            }
+        }
+        return res;
+    }
+
+    function isFederation(address add) private view returns (bool res) {
+        res=false;
+        for (uint i=0; i<federacao.length; i++) {
+            if (equipas[i] == add) {
+                res=true;
+                break;
+            }
+        }
+        return res;
+    }
+
+    function isMember(address add) private view returns (bool res) {
+        return (isTeam(add) || isBank(add) || isFederation(add));
     }
 
 }
