@@ -2,7 +2,7 @@
     <div>
        <v-navigation-drawer
           class="primary"
-          dark
+         dark
           permanent
         >
     <v-list>
@@ -49,5 +49,7 @@ export default {
 </script>
 
 <style>
-    
+    .primary2{
+      background-color:#327CCB;
+    }
 </style>
