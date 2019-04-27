@@ -27,7 +27,8 @@ contract Transferencias {
     /// The smart contract's constructor
     constructor() public {
         owner = "primeiro";
-        owner2= calculateHash("primeiro");
+        owner2 = calculateHash("primeiro");
+        ownerAcc = 0x24BF0ffC4daf52B0df27640882E202b0AAd98B11;
         
         //adicionar os participantes
         equipas.push(0x1Fb4C08AeA29A6642D8C963F1ca01c15C63385bc);
@@ -36,7 +37,7 @@ contract Transferencias {
     }
 
     function adicionaFatura(uint valor, string memory emitData, bytes32 hash) public {
-        //require(isTeam(msg.sender) == true,"Sender not authorized.");
+        require(isMember(msg.sender) == true,"Sender not authorized.");
         
         Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
         KeysFaturas.push(hash);
@@ -45,43 +46,43 @@ contract Transferencias {
     }
 
     function recebeFatura(bytes32 hash) public{
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
-
-        if(transacoes[hash].estadoVenda == 1)
-            transacoes[hash].estadoVenda = 2;        
+        require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].estadoVenda == 1, "Operação não disponível");
+            
+        transacoes[hash].estadoVenda = 2;        
     }
 
     function validaFatura(bytes32 hash, bool aceitar) public{
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].estadoVenda == 2, "Operação não disponível");
         
-        if(transacoes[hash].estadoVenda == 2)
-            if(aceitar)
-                transacoes[hash].estadoVenda = 3; 
-            else
-                transacoes[hash].estadoVenda = 0; 
+        if(aceitar)
+            transacoes[hash].estadoVenda = 3; 
+        else
+            transacoes[hash].estadoVenda = 0; 
     }
 
     function pagaFatura(bytes32 hash) public{
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].estadoVenda == 3, "Operação não disponível");
         
-        if(transacoes[hash].estadoVenda == 3)
-            transacoes[hash].estadoVenda = 4; 
+        transacoes[hash].estadoVenda = 4; 
     }
 
 
     function validaPagamento(bytes32 hash) public{
-        require(isBank(msg.sender) == true,"Sender not authorized.");
-        
-        if(transacoes[hash].estadoVenda == 4)
-            transacoes[hash].estadoVenda = 5; 
+        require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].estadoVenda == 4, "Operação não disponível");
+            
+        transacoes[hash].estadoVenda = 5; 
     }
 
 
     function pagaPercentagem(bytes32 hash) public{
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
-        
-        if(transacoes[hash].estadoVenda == 5)
-            transacoes[hash].estadoVenda = 6; 
+        require(isMember(msg.sender) == true,"Sender not authorized.");    
+        require(transacoes[hash].estadoVenda == 5, "Operação não disponível");
+
+        transacoes[hash].estadoVenda = 6; 
     }
 
 
@@ -91,15 +92,15 @@ contract Transferencias {
         return fatura.estadoVenda;
     }
 
-    function adicionarEquipa() public{
+    function adicionarEquipa(address add) public{
         require(msg.sender == ownerAcc, "Sender not authorized.");
-        equipas.push(msg.sender);
+        equipas.push(add);
         emit Exemplo("ola",123); 
     }
 
-    function adicionarBanco() public{
+    function adicionarBanco(address add) public{
         require(msg.sender == ownerAcc, "Sender not authorized.");
-        bancos.push(msg.sender);
+        bancos.push(add);
         emit Exemplo("ola",123); 
     }
 
@@ -151,7 +152,7 @@ contract Transferencias {
     }
 
     function isMember(address add) private view returns (bool res) {
-        return (isTeam(add) || isBank(add) || isFederation(add));
+        return (isTeam(add) || isBank(add) || isFederation(add) || add == ownerAcc);
     }
 
 }
