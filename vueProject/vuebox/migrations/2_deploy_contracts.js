@@ -1,4 +1,4 @@
-var Users = artifacts.require("./Users.sol");
+//var Users = artifacts.require("./Users.sol");
 var Transferencias = artifacts.require("./Transferencias.sol");
 
 

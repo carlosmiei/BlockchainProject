@@ -234,7 +234,7 @@ export default {
   ,methods:{
     async adicionarTransacao(){
       this.loading=true
-      var res = await Transferencias.adicionaFatura(this.ValorT,"27/04/2019",this.hashT)
+      var res = await Transferencias.adicionaFatura(20,"27/04/2019",this.hashT)
       //alert((JSON.stringify(res)))
       this.loading=false
       this.show=false

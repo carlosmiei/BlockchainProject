@@ -40,11 +40,14 @@ const Transferencias = {
     let self = this
 
     return new Promise((resolve, reject) => {
+      console.log("Valor: ", valor, " - ", typeof(valor))
+      console.log("Data: ", data, " - ", typeof(data))
+      console.log("Hash: ", hashF, " - ", typeof(hashF))
       self.instance.adicionaFatura(
-        'valor',valor,
-        'emitData',data,
-        'hash',hashF,
-        {from: window.web3.eth.accounts[0]}
+        valor, 
+        data,
+        hashF, 
+        {from: window.web3.eth.accounts[0], gas: 300000}
       ).then(exists => {
         //console.log("dentro BlockTransfer")
         //console.dir(exists)

@@ -11,7 +11,7 @@ contract Transferencias {
 
     struct Fatura{
         uint valorTotal;
-        string data;
+        bytes32 data;
         uint estadoVenda;
     }
 
@@ -19,9 +19,17 @@ contract Transferencias {
     mapping (bytes32 => Fatura) transacoes;
     
     //eventos teste 
-    event Exemplo(
-       string name,
-       uint age
+    event nextStage(
+       bytes32 id,
+       uint estadoFatura
+    );
+
+    event addEquipa(
+       address equipa
+    );
+
+    event addBanco(
+       address banco
     );
     
     /// The smart contract's constructor
@@ -36,53 +44,58 @@ contract Transferencias {
 
     }
 
-    function adicionaFatura(uint valor, string memory emitData, bytes32 hash) public {
+    function adicionaFatura(uint valor, bytes32 emitData, bytes32 hash) public {
         require(isMember(msg.sender) == true,"Sender not authorized.");
         
         Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
         KeysFaturas.push(hash);
         transacoes[hash] = myStruct;
-        emit Exemplo("teste",22);
+        emit nextStage(hash,1);
     }
 
     function recebeFatura(bytes32 hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
-        require(transacoes[hash].estadoVenda == 1, "Operação não disponível");
+        require(transacoes[hash].estadoVenda == 1, "Operation not available");
             
-        transacoes[hash].estadoVenda = 2;        
+        transacoes[hash].estadoVenda = 2;  
+        emit nextStage(hash,2);      
     }
 
     function validaFatura(bytes32 hash, bool aceitar) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
-        require(transacoes[hash].estadoVenda == 2, "Operação não disponível");
+        require(transacoes[hash].estadoVenda == 2, "Operation not available");
         
         if(aceitar)
             transacoes[hash].estadoVenda = 3; 
         else
             transacoes[hash].estadoVenda = 0; 
+        emit nextStage(hash,3);
     }
 
     function pagaFatura(bytes32 hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
-        require(transacoes[hash].estadoVenda == 3, "Operação não disponível");
+        require(transacoes[hash].estadoVenda == 3, "Operation not available");
         
-        transacoes[hash].estadoVenda = 4; 
+        transacoes[hash].estadoVenda = 4;  
+        emit nextStage(hash,4);
     }
 
 
     function validaPagamento(bytes32 hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
-        require(transacoes[hash].estadoVenda == 4, "Operação não disponível");
+        require(transacoes[hash].estadoVenda == 4, "Operation not available");
             
-        transacoes[hash].estadoVenda = 5; 
+        transacoes[hash].estadoVenda = 5;  
+        emit nextStage(hash,5);
     }
 
 
     function pagaPercentagem(bytes32 hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");    
-        require(transacoes[hash].estadoVenda == 5, "Operação não disponível");
+        require(transacoes[hash].estadoVenda == 5, "Operation not available");
 
-        transacoes[hash].estadoVenda = 6; 
+        transacoes[hash].estadoVenda = 6;  
+        emit nextStage(hash,6);
     }
 
 
@@ -94,14 +107,16 @@ contract Transferencias {
 
     function adicionarEquipa(address add) public{
         require(msg.sender == ownerAcc, "Sender not authorized.");
+        require(!isMember(add), "Account already in use");
         equipas.push(add);
-        emit Exemplo("ola",123); 
+        emit addEquipa(add); 
     }
 
     function adicionarBanco(address add) public{
         require(msg.sender == ownerAcc, "Sender not authorized.");
+        require(!isMember(add), "Account already in use");
         bancos.push(add);
-        emit Exemplo("ola",123); 
+        emit addBanco(add); 
     }
 
     function getTeamsLength() public view returns (uint count) {
@@ -110,6 +125,11 @@ contract Transferencias {
     }
 
     function getBanksLength() public view returns (uint count) {
+        require(isMember(msg.sender) == true,"Sender not authorized.");
+        return bancos.length;
+    }
+
+    function getFederationsLength() public view returns (uint count) {
         require(isMember(msg.sender) == true,"Sender not authorized.");
         return bancos.length;
     }
