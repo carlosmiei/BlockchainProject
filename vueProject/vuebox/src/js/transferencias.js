@@ -58,6 +58,36 @@ const Transferencias = {
       })
     })
 
+  },  testeS: function(valor,data,hashF){
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.testarS(
+        data,valor,hashF,
+        {from: window.web3.eth.accounts[0],gas: 900000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
+  },  isMember: function(hashF){
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.isMember.call(
+        hashF,
+        {from: window.web3.eth.accounts[0],gas: 900000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
   }
 
 }

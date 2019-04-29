@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import Transferencias from '@/js/transferencias'
+
 export default {
    name: 'Login',
   components:{
@@ -43,12 +45,20 @@ export default {
     return {
       loading: true
     }
+  },created(){
+        Transferencias.init()
   },methods:{
-      efetuarLogin(){
+     async  efetuarLogin(){
         var x = window.web3.eth.accounts[0]
         if (x == undefined){
             alert("Certifique-se que tem o metamask ativo!")
         } else {
+
+            var res =  await Transferencias.isMember(x)
+            
+            if (!res) {
+              alert("Não é membro mas para já passa!")
+            }
             this.loading=true;
             alert('entrei else')
             setTimeout(function(){this.loading=false; }, 2000);

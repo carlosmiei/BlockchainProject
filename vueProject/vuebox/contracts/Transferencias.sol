@@ -11,7 +11,7 @@ contract Transferencias {
 
     struct Fatura{
         uint valorTotal;
-        bytes32 data;
+        string data;
         uint estadoVenda;
     }
 
@@ -44,13 +44,18 @@ contract Transferencias {
 
     }
 
-    function adicionaFatura(uint valor, bytes32 emitData, bytes32 hash) public {
-        require(isMember(msg.sender) == true,"Sender not authorized.");
+    function adicionaFatura(uint valor, string memory emitData, bytes32 hash) public {
+       // require(isMember(msg.sender) == true,"Sender not authorized.");
         
         Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
         KeysFaturas.push(hash);
         transacoes[hash] = myStruct;
         emit nextStage(hash,1);
+    }
+
+    function testarS(string memory teste, bytes32 valor, bytes32 hash)public {
+        emit nextStage("0x24BF0ffC402b0AAd98B11",1);
+        
     }
 
     function recebeFatura(bytes32 hash) public{
@@ -171,7 +176,7 @@ contract Transferencias {
         return res;
     }
 
-    function isMember(address add) private view returns (bool res) {
+    function isMember(address add) public view returns (bool res) {
         return (isTeam(add) || isBank(add) || isFederation(add) || add == ownerAcc);
     }
 

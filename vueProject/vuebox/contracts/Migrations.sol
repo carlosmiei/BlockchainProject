@@ -4,9 +4,9 @@ contract Migrations {
   address public owner;
   uint public last_completed_migration;
 
-  modifier restricted() {
-    if (msg.sender == owner) _;
-  }
+  //modifier restricted() {
+  //  //if (msg.sender == owner) _;
+  //}
 
   constructor() public  {
     owner = msg.sender;
