@@ -50,8 +50,6 @@ export default {
     }
   },
   beforeCreate(){
-    Transferencias.init()
-    BlockTransfer.init()
   },
     created () {
    

@@ -46,7 +46,7 @@ const Transferencias = {
       self.instance.adicionaFatura(
         valor, 
         data,
-        hashF, 
+        window.web3.toAscii(hashF), 
         {from: window.web3.eth.accounts[0], gas: 300000}
       ).then(exists => {
         //console.log("dentro BlockTransfer")
@@ -63,8 +63,8 @@ const Transferencias = {
 
     return new Promise((resolve, reject) => {
       self.instance.testarS(
-        data,valor,hashF,
-        {from: window.web3.eth.accounts[0],gas: 900000}
+        "ola","ola","ola",
+        {from: window.web3.eth.accounts[0],gas: 300000}
       ).then(exists => {
         resolve(exists)
       }).catch(err => {
