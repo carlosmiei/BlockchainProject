@@ -19,6 +19,27 @@ const Transferencias = {
       }).catch(err => {
         reject(err)
       })
+
+      self.instance.nextStage({}, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).watch(function(error, event) {
+        if(!error) console.log("Evento-Stage: " + JSON.stringify(event))
+      });
+
+      self.instance.addEquipa({}, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).watch(function(error, event) {
+        if(!error) console.log("Evento-Equipa: " + JSON.stringify(event))
+      });
+
+      self.instance.addBanco({}, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).watch(function(error, event) {
+        if(!error) console.log("Evento-Banco: " + JSON.stringify(event))
+      });
     })
   },
 
@@ -40,6 +61,7 @@ const Transferencias = {
     let self = this
 
     return new Promise((resolve, reject) => {
+      
       console.log("Valor: ", valor, " - ", typeof(valor))
       console.log("Data: ", data, " - ", typeof(data))
       console.log("Hash: ", hashF, " - ", typeof(hashF))
@@ -49,6 +71,7 @@ const Transferencias = {
         window.web3.toAscii(hashF), 
         {from: window.web3.eth.accounts[0], gas: 300000}
       ).then(exists => {
+        //console.log("OBJETO: " + JSON.stringify(exists))
         //console.log("dentro BlockTransfer")
         //console.dir(exists)
         resolve(exists)
