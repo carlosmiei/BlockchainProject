@@ -15,31 +15,37 @@ const Transferencias = {
 
       self.contract.deployed().then(instance => {
         self.instance = instance
+
+        self.instance.nextStage({}, {
+          fromBlock: 0,
+          toBlock: 'latest'
+        }).watch((error, event) => {
+          if(!error) console.log("Evento-Stage: " + JSON.stringify(event))
+          else console.log("Evento-Stage: ERRO")
+        });
+  
+        self.instance.addEquipa({}, {
+          fromBlock: 0,
+          toBlock: 'latest'
+        }).watch((error, event) => {
+          if(!error) console.log("Evento-Equipa: " + JSON.stringify(event))
+          else console.log("Evento-Equipa: ERRO")
+        });
+  
+        self.instance.addBanco({}, {
+          fromBlock: 0,
+          toBlock: 'latest'
+        }).watch((error, event) => {
+          if(!error) console.log("Evento-Banco: " + JSON.stringify(event))
+          else console.log("Evento-Banco: ERRO")
+        });
+        
         resolve()
+
       }).catch(err => {
         reject(err)
       })
 
-      self.instance.nextStage({}, {
-        fromBlock: 0,
-        toBlock: 'latest'
-      }).watch(function(error, event) {
-        if(!error) console.log("Evento-Stage: " + JSON.stringify(event))
-      });
-
-      self.instance.addEquipa({}, {
-        fromBlock: 0,
-        toBlock: 'latest'
-      }).watch(function(error, event) {
-        if(!error) console.log("Evento-Equipa: " + JSON.stringify(event))
-      });
-
-      self.instance.addBanco({}, {
-        fromBlock: 0,
-        toBlock: 'latest'
-      }).watch(function(error, event) {
-        if(!error) console.log("Evento-Banco: " + JSON.stringify(event))
-      });
     })
   },
 
