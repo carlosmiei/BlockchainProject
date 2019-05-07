@@ -37,11 +37,12 @@ export default {
           { title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'},
           { title: 'Adicionar Transação', icon: 'transfer_within_a_station',route:'/addTransfer' },
           { title: 'Alterar Transação', icon: 'touch_app' },
-          { title: 'Consultar Transação', icon: 'list' },
+          { title: 'Consultar Transação', icon: 'list', route:'/consultTrans'},
           { title: 'Perfil', icon: 'dashboard' },
           { title: 'Jogadores', icon: 'person' },
           { title: 'Account', icon: 'account_box' },
           { title: 'Admin', icon: 'gavel' }
+          
         ]
     }
   },
