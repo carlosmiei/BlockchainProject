@@ -10,24 +10,50 @@ export default {
     name: 'ConsultTrans',
       data () {
             return {
+              bloco:''
             
     }
-  },created(){
+  },async created(){
       var lista=[]
-      //var num = await window.web3.eth.blockNumber
-      //var l =window.web3.eth.accounts[0]
+      
+      var bloco = await this.getBlockNumber()
+      console.dir(bloco)
 
-      window.web3.eth.getBlockNumber().then(data => {
-            this.bloco = data
-      });
+      // Ir buscar um bloco 
+      
+      
+
+      for(var i=0;i<10;i++){
+        var b = await this.getBlock(300-i)
+        lista.push(b)
+      }
+      console.dir(lista)
 
 
-      alert(this.bloco)
-      for (var i=0; i < 10; i++) {  
-      lista.push(window.web3.eth.getBlock(200 - i));
+},methods:{
+
+    getBlockNumber(){
+        return new Promise (function (resolve, reject) {
+             window.web3.eth.getBlockNumber(function (error, result) {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(result);
+             }
+              })
+          })
+    },
+    getBlock(num){
+        return new Promise (function (resolve, reject) {
+             window.web3.eth.getBlock(num,function (error, result) {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(result);
+             }
+              })
+          })
     }
-    console.dir(lista)
-
 
   }
 }
