@@ -15,7 +15,7 @@
 
                 </div>
                  <div>
-                   <v-btn color="success">Success</v-btn>
+                   <v-btn v-on:click="teste()" color="success">Success</v-btn>
                    <v-btn color="error">Error</v-btn>
                    <v-btn color="warning">Warning</v-btn>
                   <v-btn color="info">Info</v-btn>
@@ -65,6 +65,14 @@ export default {
 
     },
   methods: {
+    async teste(){
+      alert('top')
+      var res = "ola"
+      var res2 = await Transferencias.testParams(res)
+      console.log(res2)
+      alert('result motherfuckers: ' + res2)
+      return true
+    },
     
     getOwner: async function (){
       let self = this

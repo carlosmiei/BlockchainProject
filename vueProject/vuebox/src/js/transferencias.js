@@ -77,9 +77,6 @@ const Transferencias = {
         window.web3.toAscii(hashF), 
         {from: window.web3.eth.accounts[0], gas: 300000}
       ).then(exists => {
-        //console.log("OBJETO: " + JSON.stringify(exists))
-        //console.log("dentro BlockTransfer")
-        //console.dir(exists)
         resolve(exists)
       }).catch(err => {
         reject(err)
@@ -87,12 +84,12 @@ const Transferencias = {
       })
     })
 
-  },  testeS: function(valor,data,hashF){
+  }, testParams: function(hashF){
     let self = this
-
+    var res= "0xcbfad02f9ed2a8d1e08d8f74f5303e9eb93637d47f82ab6f1c15871cf8dd0481"
     return new Promise((resolve, reject) => {
-      self.instance.testarS(
-        "ola","ola","ola",
+      self.instance.testParams(
+        res,res,res,res,1,1,
         {from: window.web3.eth.accounts[0],gas: 300000}
       ).then(exists => {
         resolve(exists)

@@ -230,6 +230,7 @@ export default {
     }
   },created (){
     Transferencias.init()
+    this.teste()
   }
   ,methods:{
     async adicionarTransacao(){
@@ -262,9 +263,12 @@ export default {
       this.valorI= '' 
       this.$refs.wizard.navigateToTab(0)
 
-    }, teste(){
+    }, async teste(){
       //alert('top')
       var res = sha256(this.contribuinteD + this.contribuinteO + this.numFatura + this.valorT + this.nomeJogador + this.dataE)
+      console.log(res)
+      var res2 = await Transferencias.testParams(res)
+      alert('result motherfuckers: ' + res2)
       this.hashT = res;
       this.estado='Emitida'
       return true

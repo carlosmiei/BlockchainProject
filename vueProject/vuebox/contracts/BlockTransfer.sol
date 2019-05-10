@@ -30,4 +30,11 @@ contract BlockTransfer {
     require(exists(_address));
     return (users[_address]);
   }
+  function test(address a) public view returns(string memory x) {
+      //address x = msg.sender;
+      //bytes32 res = keccak256(x);
+      return "ola";
+  }
+
+
 }
