@@ -35,7 +35,7 @@ export default {
             msg: 'Bem vindo!',
             items: [
           { title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'},
-          { title: 'Adicionar Transação', icon: 'transfer_within_a_station',route:'/addTransfer' },
+          { title: 'Efetuar Compra', icon: 'transfer_within_a_station',route:'/addTransfer' },
           { title: 'Alterar Transação', icon: 'touch_app' },
           { title: 'Consultar Transação', icon: 'list', route:'/consultTrans'},
           { title: 'Perfil', icon: 'dashboard' },

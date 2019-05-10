@@ -65,16 +65,16 @@ const Transferencias = {
   },
   adicionaFatura: function(valor,data,hashF){
     let self = this
-
+    // Tem de ter isto para ser um adress
+    hashF = '0x' + hashF
     return new Promise((resolve, reject) => {
       
-      console.log("Valor: ", valor, " - ", typeof(valor))
-      console.log("Data: ", data, " - ", typeof(data))
-      console.log("Hash: ", hashF, " - ", typeof(hashF))
+
       self.instance.adicionaFatura(
         valor, 
         data,
-        window.web3.toAscii(hashF), 
+        hashF,
+        //window.web3.toAscii(hashF), 
         {from: window.web3.eth.accounts[0], gas: 300000}
       ).then(exists => {
         resolve(exists)

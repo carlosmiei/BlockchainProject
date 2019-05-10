@@ -15,12 +15,12 @@ contract Transferencias {
         uint estadoVenda;
     }
 
-    string[] KeysFaturas;
-    mapping (string => Fatura) transacoes;
+    address[] KeysFaturas;
+    mapping (address => Fatura) transacoes;
     
     //eventos teste 
     event nextStage(
-       string id,
+       address id,
        uint estadoFatura
     );
 
@@ -44,7 +44,7 @@ contract Transferencias {
 
     }
 
-    function adicionaFatura(uint valor, string memory emitData, string memory hash) public {
+    function adicionaFatura(uint valor, string memory emitData, address  hash) public {
        // require(isMember(msg.sender) == true,"Sender not authorized.");
         
         Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
@@ -53,12 +53,12 @@ contract Transferencias {
         emit nextStage(hash,1);
     }
 
-    function testarS(string memory teste, bytes32 valor, string memory hash)public {
-        emit nextStage("0x24BF0ffC402b0AAd98B11",1);
+    function testarS(string memory teste, bytes32 valor, address hash)public {
+        emit nextStage(hash,1);
         
     }
 
-    function recebeFatura(string memory hash) public{
+    function recebeFatura(address hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
         require(transacoes[hash].estadoVenda == 1, "Operation not available");
             
@@ -66,7 +66,7 @@ contract Transferencias {
         emit nextStage(hash,2);      
     }
 
-    function validaFatura(string memory hash, bool aceitar) public{
+    function validaFatura(address hash, bool aceitar) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
         require(transacoes[hash].estadoVenda == 2, "Operation not available");
         
@@ -77,7 +77,7 @@ contract Transferencias {
         emit nextStage(hash,3);
     }
 
-    function pagaFatura(string memory hash) public{
+    function pagaFatura(address hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
         require(transacoes[hash].estadoVenda == 3, "Operation not available");
         
@@ -86,7 +86,7 @@ contract Transferencias {
     }
 
 
-    function validaPagamento(string memory hash) public{
+    function validaPagamento(address hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
         require(transacoes[hash].estadoVenda == 4, "Operation not available");
             
@@ -95,7 +95,7 @@ contract Transferencias {
     }
 
 
-    function pagaPercentagem(string memory hash) public{
+    function pagaPercentagem(address hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");    
         require(transacoes[hash].estadoVenda == 5, "Operation not available");
 
@@ -104,7 +104,7 @@ contract Transferencias {
     }
 
 
-    function getEstado(string memory hash) public view returns (uint estado) {
+    function getEstado(address hash) public view returns (uint estado) {
         require(isMember(msg.sender) == true,"Sender not authorized.");
         Fatura memory fatura = transacoes[hash];
         return fatura.estadoVenda;
