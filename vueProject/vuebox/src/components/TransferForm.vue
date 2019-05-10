@@ -88,7 +88,7 @@
             required
           ></v-text-field>
 
-                    <v-text-field
+          <v-text-field
             v-model="valorI"
             :counter="256"
             label="Valor Iva"

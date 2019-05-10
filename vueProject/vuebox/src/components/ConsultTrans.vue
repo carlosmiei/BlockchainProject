@@ -38,10 +38,32 @@
 
         </td>
         <td class="text-xs-right"> 
-          
-          <v-layout justify-center>
-              {{ props.item.estado }}
-           </v-layout>
+          <!-- Parte editável da Coluna estado -->
+          <v-edit-dialog
+            :return-value.sync="props.item.estado"
+            large
+            lazy
+            persistent
+            @save="save"
+            @cancel="cancel"
+            @open="open"
+            @close="close"
+          >
+            <div>{{ props.item.estado }}</div>
+            <template v-slot:input>
+              <div class="mt-3 title">Atualizar Estado</div>
+            </template>
+            <template v-slot:input>
+              <v-text-field
+                v-model="props.item.estado"
+                :rules="[max25chars]"
+                label="Edit"
+                single-line
+                counter
+                autofocus
+              ></v-text-field>
+            </template>
+          </v-edit-dialog>
         </td>
       </template>
       <template v-slot:no-results>
@@ -87,6 +109,10 @@ export default {
 
       
 },methods:{
+   save(estado){
+     console.log('estado')
+     console.dir(estado)
+   },
 
     getBlockNumber(){
         return new Promise (function (resolve, reject) {
