@@ -20,8 +20,8 @@
 <!-- Inicio do form -->
   <form-wizard  color="#327CCB" shape="square" title="Adicionar uma Transferencia" @on-complete="adicionarTransacao" ref="wizard">
   
-  <!-- primeiro form -->
-  <tab-content title="Informações Transação"  :before-change="teste" >
+  <!-- primeiro form  :before-change="teste" -->
+  <tab-content title="Informações Transação">
     <v-form v-model="valid">
     <v-container>
       <v-layout>
@@ -226,7 +226,8 @@ export default {
            trHash:'',
            gas:'',
            block:'',
-           event:''
+           event:'',
+           valid:true
     }
   },created (){
     Transferencias.init()

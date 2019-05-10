@@ -3,7 +3,7 @@
 
     <v-card>
     <v-card-title>
-      Consultar Transações
+      Consultar Histórico de Transações
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -44,9 +44,9 @@
             large
             lazy
             persistent
-            @save="save"
+            @save="save(props.item.name)"
             @cancel="cancel"
-            @open="open"
+            @open="open(props.item.name)"
             @close="close"
           >
             <div>{{ props.item.estado }}</div>
@@ -54,14 +54,10 @@
               <div class="mt-3 title">Atualizar Estado</div>
             </template>
             <template v-slot:input>
-              <v-text-field
-                v-model="props.item.estado"
-                :rules="[max25chars]"
-                label="Edit"
-                single-line
-                counter
-                autofocus
-              ></v-text-field>
+        <v-select
+          :items="op"
+          label="Estado"
+        ></v-select>  
             </template>
           </v-edit-dialog>
         </td>
@@ -83,9 +79,10 @@ export default {
     name: 'ConsultTrans',
       data () {
             return {
+              op:['Completa','Emitida','Em pagamento','Aceite'],
               bloco:'',
               search:'',
-               headers: [
+              headers: [
               {text: 'Hash da Transação',value: 'hash', align: 'center',},
               {text: 'Bloco', value: 'bloco' },
               {text: 'Gas', value: 'gas' },
@@ -109,6 +106,11 @@ export default {
 
       
 },methods:{
+  open(id){
+    if (id == '0x0eab421867077be5e8f28d9a442389aebfcf8a001677daffe6fc56a0be6bc8bc')
+        this.op=['fun']
+
+  },
    save(estado){
      console.log('estado')
      console.dir(estado)

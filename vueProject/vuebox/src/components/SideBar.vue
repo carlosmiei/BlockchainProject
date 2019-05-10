@@ -36,8 +36,8 @@ export default {
             items: [
           { title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'},
           { title: 'Efetuar Compra', icon: 'transfer_within_a_station',route:'/addTransfer' },
-          { title: 'Alterar Transação', icon: 'touch_app' },
-          { title: 'Consultar Transação', icon: 'list', route:'/consultTrans'},
+          { title: 'Consultar Compras', icon: 'touch_app' },
+          { title: 'Consultar Vendas', icon: 'list', route:'/consultTrans'},
           { title: 'Perfil', icon: 'dashboard' },
           { title: 'Jogadores', icon: 'person' },
           { title: 'Account', icon: 'account_box' },
