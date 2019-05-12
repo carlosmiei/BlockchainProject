@@ -20,8 +20,8 @@
 <!-- Inicio do form -->
   <form-wizard  color="#327CCB" shape="square" title="Adicionar uma Transferencia" @on-complete="adicionarTransacao" ref="wizard">
   
-  <!-- primeiro form  :before-change="teste" -->
-  <tab-content title="Informações Transação">
+  <!-- primeiro form -->
+  <tab-content title="Informações Transação"  :before-change="calcularHash" >
     <v-form v-model="valid">
     <v-container>
       <v-layout>
@@ -30,8 +30,8 @@
         >
           <v-text-field
             v-model="contribuinteO"
-            :counter="256"
-            label="Endereço do destinatário"
+            :counter="9"
+            label="Contribuinte Originante"
             required
           ></v-text-field>
         </v-flex>
@@ -61,13 +61,34 @@
         <v-flex
           xs6  
         >
-          <v-text-field
+          <!-- <v-text-field
             v-model="dataE"
             :counter="256"
             label="Data Emissão"
             required
           ></v-text-field>
-        </v-flex>
+        > -->
+      <v-menu
+        v-model="menu2"
+        :close-on-content-click="false"
+        :nudge-right="40"
+        lazy
+        transition="scale-transition"
+        offset-y
+        full-width
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Data da compra"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker v-model="dataE" @input="menu2 = false"></v-date-picker>
+      </v-menu>
+</v-flex>
         <v-flex
           xs6  
         >
@@ -88,7 +109,7 @@
             required
           ></v-text-field>
 
-          <v-text-field
+                    <v-text-field
             v-model="valorI"
             :counter="256"
             label="Valor Iva"
@@ -227,7 +248,9 @@ export default {
            gas:'',
            block:'',
            event:'',
-           valid:true
+           menu: false,
+          modal: false,
+          menu2: false
     }
   },created (){
     Transferencias.init()
@@ -263,7 +286,12 @@ export default {
       this.valorI= '' 
       this.$refs.wizard.navigateToTab(0)
 
-    },
+    }, calcularHash(){
+      var res = sha256(this.contribuinteD + this.contribuinteO + this.numFatura + this.valorT + this.nomeJogador + this.dataE)
+      this.hashT = res;
+      this.estado='Emitida'
+      return true
+    }
   }
 }
 </script>
