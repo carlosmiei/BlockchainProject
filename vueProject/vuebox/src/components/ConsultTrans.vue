@@ -16,25 +16,29 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="transacoes"
+      :items="transacoesPendentes"
       :search="search"
       :loading="false"
     >
       <template v-slot:items="props">
         <td>
           <v-layout justify-center>
-              {{ props.item.name }}
+              {{ props.item._id }}
           </v-layout>
         </td>
         <td class="text-xs-right">
           <v-layout justify-center>
           
-          {{ props.item.number }}
+          {{ props.item.to }}
          </v-layout>
         </td>
         <td class="text-xs-right">
            <v-layout justify-center>
-              {{ props.item.gas }}
+              {{ props.item.nomeJogador }}
+          </v-layout>
+        <td class="text-xs-right">
+           <v-layout justify-center>
+              {{ props.item.valorT }}
           </v-layout>
 
         </td>
@@ -161,23 +165,29 @@ export default {
               headers: [
               {text: 'Id da Venda ',value: 'hash', align: 'center',},
               {text: 'Comprador', value: 'bloco' },
+              {text: 'Jogador', value: 'jogador' },
               {text: 'Valor', value: 'gas' },
               {text: 'Estado', value: 'estado' }
-              ], transacoes: [ ]
+             ],
+              transacoes: [ ],
+              transacoesPendentes:[]
             
     }
   },async created(){
       var lista=[]
-      var transacoes = this.getTransacoes()
-      var bloco = await this.getBlockNumber()
-      console.dir(bloco)
+      var transacoes = await this.getTransacoes()
+      //Preencher a primeira
+      console.dir(transacoes)
+      transacoes.forEach(this.cutS);
+      this.transacoesPendentes = transacoes
+      
 
-      // Ir buscar um bloco 
+      // ## Preencher a segunda tabela
+      var bloco = await this.getBlockNumber()
       for(var i=0;i<10;i++){
         var b = await this.getBlock(300-i)
         lista.push(b)
       }
-      console.dir(lista)
       lista.forEach(this.fillTable);
 
       
@@ -193,7 +203,6 @@ export default {
    },async getTransacoes(){
 
       var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + this.account + '&&tipo=venda' )
-      console.log('LISTA TRANS GET TRANS: ' ); console.dir(lista.data)
       return lista.data
 
 
@@ -227,7 +236,20 @@ export default {
         obj['estado'] = 'Completa'
         this.transacoes.push(obj)
 
-  }
+  }, fillTable2(elem){
+        var obj = {}
+        obj['id'] = elem._id
+        obj['number'] = elem.number
+        obj['gas'] = elem.gasUsed
+        obj['estado'] = 'Completa'
+        this.transacoes.push(obj)
+},cutS(elem){
+  elem['_id'] = '0x' + elem._id.substr(0, 20) + '...'
+  elem['to'] =  elem.to.substr(0, 20) + '...'
+  return elem
+
+}
+
 }
 }
 </script>
