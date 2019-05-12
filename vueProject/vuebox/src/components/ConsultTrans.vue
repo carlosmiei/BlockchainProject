@@ -1,8 +1,82 @@
 <template>
   <div>
+<!-- inicio tabela pendentes -->
+<!-- Tabela do Histórico  -->
+    <v-card color="">
+    <v-card-title color="white">
+      Consultar Transações Pendentes
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="transacoes"
+      :search="search"
+      :loading="false"
+    >
+      <template v-slot:items="props">
+        <td>
+          <v-layout justify-center>
+              {{ props.item.name }}
+          </v-layout>
+        </td>
+        <td class="text-xs-right">
+          <v-layout justify-center>
+          
+          {{ props.item.number }}
+         </v-layout>
+        </td>
+        <td class="text-xs-right">
+           <v-layout justify-center>
+              {{ props.item.gas }}
+          </v-layout>
 
-    <v-card>
-    <v-card-title>
+        </td>
+        <td class="text-xs-right"> 
+          <!-- Parte editável da Coluna estado -->
+          <v-edit-dialog
+            :return-value.sync="props.item.estado"
+            large
+            lazy
+            persistent
+            @save="save(props.item.name)"
+            @cancel=""
+            @open="open(props.item.name)"
+            @close=""
+          >
+            <div>{{ props.item.estado }}</div>
+            <template v-slot:input>
+              <div class="mt-3 title">Atualizar Estado</div>
+            </template>
+            <template v-slot:input>
+        <v-select
+          :items="op"
+          label="Estado"
+        ></v-select>  
+            </template>
+          </v-edit-dialog>
+        </td>
+      </template>
+      <template v-slot:no-results>
+        <v-alert :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </template>
+    </v-data-table>
+  </v-card>
+  <v-spacer></v-spacer>
+<v-divider></v-divider>
+<v-divider></v-divider>
+<!-- fim tabela pendentes -->
+<!-- Tabela do Histórico  -->
+    <v-card color="">
+    <v-card-title color="white">
       Consultar Histórico de Transações
       <v-spacer></v-spacer>
       <v-text-field
@@ -45,9 +119,9 @@
             lazy
             persistent
             @save="save(props.item.name)"
-            @cancel="cancel"
+            @cancel=""
             @open="open(props.item.name)"
-            @close="close"
+            @close=""
           >
             <div>{{ props.item.estado }}</div>
             <template v-slot:input>
@@ -69,7 +143,7 @@
       </template>
     </v-data-table>
   </v-card>
-       
+  <!-- fim da tabela do histório -->
  </div>
 </template>
 

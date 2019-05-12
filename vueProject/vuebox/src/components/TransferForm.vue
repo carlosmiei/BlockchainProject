@@ -259,32 +259,34 @@ export default {
   }
   ,methods:{
     async adicionarTransacao(){
+      var res
       this.loading=true
-      //adicionar À BD
       var enviar = this.transacao
-      enviar['from'] = this.account
-      // problema com a data resolver depois
-      enviar['dataE'] = this.date
-      alert(enviar['dataE'])
+      var res = await Transferencias.adicionaFatura(this.transacao.valorT,this.date,this.transacao._id)
 
-     axios.post('http://localhost:4000/transacoes/',enviar)
+      //preprar enviar
+      enviar['from'] = this.account
+      enviar['dataE'] = this.date
+      enviar['hashTrans'] = res["receipt"].transactionHash
+      enviar['numBloco'] = (res["receipt"].blockNumber).toString()
+      enviar['gas'] = (res["receipt"].gasUsed).toString()
+
+      axios.post('http://localhost:4000/transacoes/',enviar)
           .then(response => {
-              console.log('Correu tudo bem' + response)
+              console.log('Correu tudo bem' + response)    
+              this.resetForm()
+              this.fillPopup(res)
+          
           }).catch(e => {
               console.log('ERRO: ' + e)
           })
 
-      var res = await Transferencias.adicionaFatura(this.transacao.valorT,this.date,this.transacao._id)
+     
 
       this.loading=false
       this.show=false
       this.recibo=res
       this.showRecibo=true
-
-      this.resetForm()
-      this.fillPopup(res)
-
-
 
     }, calcularHash(){
       var res = sha256(this.transacao.contribuinteD + this.transacao.to + this.transacao.numFatura + this.transacao.valorT + this.transacao.nomeJogador + this.transacao.dataE)
