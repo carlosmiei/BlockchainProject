@@ -47,6 +47,8 @@ router.post("/setEstado", (req, res) => {
 
 
 router.post('/', (req, res) => {
+	console.dir(req.body)
+	
 	Transacoes.inserir(req.body)
 	.then(dados => res.jsonp(dados))
 	.catch(erro => res.status(500).send('Erro ao adicionar transação: ' + erro))

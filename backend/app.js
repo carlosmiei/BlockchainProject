@@ -6,9 +6,11 @@ var logger = require('morgan');
 
 var transacaoRouter = require('./routes/transacoes');
 var userRouter = require('./routes/users');
+var cors = require('cors');
 
 var app = express();
-
+// Por causa do erro do cors
+app.use(cors());
 
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://bt:blocktransfer1@ds151596.mlab.com:51596/blocktransfer',{useNewUrlParser:true})

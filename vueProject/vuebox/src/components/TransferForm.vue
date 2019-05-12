@@ -29,9 +29,9 @@
           xs4  
         >
           <v-text-field
-            v-model="contribuinteO"
-            :counter="9"
-            label="Contribuinte Originante"
+            v-model="transacao.to"
+            :counter="256"
+            label="Adress Destinatário"
             required
           ></v-text-field>
         </v-flex>
@@ -40,7 +40,7 @@
           xs4  
         >
           <v-text-field
-            v-model="contribuinteD"
+            v-model="transacao.contribuinteD"
             :counter="9"
             label="Contribuinte Destinário"
             required
@@ -50,7 +50,7 @@
           xs4  
         >
           <v-text-field
-            v-model="numFatura"
+            v-model="transacao.numFatura"
             :counter="256"
             label="Número da Fatura"
             required
@@ -61,13 +61,6 @@
         <v-flex
           xs6  
         >
-          <!-- <v-text-field
-            v-model="dataE"
-            :counter="256"
-            label="Data Emissão"
-            required
-          ></v-text-field>
-        > -->
       <v-menu
         v-model="menu2"
         :close-on-content-click="false"
@@ -86,14 +79,14 @@
             v-on="on"
           ></v-text-field>
         </template>
-        <v-date-picker v-model="dataE" @input="menu2 = false"></v-date-picker>
+        <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
       </v-menu>
 </v-flex>
         <v-flex
           xs6  
         >
           <v-text-field
-            v-model="nomeJogador"
+            v-model="transacao.nomeJogador"
             :counter="256"
             label="Nome do Jogador"
             required
@@ -103,14 +96,14 @@
         <v-layout>
           
           <v-text-field
-            v-model="valorT"
+            v-model="transacao.valorT"
             :counter="256"
             label="Valor Total"
             required
           ></v-text-field>
 
                     <v-text-field
-            v-model="valorI"
+            v-model="transacao.valorI"
             :counter="256"
             label="Valor Iva"
             required
@@ -130,7 +123,7 @@
           xs12  
         >
           <v-text-field
-            :value="hashT"
+            :value="transacao._id"
             :counter="256"
             label="Hash da transação"
             readonly
@@ -147,21 +140,21 @@
         
         <v-form v-model="valid">
             <v-text-field
-            :value="hashT"
+            :value="transacao._id"
             :counter="256"
             label="Hash da transação"
             readonly
           ></v-text-field>
          
             <v-text-field
-            :value="valorT"
+            :value="transacao.valorT"
             :counter="256"
             label="Valor Total da transação"
             readonly
           ></v-text-field>
 
             <v-text-field
-            :value="estado"
+            :value="transacao.estado"
             :counter="256"
             label="Estado da Transação"
             readonly
@@ -222,35 +215,44 @@
 
 <script>
 import Transferencias from '../js/transferencias.js'
+import axios from 'axios';
 var sha256 = require('js-sha256');
 export default {
     name: 'TransferForm',
       data () {
             return {
            msg: 'Bem vindo!',
-           contribuinteD:'',
-           contribuinteO: '',
-           numFatura: '',
-           dataE:'',
-           nomeJogador: '',
-           valorT: '' ,
-           valorI: '' , 
+           //para já fica assim mas devia-se usar o estado
+           account: window.web3.eth.accounts[0],
+           transacao:{
+              contribuinteD:'',
+              to: '',
+              numFatura: '',
+              dataE:'',
+              nomeJogador: '',
+              valorT: '' ,
+              valorI: '' , 
+              _id:'',
+              estado:''
+           },
            show:true,
            value:'ol',
            loading:false,
            recibo:'',
            showR:true,
            showRecibo:false,
-           estado:'',
-           hashT:'',
+
+
            dialog:false,
            trHash:'',
            gas:'',
            block:'',
            event:'',
            menu: false,
-          modal: false,
-          menu2: false
+           modal: false,
+           menu2: false,
+           date: new Date().toISOString().substr(0, 10),
+           valid: true
     }
   },created (){
     Transferencias.init()
@@ -258,39 +260,55 @@ export default {
   ,methods:{
     async adicionarTransacao(){
       this.loading=true
-      var res = await Transferencias.adicionaFatura(20,"27/04/2019",this.hashT)
-      //alert((JSON.stringify(res)))
-      //var res =  await Transferencias.testeS(20,"27/04/2019",this.hashT)
-      //alert(res2)
+      //adicionar À BD
+      var enviar = this.transacao
+      enviar['from'] = this.account
+      // problema com a data resolver depois
+      enviar['dataE'] = this.date
+      alert(enviar['dataE'])
+
+     axios.post('http://localhost:4000/transacoes/',enviar)
+          .then(response => {
+              console.log('Correu tudo bem' + response)
+          }).catch(e => {
+              console.log('ERRO: ' + e)
+          })
+
+      var res = await Transferencias.adicionaFatura(this.transacao.valorT,this.date,this.transacao._id)
+
       this.loading=false
       this.show=false
       this.recibo=res
       this.showRecibo=true
 
-      //campos do popup
-      this.trHash= res["receipt"].transactionHash
-      this.gas= res["receipt"].gasUsed
-      this.block = res["receipt"].blockNumber
-      var array = res["logs"]
-      //console.log("ARRAYYYYYYYYYYY")
-      //console.dir(array)
-      this.event = array[0].event
-      this.dialog=true
-      // reset Form
-      this.contribuinteD=''
-      this.contribuinteO= ''
-      this.numFatura= ''
-      this.dataE=''
-      this.nomeJogador= ''
-      this.valorT= '' 
-      this.valorI= '' 
-      this.$refs.wizard.navigateToTab(0)
+      this.resetForm()
+      this.fillPopup(res)
+
+
 
     }, calcularHash(){
-      var res = sha256(this.contribuinteD + this.contribuinteO + this.numFatura + this.valorT + this.nomeJogador + this.dataE)
-      this.hashT = res;
-      this.estado='Emitida'
+      var res = sha256(this.transacao.contribuinteD + this.transacao.to + this.transacao.numFatura + this.transacao.valorT + this.transacao.nomeJogador + this.transacao.dataE)
+      this.transacao._id = res;
+      this.transacao.estado='Emitida'
       return true
+    }, resetForm(){
+        // reset Form
+        this.transacao.contribuinteD=''
+        this.transacao.to= ''
+        this.transacao.numFatura= ''
+        this.transacao.dataE=''
+        this.transacao.nomeJogador= ''
+        this.transacao.valorT= '' 
+        this.transacao.valorI= '' 
+        this.$refs.wizard.navigateToTab(0)
+      
+    }, fillPopup(res){
+          this.trHash= res["receipt"].transactionHash
+          this.gas= res["receipt"].gasUsed
+          this.block = res["receipt"].blockNumber
+          var array = res["logs"]
+          this.event = array[0].event
+          this.dialog=true
     }
   }
 }
