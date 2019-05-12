@@ -149,24 +149,26 @@
 
 <script>
 import Transferencias from '../js/transferencias.js'
+import axios from 'axios';
 export default {
     name: 'ConsultTrans',
       data () {
             return {
+              account: window.web3.eth.accounts[0],
               op:['Completa','Emitida','Em pagamento','Aceite'],
               bloco:'',
               search:'',
               headers: [
-              {text: 'Hash da Transação',value: 'hash', align: 'center',},
-              {text: 'Bloco', value: 'bloco' },
-              {text: 'Gas', value: 'gas' },
+              {text: 'Id da Venda ',value: 'hash', align: 'center',},
+              {text: 'Comprador', value: 'bloco' },
+              {text: 'Valor', value: 'gas' },
               {text: 'Estado', value: 'estado' }
               ], transacoes: [ ]
             
     }
   },async created(){
       var lista=[]
-      
+      var transacoes = this.getTransacoes()
       var bloco = await this.getBlockNumber()
       console.dir(bloco)
 
@@ -188,9 +190,15 @@ export default {
    save(estado){
      console.log('estado')
      console.dir(estado)
-   },
+   },async getTransacoes(){
 
-    getBlockNumber(){
+      var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + this.account + '&&tipo=venda' )
+      console.log('LISTA TRANS GET TRANS: ' ); console.dir(lista.data)
+      return lista.data
+
+
+   }
+   ,getBlockNumber(){
         return new Promise (function (resolve, reject) {
              window.web3.eth.getBlockNumber(function (error, result) {
             if (error) {
