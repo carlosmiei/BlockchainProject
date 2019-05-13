@@ -43,16 +43,15 @@
 
         </td>
         <td class="text-xs-right"> 
-          <!-- Parte editável da Coluna estado -->
+          
+          <!-- Parte editável da Coluna    @close="" estado @cancel=""  -->
           <v-edit-dialog
             :return-value.sync="props.item.estado"
             large
             lazy
             persistent
-            @save="save(props.item.name)"
-            @cancel=""
-            @open="open(props.item.name)"
-            @close=""
+            @save="save(props.item.estado)"
+            @open="open(props.item.estado)"
           >
             <div>{{ props.item.estado }}</div>
             <template v-slot:input>
@@ -144,7 +143,7 @@ export default {
       data () {
             return {
               account: window.web3.eth.accounts[0],
-              op:['Completa','Emitida','Em pagamento','Aceite'],
+              op:[],
               bloco:'',
               search:'',
               headers: [
@@ -174,21 +173,23 @@ export default {
       
 },methods:{
   open(id){
-    if (id == '0x0eab421867077be5e8f28d9a442389aebfcf8a001677daffe6fc56a0be6bc8bc')
-        this.op=['fun']
+    if (id == 'Emitida'){
+        this.op=['Recebida']
+    }
+    if (id == 'Recebida'){
+        this.op=['Aceite','Rejeitada']
+    }
+    if (id == 'Rejeitada' || id=='Em pagamento'){
+        this.op=[]
+    }
+    if (id == 'Validada'){
+            this.op=['Em pagamento']
+    }
+        
 
-  }, async getTransacoes(){
-      var ad = this.account
-      //var res = ad.substr(2,ad.length);
-      //res = '0x' + res.toUpperCase()
+  }, async getTransacoes(){      
 
-      //o web 3 da me o adress assim
-      //0x685d6296b4fd9d0f00d8cc2f634a2160b2a183a8
-      // a conta ta no ganache e e no metamask assim
-      //0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8
-      
-      alert(ad)
-      var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + ad + '&&tipo=compra' )
+      var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + this.account + '&&tipo=compra' )
       return lista.data
 
    },cutS(elem){
