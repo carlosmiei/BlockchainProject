@@ -270,6 +270,8 @@ export default {
       enviar['hashTrans'] = res["receipt"].transactionHash
       enviar['numBloco'] = (res["receipt"].blockNumber).toString()
       enviar['gas'] = (res["receipt"].gasUsed).toString()
+      // quick fix lower case problem
+      enviar['to'] = enviar['to'].toLowerCase()
 
       axios.post('http://localhost:4000/transacoes/',enviar)
           .then(response => {

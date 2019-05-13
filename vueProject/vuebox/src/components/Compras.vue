@@ -106,7 +106,7 @@
         <td class="text-xs-right">
           <v-layout justify-center>
           
-          {{ props.item.from }}
+          {{ props.item.to}}
          </v-layout>
         </td>
         <td class="text-xs-right">
