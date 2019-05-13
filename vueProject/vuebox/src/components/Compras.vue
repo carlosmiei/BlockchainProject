@@ -166,10 +166,10 @@ export default {
       transacoes.forEach(this.cutS);
       this.transacoesPendentes = transacoes
       this.transacoesC = transacoes
-
+      
       // ## Preencher a segunda tabela
       this.transacoes = this.transacoesC.filter(elem => elem.estado=='Completa');
-       this.transacoesPendentes = this.transacoesPendentes.filter(elem => elem.estado!='Completa')
+      this.transacoesPendentes = this.transacoesPendentes.filter(elem => elem.estado!='Completa')
 
       
 },methods:{
@@ -178,8 +178,17 @@ export default {
         this.op=['fun']
 
   }, async getTransacoes(){
+      var ad = this.account
+      //var res = ad.substr(2,ad.length);
+      //res = '0x' + res.toUpperCase()
 
-      var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + this.account + '&&tipo=compra' )
+      //o web 3 da me o adress assim
+      //0x685d6296b4fd9d0f00d8cc2f634a2160b2a183a8
+      // a conta ta no ganache e e no metamask assim
+      //0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8
+      
+      alert(ad)
+      var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + ad + '&&tipo=compra' )
       return lista.data
 
    },cutS(elem){

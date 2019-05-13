@@ -38,7 +38,6 @@ router.get('/', (req, res) => {
 	}
 });
 
-
 router.post("/setEstado", (req, res) => {
 	Transacoes.alteraEstado(req.body._id, req.body.estado)
 	.then(dados => res.jsonp(dados))
