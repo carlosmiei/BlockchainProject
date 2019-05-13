@@ -35,9 +35,9 @@ export default {
             msg: 'Bem vindo!',
             items: [
           { title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'},
-          { title: 'Efetuar Compra', icon: 'transfer_within_a_station',route:'/addTransfer' },
-          { title: 'Consultar Compras', icon: 'touch_app' },
-          { title: 'Consultar Vendas', icon: 'list', route:'/consultTrans'},
+          { title: 'Efetuar Venda', icon: 'transfer_within_a_station',route:'/addTransfer' },
+          { title: 'Consultar Vendas', icon: 'list', route:'/vendas'},
+          { title: 'Consultar Compras', icon: 'touch_app', route:'/compras' },
           { title: 'Perfil', icon: 'dashboard' },
           { title: 'Jogadores', icon: 'person' },
           { title: 'Account', icon: 'account_box' },

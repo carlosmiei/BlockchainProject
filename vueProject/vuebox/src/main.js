@@ -10,7 +10,10 @@ import 'vuetify/dist/vuetify.min.css'
 import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 import { store } from './store/store'
+import VueGraph from 'vue-graph'
+
 Vue.use(VueFormWizard)
+Vue.use(VueGraph)
 
 
 Vue.use(Vuetify)

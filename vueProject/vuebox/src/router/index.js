@@ -5,7 +5,8 @@ import AddTransfer from '@/components/AddTransfer'
 import Login from '@/components/Login'
 import DashBoard from '@/components/DashBoard'
 import { store } from '@/store/store'
-import ConsultTrans from '@/components/ConsultTrans'
+import ConsultTrans from '@/components/Vendas'
+import Compras from '@/components/Compras'
 
 Vue.use(Router)
 
@@ -32,9 +33,13 @@ let router =  new Router({
       name: 'DashBoard',
       component: DashBoard
     },{
-      path:'/consultTrans',
-      name:'ConsultTrans',
+      path:'/vendas',
+      name:'Vendas',
       component: ConsultTrans
+    },{
+      path:'/compras',
+      name:'Compras',
+      component: Compras
     }
   ]
 })
