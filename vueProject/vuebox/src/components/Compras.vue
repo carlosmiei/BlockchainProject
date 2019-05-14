@@ -50,7 +50,7 @@
             large
             lazy
             persistent
-            @save="save(props.item.estado)"
+            @save="save(props.item._id)"
             @open="open(props.item.estado)"
           >
             <div>{{ props.item.estado }}</div>
@@ -61,6 +61,7 @@
         <v-select
           :items="op"
           label="Estado"
+          v-model="input" 
         ></v-select>  
             </template>
           </v-edit-dialog>
@@ -154,7 +155,8 @@ export default {
               {text: 'Estado', value: 'estado' }
              ],
               transacoes: [ ],
-              transacoesPendentes:[]
+              transacoesPendentes:[],
+              input:''
             
     }
   },async created(){
@@ -193,11 +195,28 @@ export default {
       return lista.data
 
    },cutS(elem){
-  elem['_id'] = '0x' + elem._id.substr(0, 20) + '...'
-  elem['to'] =  elem.to.substr(0, 20) + '...'
-  return elem
-
+        elem['_id'] = '0x' + elem._id.substr(0, 20) + '...'
+        elem['to'] =  elem.to.substr(0, 20) + '...'
+        return elem
+  },
+  save(name){
+    alert(this.input)
+    switch (this.input) {
+      case 'Recebida':
+        text = "Today is Saturday";
+        break; 
+      case 'Aceite':
+        text = "Today is Sunday";
+        break;
+      case 'Rejeitada':
+        break
+      case 'Em pagamento':
+        break
+      default: 
+        alert('Erro a processar alteração de estado')
+        break
 }
+  }
 }
 
 }
