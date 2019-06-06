@@ -226,30 +226,29 @@ export default {
           console.dir(this.transacoesPendentes)
        }
 
-       //Fazer Alteração na BD
-       //Fazer alteração na BlockChain
-       alert(idVenda)
-       var fatura = await Transferencias.emPagamento(idVenda)
-       this.alteraEstado(idVenda,4)
-       console.dir(fatura)
-
     }
 
-    // switch (this.input) {
-    //   case 'Recebida':
-    //     text = "Today is Saturday";
-    //     break; 
-    //   case 'Aceite':
-    //     text = "Today is Sunday";
-    //     break;
-    //   case 'Rejeitada':
-    //     break
-    //   case 'Em pagamento':
-    //     break
-    //   default: 
-    //     alert('Erro a processar alteração de estado')
-    //     break
-    //   }
+     switch (this.input) {
+       case 'Recebida':
+          var fatura = await Transferencias.recebeFatura(idVenda)
+          this.alteraEstado(idVenda,2)
+          break; 
+       case 'Aceite':
+          var fatura = await Transferencias.validaFatura(idVenda,true)
+          this.alteraEstado(idVenda,3)
+          break;
+       case 'Rejeitada':
+          var fatura = await Transferencias.validqaFatura(idVenda,false)
+          this.alteraEstado(idVenda,3)       
+          break
+       case 'Em pagamento':
+          var fatura = await Transferencias.pagaFatura(idVenda)
+          this.alteraEstado(idVenda,4)       
+          break
+       default: 
+         alert('Erro a processar alteração de estado')
+         break
+       }
 
       // Colocar aqui o método para alterar estado Blockchain
       //Alterar estado BD
