@@ -99,7 +99,7 @@ const Transferencias = {
       })
     })
 
-  }, emPagamento: function(fatura){
+  },emPagamento: function(fatura){
     let self = this
 
     return new Promise((resolve, reject) => {
@@ -114,7 +114,36 @@ const Transferencias = {
       })
     })
 
-  },  isMember: function(hashF){
+  },recebeFatura: function(fatura){
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.recebeFatura(
+        fatura,
+        {from: window.web3.eth.accounts[0],gas: 300000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
+  },validaFatura: function(fatura,aceitar){
+    let self = this
+    return new Promise((resolve, reject) => {
+      self.instance.validaFatura(
+        fatura,aceitar,
+        {from: window.web3.eth.accounts[0],gas: 300000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
+  },isMember: function(hashF){
     let self = this
 
     return new Promise((resolve, reject) => {

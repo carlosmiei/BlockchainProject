@@ -78,8 +78,8 @@ contract Transferencias {
     }
 
     function pagaFatura(address hash) public{
-        require(isMember(msg.sender) == true,"Sender not authorized.");
-        require(transacoes[hash].estadoVenda == 3, "Operation not available");
+        //require(isMember(msg.sender) == true,"Sender not authorized.");
+        //require(transacoes[hash].estadoVenda == 3, "Operation not available");
         
         transacoes[hash].estadoVenda = 4;  
         emit nextStage(hash,4);
