@@ -246,7 +246,7 @@ export default {
           this.alteraEstado(idVenda,"Rejeitada")       
           break
        case 'Em pagamento':
-          var fatura = await Transferencias.pagaFatura(idVenda)
+          var fatura = await Transferencias.emPagamento(idVenda)
           this.alteraEstado(idVenda,"Em pagamento")       
           break
        default: 
