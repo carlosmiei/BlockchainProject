@@ -68,6 +68,7 @@ export default {
     async teste(){
       alert('top')
       var res = "ola"
+
       var res2 = await Transferencias.testParams(res)
       console.log(res2)
       alert('result motherfuckers: ' + res2)

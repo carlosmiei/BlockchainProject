@@ -46,7 +46,7 @@ let router =  new Router({
 
 
 router.beforeEach((to, from, next) => {
-/*
+  /*
   if (to.fullPath != '/login' && !store.getters.isLogged) {
     console.log("nao estou logado")
     next('/login') 

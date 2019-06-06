@@ -46,7 +46,7 @@
           
           <!-- Parte editável da Coluna    @close="" estado @cancel=""  -->
           <v-edit-dialog
-            :return-value.sync="props.item.estado"
+           
             large
             lazy
             persistent
@@ -138,6 +138,7 @@
 
 <script>
 import Transferencias from '../js/transferencias.js'
+import Vue from "vue";
 import axios from 'axios';
 export default {
     name: 'ConsultTrans',
@@ -157,13 +158,14 @@ export default {
               transacoes: [ ],
               transacoesPendentes:[],
               input:''
-            
+             
     }
-  },async created(){
+  },async mounted(){
       var lista=[]
+      console.dir('FUI A BD')
       var transacoes = await this.getTransacoes()
       //Preencher a primeira
-      console.dir(transacoes)
+      //console.dir(transacoes)
       transacoes.forEach(this.cutS);
       this.transacoesPendentes = transacoes
       this.transacoesC = transacoes
@@ -199,8 +201,21 @@ export default {
         elem['to'] =  elem.to.substr(0, 20) + '...'
         return elem
   },
-  save(name){
-    alert(this.input)
+  save(idVenda){
+    //alert(name)
+    var text= ''
+    //console.dir(this.transacoesPendentes._id)
+    
+    var teste = this.transacoesPendentes
+    for (var x in teste) {
+
+       var obj = teste[x]
+       if (obj._id == idVenda){
+          this.transacoesPendentes[x].estado="Aceite"
+          console.dir(this.transacoesPendentes)
+       }
+    }
+
     switch (this.input) {
       case 'Recebida':
         text = "Today is Saturday";
@@ -215,7 +230,12 @@ export default {
       default: 
         alert('Erro a processar alteração de estado')
         break
-}
+      }
+
+      // Colocar aqui o método para alterar estado Blockchain
+      //Alterar estado BD
+      return true;
+  
   }
 }
 

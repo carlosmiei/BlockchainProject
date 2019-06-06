@@ -57,10 +57,10 @@ export default {
             var res =  await Transferencias.isMember(x)
             
             if (!res) {
-              alert("Não é membro mas para já passa!")
+              //alert("Não é membro mas para já passa!")
             }
             this.loading=true;
-            alert('entrei else')
+            //alert('entrei else')
             setTimeout(function(){this.loading=false; }, 2000);
             
             this.$store.commit('changeWallet',x)
