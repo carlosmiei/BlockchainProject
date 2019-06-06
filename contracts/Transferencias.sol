@@ -36,7 +36,7 @@ contract Transferencias {
     }
 
     function adicionaFatura(uint valor, string memory emitData, uint hash) public {
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        //require(isTeam(msg.sender) == true,"Sender not authorized.");
         
         Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
         KeysFaturas.push(hash);
@@ -44,14 +44,14 @@ contract Transferencias {
     }
 
     function recebeFatura(uint hash) public{
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        //require(isTeam(msg.sender) == true,"Sender not authorized.");
 
         if(transacoes[hash].estadoVenda == 1)
             transacoes[hash].estadoVenda = 2;        
     }
 
     function validaFatura(uint hash, bool aceitar) public{
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        //require(isTeam(msg.sender) == true,"Sender not authorized.");
         
         if(transacoes[hash].estadoVenda == 2)
             if(aceitar)
@@ -61,7 +61,7 @@ contract Transferencias {
     }
 
     function pagaFatura(uint hash) public{
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        //require(isTeam(msg.sender) == true,"Sender not authorized.");
         
         if(transacoes[hash].estadoVenda == 3)
             transacoes[hash].estadoVenda = 4; 
@@ -69,7 +69,7 @@ contract Transferencias {
 
 
     function validaPagamento(uint hash) public{
-        require(isBank(msg.sender) == true,"Sender not authorized.");
+        //require(isBank(msg.sender) == true,"Sender not authorized.");
         
         if(transacoes[hash].estadoVenda == 4)
             transacoes[hash].estadoVenda = 5; 
@@ -77,7 +77,7 @@ contract Transferencias {
 
 
     function pagaPercentagem(uint hash) public{
-        require(isTeam(msg.sender) == true,"Sender not authorized.");
+        //require(isTeam(msg.sender) == true,"Sender not authorized.");
         
         if(transacoes[hash].estadoVenda == 5)
             transacoes[hash].estadoVenda = 6; 
@@ -85,30 +85,30 @@ contract Transferencias {
 
 
     function getEstado(uint hash) public view returns (uint estado) {
-        require(isMember(msg.sender) == true,"Sender not authorized.");
+        //require(isMember(msg.sender) == true,"Sender not authorized.");
         Fatura memory fatura = transacoes[hash];
         return fatura.estadoVenda;
     }
 
     function adicionarEquipa() public{
-        require(msg.sender == ownerAcc, "Sender not authorized.");
+        //require(msg.sender == ownerAcc, "Sender not authorized.");
         equipas.push(msg.sender);
         emit Exemplo("ola",123); 
     }
 
     function adicionarBanco() public{
-        require(msg.sender == ownerAcc, "Sender not authorized.");
+        //require(msg.sender == ownerAcc, "Sender not authorized.");
         bancos.push(msg.sender);
         emit Exemplo("ola",123); 
     }
 
     function getTeamsLength() public view returns (uint count) {
-        require(isMember(msg.sender) == true,"Sender not authorized.");
+        //require(isMember(msg.sender) == true,"Sender not authorized.");
         return equipas.length;
     }
 
     function getBanksLength() public view returns (uint count) {
-        require(isMember(msg.sender) == true,"Sender not authorized.");
+        //require(isMember(msg.sender) == true,"Sender not authorized.");
         return bancos.length;
     }
 

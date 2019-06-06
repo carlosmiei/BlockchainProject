@@ -23,7 +23,7 @@
       <template v-slot:items="props">
         <td>
           <v-layout justify-center>
-              {{ props.item._id }}
+              {{ props.item._id2 }}
           </v-layout>
         </td>
         <td class="text-xs-right">
@@ -100,7 +100,7 @@
       <template v-slot:items="props">
         <td>
           <v-layout justify-center>
-              {{ props.item._id }}
+              {{ props.item._id2 }}
           </v-layout>
         </td>
         <td class="text-xs-right">
@@ -161,6 +161,7 @@ export default {
              
     }
   },async mounted(){
+     Transferencias.init()
       var lista=[]
       console.dir('FUI A BD')
       var transacoes = await this.getTransacoes()
@@ -186,8 +187,8 @@ export default {
     if (id == 'Rejeitada' || id=='Em pagamento'){
         this.op=[]
     }
-    if (id == 'Validada'){
-            this.op=['Em pagamento']
+    if (id == 'Aceite'){
+        this.op=['Em pagamento']
     }
         
 
@@ -196,41 +197,59 @@ export default {
       var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + this.account + '&&tipo=compra' )
       return lista.data
 
+   },async alteraEstado(id,estado){
+     //alterar estado para emPagamento
+      var obj = {}
+      obj['_id'] = id
+      obj['estado'] = estado
+      axios.post('http://localhost:4000/setEstado/',enviar)
+          .then(response => {
+              console.log('Correu tudo bem' + response)    
+        
+          }).catch(e => {
+              console.log('ERRO: ' + e)
+          })
+
    },cutS(elem){
-        elem['_id'] = '0x' + elem._id.substr(0, 20) + '...'
+        elem['_id2'] = '0x' + elem._id.substr(0, 20) + '...'
+        elem['_id'] = '0x' + elem._id //.substr(0, 20) + '...'
         elem['to'] =  elem.to.substr(0, 20) + '...'
         return elem
   },
-  save(idVenda){
-    //alert(name)
-    var text= ''
-    //console.dir(this.transacoesPendentes._id)
-    
+  async save(idVenda){
     var teste = this.transacoesPendentes
     for (var x in teste) {
 
        var obj = teste[x]
        if (obj._id == idVenda){
-          this.transacoesPendentes[x].estado="Aceite"
+          this.transacoesPendentes[x].estado=this.input
           console.dir(this.transacoesPendentes)
        }
+
+       //Fazer Alteração na BD
+       //Fazer alteração na BlockChain
+       alert(idVenda)
+       var fatura = await Transferencias.emPagamento(idVenda)
+       this.alteraEstado(idVenda,4)
+       console.dir(fatura)
+
     }
 
-    switch (this.input) {
-      case 'Recebida':
-        text = "Today is Saturday";
-        break; 
-      case 'Aceite':
-        text = "Today is Sunday";
-        break;
-      case 'Rejeitada':
-        break
-      case 'Em pagamento':
-        break
-      default: 
-        alert('Erro a processar alteração de estado')
-        break
-      }
+    // switch (this.input) {
+    //   case 'Recebida':
+    //     text = "Today is Saturday";
+    //     break; 
+    //   case 'Aceite':
+    //     text = "Today is Sunday";
+    //     break;
+    //   case 'Rejeitada':
+    //     break
+    //   case 'Em pagamento':
+    //     break
+    //   default: 
+    //     alert('Erro a processar alteração de estado')
+    //     break
+    //   }
 
       // Colocar aqui o método para alterar estado Blockchain
       //Alterar estado BD
