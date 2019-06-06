@@ -199,17 +199,19 @@ export default {
 
    },async alteraEstado(id,estado){
      //alterar estado para emPagamento
+      alert("Entrei altera estado")
       var obj = {}
       obj['_id'] = id
       obj['estado'] = estado
-      axios.post('http://localhost:4000/setEstado/',enviar)
+      alert("pasei obj")
+      axios.post('http://localhost:4000/transacoes/setEstado',obj)
           .then(response => {
               console.log('Correu tudo bem' + response)    
         
           }).catch(e => {
               console.log('ERRO: ' + e)
           })
-
+    return true
    },cutS(elem){
         elem['_id2'] = '0x' + elem._id.substr(0, 20) + '...'
         elem['_id'] = '0x' + elem._id //.substr(0, 20) + '...'
@@ -223,35 +225,35 @@ export default {
        var obj = teste[x]
        if (obj._id == idVenda){
           this.transacoesPendentes[x].estado=this.input
-          console.dir(this.transacoesPendentes)
        }
 
     }
 
      switch (this.input) {
        case 'Recebida':
+          alert("entrei recebida")
           var fatura = await Transferencias.recebeFatura(idVenda)
-          this.alteraEstado(idVenda,2)
+            this.alteraEstado(idVenda,"Recebida")
+
+          console.log("passei do metamask")
           break; 
        case 'Aceite':
           var fatura = await Transferencias.validaFatura(idVenda,true)
-          this.alteraEstado(idVenda,3)
+          this.alteraEstado(idVenda,"Aceite")
           break;
        case 'Rejeitada':
-          var fatura = await Transferencias.validqaFatura(idVenda,false)
-          this.alteraEstado(idVenda,3)       
+          var fatura = await Transferencias.validaFatura(idVenda,false)
+          this.alteraEstado(idVenda,"Rejeitada")       
           break
        case 'Em pagamento':
           var fatura = await Transferencias.pagaFatura(idVenda)
-          this.alteraEstado(idVenda,4)       
+          this.alteraEstado(idVenda,"Em pagamento")       
           break
        default: 
          alert('Erro a processar alteração de estado')
          break
        }
 
-      // Colocar aqui o método para alterar estado Blockchain
-      //Alterar estado BD
       return true;
   
   }
