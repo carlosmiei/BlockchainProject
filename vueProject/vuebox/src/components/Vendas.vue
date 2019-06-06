@@ -43,28 +43,10 @@
 
         </td>
         <td class="text-xs-right"> 
-          <!-- Parte editável da Coluna estado -->
-          <v-edit-dialog
-            :return-value.sync="props.item.estado"
-            large
-            lazy
-            persistent
-            @save="save(props.item.name)"
-            @cancel=""
-            @open="open(props.item.name)"
-            @close=""
-          >
-            <div>{{ props.item.estado }}</div>
-            <template v-slot:input>
-              <div class="mt-3 title">Atualizar Estado</div>
-            </template>
-            <template v-slot:input>
-        <v-select
-          :items="op"
-          label="Estado"
-        ></v-select>  
-            </template>
-          </v-edit-dialog>
+           <v-layout justify-center>
+              {{ props.item.estado }}
+          </v-layout>
+
         </td>
       </template>
       <template v-slot:no-results>

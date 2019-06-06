@@ -213,8 +213,8 @@ export default {
           })
     return true
    },cutS(elem){
-        elem['_id2'] = '0x' + elem._id.substr(0, 20) + '...'
-        elem['_id'] = '0x' + elem._id //.substr(0, 20) + '...'
+        elem['_id2'] = /*'0x' +*/ elem._id.substr(0, 20) + '...'
+        elem['_id'] = /*'0x' +*/ elem._id //.substr(0, 20) + '...'
         elem['to'] =  elem.to.substr(0, 20) + '...'
         return elem
   },

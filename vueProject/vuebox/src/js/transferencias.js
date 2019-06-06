@@ -66,7 +66,7 @@ const Transferencias = {
   adicionaFatura: function(valor,data,hashF){
     let self = this
     // Tem de ter isto para ser um adress
-    hashF = '0x' + hashF
+    //hashF = '0x' + hashF
     return new Promise((resolve, reject) => {
       
 

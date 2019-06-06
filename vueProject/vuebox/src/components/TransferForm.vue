@@ -292,7 +292,7 @@ export default {
 
     }, calcularHash(){
       var res = sha256(this.transacao.contribuinteD + this.transacao.to + this.transacao.numFatura + this.transacao.valorT + this.transacao.nomeJogador + this.transacao.dataE)
-      this.transacao._id = res;
+      this.transacao._id = '0x' + res;
       this.transacao.estado='Emitida'
       return true
     }, resetForm(){
