@@ -158,6 +158,21 @@ const Transferencias = {
       })
     })
 
+  },typeA: function(hashF){
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.typeA.call(
+        hashF,
+        {from: window.web3.eth.accounts[0],gas: 900000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
   }
 
 }

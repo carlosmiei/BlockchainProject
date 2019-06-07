@@ -54,10 +54,13 @@ export default {
             alert("Certifique-se que tem o metamask ativo!")
         } else {
 
-            var res =  await Transferencias.isMember(x)
+            var res =  await Transferencias.typeA(x)
             
-            if (!res) {
-              //alert("Não é membro mas para já passa!")
+            if (res.s!=0) {
+              alert('Sou do tipo: ' + res.s)
+              this.$store.commit('changeType',res.s)
+            }else {
+              alert('Atenção não é membro!')
             }
             this.loading=true;
             //alert('entrei else')

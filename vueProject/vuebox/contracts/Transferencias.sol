@@ -41,6 +41,8 @@ contract Transferencias {
         //adicionar os participantes
         equipas.push(0x1Fb4C08AeA29A6642D8C963F1ca01c15C63385bc);
         equipas.push(0xdB254AFdcaCEa500C4f7449c4b9F9DA3e1224F81);
+        equipas.push(0xe82f3f7C5dc295aa96e9c3b96e53998F240D426F);
+        equipas.push(0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8);
 
     }
 
@@ -179,7 +181,21 @@ contract Transferencias {
     function isMember(address add) public view returns (bool res) {
         return (isTeam(add) || isBank(add) || isFederation(add) || add == ownerAcc);
     }
+    
+    function typeA(address add) public view returns (uint res) {
+        uint val = 0; 
 
+        if(isTeam(add))
+            val = 1;
+
+        if(isBank(add))
+            val = 2;
+            
+        if (isFederation(add))
+            val = 3;
+        
+        return val;
+    }
     function testParams(address a,address b,address v,address f,bytes32 e, bytes32 d) public  returns (uint count) {
         return 1;
     }

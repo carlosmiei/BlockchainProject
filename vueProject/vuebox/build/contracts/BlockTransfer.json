@@ -3275,12 +3275,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xF58C0499C2Da455A4dd4A2057C1BbC0403eFf8fD",
-      "transactionHash": "0x35ab8c3950047c796d57f078b432a558595039bb4ec19d8d97e27db2c5d637d1"
+      "address": "0xBa3B88aD168Bd0c375E479d26410F87aaD27AB76",
+      "transactionHash": "0xa5151bc2da2c8898c85c1568308ffbc157c6c85a7169b893d3ed5c9ba4609d57"
     }
   },
   "schemaVersion": "3.0.0-beta.2",
-  "updatedAt": "2019-06-06T21:35:45.542Z",
+  "updatedAt": "2019-06-07T18:10:44.735Z",
   "devdoc": {
     "methods": {}
   },
