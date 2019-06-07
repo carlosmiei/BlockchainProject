@@ -21,7 +21,7 @@
       :loading="false"
     >
       <template v-slot:items="props">
-        <td>
+        <td @click="clickTable(props.item)"> 
           <v-layout justify-center>
               {{ props.item._id }}
           </v-layout>
@@ -80,7 +80,7 @@
       :loading="false"
     >
       <template v-slot:items="props">
-        <td>
+        <td @click="clickTable(props.item)">
           <v-layout justify-center>
               {{ props.item._id }}
           </v-layout>
@@ -115,16 +115,30 @@
     </v-data-table>
   </v-card>
   <!-- fim da tabela do histório -->
+    <!-- Inicio do PopUp -->
+      <v-dialog
+      v-model="dialog"
+      width="600"
+      >
+      <PopUp v-if="dialog" :transacao="varPassar" v-on:childToParent="onChildClick" ></PopUp>
+      </v-dialog>
+  <!-- Fim do popup -->
  </div>
 </template>
 
 <script>
+import PopUp from './PopUp.vue'
 import Transferencias from '../js/transferencias.js'
 import axios from 'axios';
 export default {
     name: 'ConsultTrans',
+    components:{
+      PopUp
+    },
       data () {
             return {
+              dialog:false,
+              varPassar: '',
               account: window.web3.eth.accounts[0],
               op:['Completa','Emitida','Em pagamento','Aceite'],
               bloco:'',
@@ -211,7 +225,15 @@ export default {
   elem['to'] =  elem.to.substr(0, 20) + '...'
   return elem
 
-}
+}, onChildClick(elem){
+    this.dialog = elem
+
+},clickTable(elem){
+     this.dialog = true
+     console.dir(elem)
+     this.varPassar = elem
+
+  }
 
 }
 }

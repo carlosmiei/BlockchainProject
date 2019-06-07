@@ -6,7 +6,7 @@
           class="headline grey lighten-2"
           primary-title
         >
-          Transação Adicionada!   &nbsp;  <v-icon color="green" x-large >check</v-icon>
+          Detalhes Transaçao!   &nbsp;  <v-icon color="green" x-large >check</v-icon>
 
         </v-card-title>
 
@@ -15,7 +15,7 @@
         <b>Vendedor: </b> {{this.transacao.from}} <br>
         <b>Comprador: </b> {{this.transacao.to}} <br>
         <b>Nome do Jogador: </b> {{this.transacao.nomeJogador}} <br>
-        <b>Valor Total / Valor Iva: </b> {{this.transacao.valorT}} /  {{this.transacao.valorI}}  <br>
+        <b>Valor Total / Valor Iva: </b> {{this.transacao.valorT}} &euro; /  {{this.transacao.valorI}} &euro; <br>
         <b>Hash Transação: </b> {{this.transacao.hashTrans}} <br>
         <b>Gas utilizado: </b> {{this.transacao.gas}} <br>
         <b>Número da fatura: </b> {{this.transacao.numFatura}} <br>
@@ -57,8 +57,8 @@ export default {
         }
     
     },mounted() {
-        alert("entrei PopUp")
-        console.dir(transacao)
+       // alert("entrei PopUp")
+        //console.dir(transacao)
     }
     ,methods: {
         enviarParent(event){
