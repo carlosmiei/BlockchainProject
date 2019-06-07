@@ -19,9 +19,10 @@
       :items="transacoesPendentes"
       :search="search"
       :loading="false"
+    
     >
       <template v-slot:items="props">
-        <td>
+        <td @click="clickTable(props.item)">
           <v-layout justify-center>
               {{ props.item._id2 }}
           </v-layout>
@@ -46,7 +47,6 @@
           
           <!-- Parte editável da Coluna    @close="" estado @cancel=""  -->
           <v-edit-dialog
-           
             large
             lazy
             persistent
@@ -133,17 +133,32 @@
     </v-data-table>
   </v-card>
   <!-- fim da tabela do histório -->
+  <!-- Inicio do PopUp -->
+      <v-dialog
+      v-model="dialog"
+      width="600"
+      >
+      <PopUp v-if="dialog" :transacao="varPassar" v-on:childToParent="onChildClick" ></PopUp>
+      </v-dialog>
+  <!-- Fim do popup -->
  </div>
 </template>
 
 <script>
 import Transferencias from '../js/transferencias.js'
+import PopUp from './PopUp.vue'
 import Vue from "vue";
 import axios from 'axios';
 export default {
     name: 'ConsultTrans',
+    components:{
+      PopUp
+
+    },
       data () {
             return {
+              varPassar: '',
+              dialog:false,
               account: window.web3.eth.accounts[0],
               op:[],
               bloco:'',
@@ -256,6 +271,13 @@ export default {
 
       return true;
   
+  }, clickTable(elem){
+     this.dialog = true
+     console.dir(elem)
+     this.varPassar = elem
+
+  }, onChildClick(elem){
+    this.dialog = elem
   }
 }
 
