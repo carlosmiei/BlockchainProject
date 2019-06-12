@@ -183,7 +183,7 @@ contract Transferencias {
     function isMember(address add) public view returns (bool res) {
         return (isTeam(add) || isBank(add) || isFederation(add) || add == ownerAcc);
     }
-    
+        
     function typeA(address add) public view returns (uint res) {
         uint val = 0;
 

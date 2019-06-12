@@ -98,7 +98,7 @@
       :loading="false"
     >
       <template v-slot:items="props">
-        <td>
+        <td @click="clickTable(props.item)" >
           <v-layout justify-center>
               {{ props.item._id2 }}
           </v-layout>
