@@ -8,6 +8,8 @@ import { store } from '@/store/store'
 import ConsultTrans from '@/components/Vendas'
 import Compras from '@/components/Compras'
 import Confpagamento from '@/components/confirmarPagamento'
+import Equipas from '@/components/Equipas'
+import Equipa from '@/components/Equipa'
 
 Vue.use(Router)
 
@@ -48,6 +50,17 @@ let router =  new Router({
       path:'/banco',
       name:'Confpagamento',
       component: Confpagamento
+    },
+    {
+      path:'/equipas',
+      name:'Equipas',
+      component: Equipas
+    },
+    {
+      path:'/equipas/:id',
+      name:'Equipa',
+      props: true,
+      component: Equipa
     }
   ]
 })

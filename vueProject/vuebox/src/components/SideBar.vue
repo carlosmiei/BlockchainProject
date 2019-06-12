@@ -47,6 +47,7 @@ export default {
       this.items.push({ title: 'Consultar Transferências', icon: 'list', route:'/banco' })
     }
     this.items.push({ title: 'Perfil', icon: 'dashboard' })
+    this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })
     this.items.push({ title: 'Jogadores', icon: 'person' })
     this.items.push({ title: 'Account', icon: 'account_box' })
     this.items.push({ title: 'Admin', icon: 'gavel' })

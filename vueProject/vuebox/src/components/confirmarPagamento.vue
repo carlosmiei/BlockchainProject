@@ -186,7 +186,7 @@ export default {
     
     async getTransacoes(){      
 
-      var lista = await axios.get('http://localhost:4000/transacoes?banco=0xE0b303c8158BA5b545CbCE21Aa11FC2B62bF73E3')
+      var lista = await axios.get('http://localhost:4000/transacoes?banco=' + this.account)
       console.log(lista)
       return lista.data
 
