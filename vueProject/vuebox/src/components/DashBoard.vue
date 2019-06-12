@@ -1,11 +1,17 @@
 <template>
     <div>
+        
     <v-container grid-list-md text-xs-center >
+        <v-flex xs12>
+                 <v-card dark color="primary">
+                    <v-card-text class="px-0">Utilizador: <b>{{ }} </b> </v-card-text>
+                  </v-card>
+        </v-flex>
         <v-layout row wrap justify-space-around>
             <v-flex xs4>
                 <v-card dark color="blue lighten-1">
           <v-card-text class="px-0">
-              <b><animated :number="90"></animated> ETH </b><br> Saldo <br>
+              <!-- <b><animated :number="90"></animated> ETH </b><br> Saldo <br> -->
               
               </v-card-text>
         </v-card>
@@ -30,19 +36,27 @@
 </template>
 
 <script>
-import animated from './animated-number.vue'
+// import animated from './animated-number.vue'
 export default {
     name: 'DashBoard',
       data () {
             return {
-            msg: 'Bem vindo!',
-            saldo:100,
-            names: [ 'MS', 'Apple', 'Google' ],
-            values: [
-                [ 10, 5, 5, 5 ],
-                [ 40, 10, 10, 10 ],
-                 [ 30, 30, 30, 30 ]
-        ]
+                account:'ola',
+                tipo:'',
+                msg: 'Bem vindo!',
+                saldo:100,
+                names: [ 'MS', 'Apple', 'Google' ],
+                values: [
+                    [ 10, 5, 5, 5 ],
+                    [ 40, 10, 10, 10 ],
+                    [ 30, 30, 30, 30 ]
+                ]
     }
-  }
+  }, created() { 
+      console.log("pqp")
+      //this.account = this.$store.getters.wallet
+      //alert(this.account)
+      //console.log(this.account)
+      
+  },
 }
