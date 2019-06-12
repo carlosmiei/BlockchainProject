@@ -52,7 +52,7 @@ export default {
   beforeCreate(){
   },
     created () {
-    alert("teste")
+    
     this.account = window.web3.eth.accounts[0]
 
     web3.eth.getBalance(this.account, (error, result)=>{

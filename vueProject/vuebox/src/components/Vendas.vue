@@ -164,7 +164,7 @@ export default {
       this.transacoesC = transacoes
 
       // ## Preencher a segunda tabela
-      this.transacoes = this.transacoesC.filter(elem => elem.estado=='Completa');
+       this.transacoes = this.transacoesC.filter(elem => elem.estado=='Completa');
        this.transacoesPendentes = this.transacoesPendentes.filter(elem => elem.estado!='Completa')
 
       
@@ -177,9 +177,7 @@ export default {
    save(estado){
      console.log('estado')
      console.dir(estado)
-   },
-   
-   async getTransacoes(){
+   },async getTransacoes(){
 
       var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + this.account + '&&tipo=venda' )
       return lista.data

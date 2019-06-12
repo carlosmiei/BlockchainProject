@@ -11,6 +11,9 @@ import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 import { store } from './store/store'
 import VueGraph from 'vue-graph'
+import VueGoogleCharts from 'vue-google-charts'
+ 
+Vue.use(VueGoogleCharts)
 
 Vue.use(VueFormWizard)
 Vue.use(VueGraph)
