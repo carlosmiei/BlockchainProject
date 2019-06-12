@@ -7,15 +7,15 @@ export const store = new Vuex.Store({
 
     state: {
         isLogged: false,
-        waller:'',
+        wallet:'default',
         type:0
       },
       mutations:{
           changeLogged(state,isLogged){
               state.isLogged = isLogged
           },
-          changeWallet(state,wallet){
-              state.wallet=wallet
+          changeWallet(state,x){
+              state.wallet=x
           },
           changeType(state,estado){
               state.type = estado
