@@ -26,6 +26,11 @@ router.get('/', (req, res) => {
         .then(dados => res.jsonp(dados))
         .catch(_ => res.status(500).send('Erro na consulta de transações do utilizador: ' + req.query.utilizador))
 	} 
+	else if(req.query.banco){
+		Transacoes.listarPorBanco(req.query.banco)
+		.then(dados => res.jsonp(dados))
+		.catch(_ => res.status(500).send('Erro na consulta da transação do banco: ' + req.query.banco))
+	}
 	else if(req.query.id){
 		Transacoes.consultar(req.query.id)
 		.then(dados => res.jsonp(dados))
@@ -39,6 +44,8 @@ router.get('/', (req, res) => {
 });
 
 router.post("/setEstado", (req, res) => {
+	console.log("Entrou no /setEstado")
+	console.dir(req.body)
 	Transacoes.alteraEstado(req.body._id, req.body.estado)
 	.then(dados => res.jsonp(dados))
 	.catch(erro => res.status(500).send('Erro ao alterar estado da transação: ' + erro))
@@ -46,6 +53,7 @@ router.post("/setEstado", (req, res) => {
 
 
 router.post('/', (req, res) => {
+	console.log("Entrou no /setEstado")
 	console.dir(req.body)
 	
 	Transacoes.inserir(req.body)

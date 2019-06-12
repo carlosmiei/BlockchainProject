@@ -44,6 +44,8 @@ contract Transferencias {
         equipas.push(0xe82f3f7C5dc295aa96e9c3b96e53998F240D426F);
         equipas.push(0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8);
 
+        bancos.push(0x50C944f45603314164662310295993902121fBee);
+
     }
 
     function adicionaFatura(uint valor, string memory emitData, address  hash) public {
@@ -183,17 +185,17 @@ contract Transferencias {
     }
     
     function typeA(address add) public view returns (uint res) {
-        uint val = 0; 
+        uint val = 0;
 
-        if(isTeam(add))
+        if(isTeam(add)){
             val = 1;
-
-        if(isBank(add))
+        }
+        if(isBank(add)){
             val = 2;
-            
-        if (isFederation(add))
+        }
+        if(isFederation(add)){
             val = 3;
-        
+        }
         return val;
     }
     function testParams(address a,address b,address v,address f,bytes32 e, bytes32 d) public  returns (uint count) {

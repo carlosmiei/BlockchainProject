@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
     state: {
         isLogged: false,
         waller:'',
-        type:0
+        type:2
       },
       mutations:{
           changeLogged(state,isLogged){

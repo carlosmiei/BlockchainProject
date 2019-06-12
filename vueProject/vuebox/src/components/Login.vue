@@ -55,12 +55,14 @@ export default {
         } else {
 
             var res =  await Transferencias.typeA(x)
+            console.log(res)
             
-            if (res.s!=0) {
-              alert('Sou do tipo: ' + res.s)
-              this.$store.commit('changeType',res.s)
+            if (res.c[0]!=0) {
+              alert('Sou do tipo: ' + res.c[0])
+              this.$store.commit('changeType',res.c[0])
             }else {
               alert('Atenção não é membro!')
+              this.$store.commit('changeType',res.c[0])
             }
             this.loading=true;
             //alert('entrei else')

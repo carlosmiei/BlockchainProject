@@ -24,6 +24,12 @@ module.exports.listarPorUtilizador = user => {
         .exec()
 }
 
+module.exports.listarPorBanco = b => {
+    return Transacao
+        .find({ banco: b })
+        .exec()
+}
+
 module.exports.listarFromUser = user => {
     return Transacao
         .find({from: user})

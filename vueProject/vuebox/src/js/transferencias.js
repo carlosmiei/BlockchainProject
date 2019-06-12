@@ -147,7 +147,7 @@ const Transferencias = {
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.isMember.call(
+        self.instance.isMember.call(
         hashF,
         {from: window.web3.eth.accounts[0],gas: 900000}
       ).then(exists => {
@@ -160,7 +160,7 @@ const Transferencias = {
 
   },typeA: function(hashF){
     let self = this
-
+    console.log(window.web3.eth.accounts[0])
     return new Promise((resolve, reject) => {
       self.instance.typeA.call(
         hashF,

@@ -177,7 +177,9 @@ export default {
    save(estado){
      console.log('estado')
      console.dir(estado)
-   },async getTransacoes(){
+   },
+   
+   async getTransacoes(){
 
       var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + this.account + '&&tipo=venda' )
       return lista.data

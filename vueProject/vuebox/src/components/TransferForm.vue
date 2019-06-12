@@ -102,13 +102,19 @@
             required
           ></v-text-field>
 
-                    <v-text-field
+          <v-text-field
             v-model="transacao.valorI"
             :counter="256"
             label="Valor Iva"
             required
           ></v-text-field>
 
+          <v-text-field
+            v-model="transacao.banco"
+            :counter="256"
+            label="Banco"
+            required
+          ></v-text-field>
         </v-layout>
     </v-container> 
       </v-form>
@@ -233,7 +239,8 @@ export default {
               valorT: '' ,
               valorI: '' , 
               _id:'',
-              estado:''
+              estado:'',
+              banco: ''
            },
            show:true,
            value:'ol',

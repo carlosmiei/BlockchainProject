@@ -16,8 +16,8 @@ var TransacaoSchema = new Schema({
     contribuinteD: {type: String, required:true},
     hashTrans: {type: String, required:true},
     numBloco: {type: String, required:true},
-    gas: {type: String, required:true}
-
+    gas: {type: String, required:true},
+    banco: {type: String, required:false}
 })
 
 module.exports = mongoose.model('Transacao',TransacaoSchema,'transacoes')
