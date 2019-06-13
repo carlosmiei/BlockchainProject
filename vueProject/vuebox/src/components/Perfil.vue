@@ -12,7 +12,7 @@
         md8
       >
         <material-card
-          color="green"
+          color="primary"
           title="Edit Profile"
           text="Complete your profile"
         >
@@ -102,10 +102,11 @@
                   text-xs-right
                 >
                   <v-btn
-                    class="mx-0 font-weight-light"
-                    color="success"
+                  block
+                    class="font-weight-light grey lighten-3"
+                   
                   >
-                    Update Profile
+                    Atualizar Perfil
                   </v-btn>
                 </v-flex>
               </v-layout>
@@ -121,21 +122,21 @@
           <v-avatar
             slot="offset"
             class="mx-auto d-block"
-            size="130"
+            size="140"
           >
             <img
-              src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
+              src="https://upload.wikimedia.org/wikipedia/pt/f/f0/500px-SL_Benfica_logo_svg.png"
             >
           </v-avatar>
           <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-3">CEO / CO-FOUNDER</h6>
+            <h6 class="category text-gray font-weight-thin mb-2">Equipa de Futebol</h6>
             <h4 class="card-title font-weight-light">Alec Thompson</h4>
             <p class="card-description font-weight-light">Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
             <v-btn
-              color="success"
+            
               round
-              class="font-weight-light"
-            >Follow</v-btn>
+              class="grey lighten-3 font-weight-light"
+            >Saber Mais</v-btn>
           </v-card-text>
         </material-card>
       </v-flex>
