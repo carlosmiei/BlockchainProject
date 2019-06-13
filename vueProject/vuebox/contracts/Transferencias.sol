@@ -47,6 +47,10 @@ contract Transferencias {
         equipas.push(0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8);
 
         bancos.push(0x50C944f45603314164662310295993902121fBee);
+        bancos.push(0x973A5B3360bc1d5AfAFA88585eFb55F8db972Be2);
+        
+
+
 
     }
 

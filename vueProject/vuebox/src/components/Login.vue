@@ -70,7 +70,7 @@ export default {
             
             this.$store.commit('changeWallet',x)
             this.$store.commit('changeLogged',true)
-            this.$router.push('/')
+            this.$router.push('/dashboard')
         }
 
 
