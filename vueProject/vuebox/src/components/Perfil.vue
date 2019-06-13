@@ -18,7 +18,8 @@
                 <v-flex
                   xs6                >
                   <v-text-field
-                   mb-0
+                   :value="equipa.liga"
+                    mb-0
                     label="Federação"
                     disabled/>
                 </v-flex>
@@ -28,6 +29,7 @@
                  
                 >
                   <v-text-field
+                  :value="equipa.nome"
                     label="Nome"
                     class="purple-input"/>
                 </v-flex>
@@ -36,6 +38,7 @@
                 
                 >
                   <v-text-field
+                  :value="equipa._id"
                     label="Adress"
                     class="purple-input"/>
                 </v-flex>
@@ -58,9 +61,10 @@
                   xs12
                   >
                   <v-text-field
+                    :value="equipa.pais"
                     class="purple-input"
                     label="País"
-                    type="number"/>
+                    />
                 </v-flex>
                 <!-- <v-flex xs12>
                   <v-textarea
@@ -87,6 +91,7 @@
 
       </v-flex>
       <v-flex
+        class="border"
         xs12
         md4
       >
@@ -97,16 +102,16 @@
             size="140"
           >
             <img  
-              src="https://upload.wikimedia.org/wikipedia/pt/f/f0/500px-SL_Benfica_logo_svg.png"
-              width="40%" height="40%"
+              v-bind:src="equipa.foto"
+              width="100px" height="40%"
             >
           </v-avatar>
           <v-card-text class="text-xs-center">
             <h6 class="category text-gray font-weight-thin mb-2">Equipa de Futebol</h6>
-            <h4 class="card-title font-weight-light">Alec Thompson</h4>
-            <p class=" card-description font-weight-light">O Sport Lisboa e Benfica é um clube multidesportivo sediado na freguesia de São Domingos de Benfica, em Lisboa. O seu eclectismo, historial e forte base de adeptos fazem do Benfica um dos Grandes clubes de Portugal e um dos mais prestigiados a nível mundial.</p>
+            <!-- <h4 class="card-title font-weight-light">Alec Thompson</h4> -->
+            <p class=" card-description font-weight-light">{{equipa.descricao}}</p>
             <v-btn
-            
+              v-bind:href="equipa.site"
               round
               class="grey lighten-3 font-weight-light"
             >Saber Mais</v-btn>
@@ -129,10 +134,19 @@ export default {
         async created(){
           /** Nota agora vai ler da wallet mas deveria ler do estado mas para nao termos de ir sempre ao login fica assim : this.$store.getters.wallet  */
           this.conta = window.web3.eth.accounts[0]
-
           //ir buscar infos a bd
-          var equipa = await axios.get('http://localhost:4000/users?utilizador=' + this.conta + '?tipo=Equipa')
-          console.dir(equipa)
+          var equipa = await axios.get('http://localhost:4000/users?utilizador=' + this.conta)
+          this.equipa = equipa.data
+          console.dir(this.equipa)
         }
 }
 </script>
+
+<style>
+  .border{
+        border-style: solid;
+        border-width: 5px;
+        border-color:#EEEEEE;
+  }
+  
+</style>
