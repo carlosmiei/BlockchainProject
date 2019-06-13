@@ -46,6 +46,26 @@ module.exports.alteraNome = (uid, n) => {
         .exec()
 }
 
+module.exports.addJogador = (uid, jogador) => {
+    console.dir(jogador)
+    return User.update(
+        {_id: uid},
+        {$push: { jogadores: jogador }}
+    )
+}
+
+module.exports.remJogador = (uid, jogador) => {
+    console.dir(jogador)
+    return User.update(
+        {_id: uid},
+        {$pull: { jogadores: { _id: jogador} }}
+    )
+}
+
 module.exports.inserir = user => {
     return User.create(user)
+}
+
+module.exports.remover = uid => {
+    return User.deleteOne( { _id: uid } )
 }

@@ -39,6 +39,8 @@ contract Transferencias {
         ownerAcc = 0x24BF0ffC4daf52B0df27640882E202b0AAd98B11;
         
         //adicionar os participantes
+        federacao.push(0xC2eF946de5Fa4CF029f0Cd6437048cdbaed8869C);
+
         equipas.push(0x1Fb4C08AeA29A6642D8C963F1ca01c15C63385bc);
         equipas.push(0xdB254AFdcaCEa500C4f7449c4b9F9DA3e1224F81);
         equipas.push(0xe82f3f7C5dc295aa96e9c3b96e53998F240D426F);
@@ -172,7 +174,7 @@ contract Transferencias {
     function isFederation(address add) private view returns (bool res) {
         res=false;
         for (uint i=0; i<federacao.length; i++) {
-            if (equipas[i] == add) {
+            if (federacao[i] == add) {
                 res=true;
                 break;
             }

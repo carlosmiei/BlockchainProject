@@ -1,9 +1,20 @@
 <template>
   <div class="team">
     <v-container class="my-2">
-      
-      <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg3 v-for="equipa in equipas" :key="equipa._id">
+        <v-layout row wrap >
+            <v-flex xs12 sm8 md6 lg4>
+                <v-text-field 
+                class="mb-3"
+                v-model="search"
+                append-icon="search"
+                label="Search for a team..."
+                single-line
+                hide-details
+                ></v-text-field>
+            </v-flex>
+        </v-layout>
+        <v-layout row wrap>
+            <v-flex xs12 sm6 lg4 v-for="equipa in teamFilter" :key="equipa._id">
                 <v-card flat class="ma-2 grey lighten-3 rounded-card">
                 <v-layout columns class="h-align" >
                     <v-flex xs3 offset-xs1>
@@ -17,7 +28,7 @@
                     </v-flex>
                     <v-flex xs7>
                         <v-card-text class="text--right">
-                            <div class="subheading">{{ equipa.nome }}</div>
+                            <div :search="search" class="subheading">{{ equipa.nome }}</div>
                             <div class="grey--text">{{ equipa.pais }}</div>
                         </v-card-text>
                     </v-flex>
@@ -45,6 +56,7 @@
         },
         data () {
         return {
+            search: '',
             equipas: [ ]
         }
         },
@@ -63,6 +75,11 @@
                 console.log(lista)
                 return lista.data
 
+            }
+        },
+        computed: {
+            teamFilter () {
+                return this.equipas.filter(equipa => (equipa.nome.indexOf(this.search) > -1) )
             }
         }
     }

@@ -42,6 +42,19 @@ router.post("/alteraNome", (req, res) => {
 	.catch(erro => res.status(500).send('Erro ao alterar nome do utilizador: ' + erro))
 });
 
+router.post("/addJogador", (req, res) => {
+	console.dir(req.body.jogador)
+	Users.addJogador(req.body._id, req.body.jogador)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao adicionar jogador: ' + erro))
+});
+
+router.post("/remJogador", (req, res) => {
+	console.dir(req.body.jogador)
+	Users.remJogador(req.body._id, req.body.jogador)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao adicionar jogador: ' + erro))
+});
 
 router.post('/', (req, res) => {
 	Users.inserir(req.body)
@@ -49,5 +62,11 @@ router.post('/', (req, res) => {
 	.catch(erro => res.status(500).send('Erro ao adicionar utilizador: ' + erro))
 });
 
+
+router.delete('/', (req, res) => {
+	Users.remover(req.body._id)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao remover utilizador: ' + erro))
+});
 
 module.exports = router;
