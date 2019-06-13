@@ -124,14 +124,15 @@
             class="mx-auto d-block"
             size="140"
           >
-            <img
+            <img  
               src="https://upload.wikimedia.org/wikipedia/pt/f/f0/500px-SL_Benfica_logo_svg.png"
+              width="40%" height="40%"
             >
           </v-avatar>
           <v-card-text class="text-xs-center">
             <h6 class="category text-gray font-weight-thin mb-2">Equipa de Futebol</h6>
             <h4 class="card-title font-weight-light">Alec Thompson</h4>
-            <p class="card-description font-weight-light">Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
+            <p class=" card-description font-weight-light">O Sport Lisboa e Benfica é um clube multidesportivo sediado na freguesia de São Domingos de Benfica, em Lisboa. O seu eclectismo, historial e forte base de adeptos fazem do Benfica um dos Grandes clubes de Portugal e um dos mais prestigiados a nível mundial.</p>
             <v-btn
             
               round

@@ -2,12 +2,12 @@
     <div>
         
     <v-container grid-list-md text-xs-center >
-        <v-flex xs12>
+        <v-flex xs12  >
                  <v-card dark color="primary">
                     <v-card-text class="px-0">Utilizador:  <b> [{{tipo}}] {{account}} </b> </v-card-text>
                   </v-card>
         </v-flex>
-        <v-layout row wrap justify-space-around>
+        <v-layout pa-1 row wrap justify-space-around>
             <v-flex xs4>
                 <v-card dark color="blue lighten-1">
                      <!-- <b><animated :number="90"></animated> ETH </b><br> Saldo <br> -->
