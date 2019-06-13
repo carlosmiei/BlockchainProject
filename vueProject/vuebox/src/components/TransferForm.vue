@@ -107,6 +107,7 @@
             :counter="256"
             label="Valor Iva"
             required
+            readonly
           ></v-text-field>
 
           <v-text-field
@@ -263,6 +264,12 @@ export default {
     }
   },created (){
     Transferencias.init()
+  },watch: {
+    'transacao.valorT': function (newQuestion, oldQuestion) {
+          var int =  parseInt(this.transacao.valorT)
+          var imposto = int * 0.21
+          this.transacao.valorI = imposto.toString()
+    },
   }
   ,methods:{
     async adicionarTransacao(){
@@ -320,7 +327,8 @@ export default {
           var array = res["logs"]
           this.event = array[0].event
           this.dialog=true
-    }
+    },
+
   }
 }
 </script>

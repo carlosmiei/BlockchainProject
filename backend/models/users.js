@@ -22,6 +22,7 @@ var UserSchema = new Schema({
     foto: {type: String, required:false},
     descricao: {type: String, required:false},
     site: {type: String, required:false},
+    contribuinte:{type: String, required:true}
 })
 
 module.exports = mongoose.model('User',UserSchema,'users')
