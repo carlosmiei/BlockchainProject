@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: 'DashBoard',
       data () {
@@ -123,6 +124,28 @@ export default {
 
       
   }, created() {
+
+     // var equipa = {
+     //     _id: '0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8',
+     //     tipo:'Equipa',
+     //     nome: 'Braga',
+     //     pais: 'Portugal',
+     //     liga:'Primeira Liga Portuguesa',
+     //     jogadores: [],
+     //     bancos:['0x973A5B3360bc1d5AfAFA88585eFb55F8db972Be2'],
+     //     foto:'http://2.bp.blogspot.com/_LI4lDOsMHhc/TPwpiEyHOuI/AAAAAAAAGyw/_cMNGN8k5_0/s1600/SC_Braga.png',
+     //     site: 'https://scbraga.pt/',
+     //     descricao:'O Sporting Clube de Braga é um clube desportivo fundado oficialmente em 19 de janeiro em 1921 e sediado na cidade de Braga.Trata-se de um clube eclético[1] que, para além do futebol, se distingue em modalidades como o atletismo, natação, futsal, bilhar, taekwondo, basquetebol, etc. tendo já vencido vários troféus nacionais e internacionais. Actualmente milita na Primeira Liga de futebol'
+//
+     // }
+     // axios.post('http://localhost:4000/users/',equipa)
+     //           .then(response => {
+     //               console.log('Correu tudo bem' + response)   
+     //           
+     //           }).catch(e => {
+     //               console.log('ERRO: ' + e)
+     //           })
+     // 
 
   },
 }

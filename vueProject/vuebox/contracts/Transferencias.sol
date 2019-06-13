@@ -44,10 +44,17 @@ contract Transferencias {
         equipas.push(0x1Fb4C08AeA29A6642D8C963F1ca01c15C63385bc);
         equipas.push(0xdB254AFdcaCEa500C4f7449c4b9F9DA3e1224F81);
         equipas.push(0xe82f3f7C5dc295aa96e9c3b96e53998F240D426F);
-        equipas.push(0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8);
 
+        //Benfica Peixoto
+        equipas.push(0xE0b303c8158BA5b545CbCE21Aa11FC2B62bF73E3);
+        //Braga Carlos
+        equipas.push(0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8);
+        
+        //Bancos Peixoto
         bancos.push(0x50C944f45603314164662310295993902121fBee);
+        //Bancos Carlos
         bancos.push(0x973A5B3360bc1d5AfAFA88585eFb55F8db972Be2);
+        bancos.push(0xE2381C29Ca01ef3179fAd7d55A5C9e4fD9325461);
         
 
 

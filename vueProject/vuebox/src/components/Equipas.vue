@@ -49,7 +49,7 @@
 
 <script>
     import Transferencias from '../js/transferencias.js'
-    import axios from 'axios';
+import axios from 'axios';
 
     export default {
         components: {

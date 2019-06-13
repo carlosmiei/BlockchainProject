@@ -57,6 +57,7 @@ router.post("/remJogador", (req, res) => {
 });
 
 router.post('/', (req, res) => {
+	console.log("Entrei")
 	Users.inserir(req.body)
 	.then(dados => res.jsonp(dados))
 	.catch(erro => res.status(500).send('Erro ao adicionar utilizador: ' + erro))
