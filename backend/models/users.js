@@ -4,6 +4,7 @@ var Schema = mongoose.Schema
 
 var JogadorSchema = new Schema({
     nome: {type: String, required:true},
+    contribuinte:{type: String, required:true},
     pais: {type: String, required:true},
     nascimento: {type: String, required:true},
     foto: {type: String, required:false},

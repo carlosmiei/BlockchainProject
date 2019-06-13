@@ -11,64 +11,36 @@
         xs12
         md8
       >
-        <material-card
-          color="primary"
-          title="Edit Profile"
-          text="Complete your profile"
-        >
+       
           <v-form>
             <v-container py-0>
               <v-layout wrap>
                 <v-flex
-                  xs12
-                  md4
-                >
+                  xs6                >
                   <v-text-field
-                    label="Company (disabled)"
+                   mb-0
+                    label="Federação"
                     disabled/>
                 </v-flex>
+
                 <v-flex
-                  xs12
-                  md4
+                  xs6
+                 
                 >
                   <v-text-field
-                    class="purple-input"
-                    label="User Name"
-                  />
-                </v-flex>
-                <v-flex
-                  xs12
-                  md4
-                >
-                  <v-text-field
-                    label="Email Address"
+                    label="Nome"
                     class="purple-input"/>
                 </v-flex>
                 <v-flex
                   xs12
-                  md6
-                >
-                  <v-text-field
-                    label="First Name"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md6
-                >
-                  <v-text-field
-                    label="Last Name"
-                    class="purple-input"/>
-                </v-flex>
-                <v-flex
-                  xs12
-                  md12
+                
                 >
                   <v-text-field
                     label="Adress"
                     class="purple-input"/>
                 </v-flex>
-                <v-flex
+            
+                <!-- <v-flex
                   xs12
                   md4>
                   <v-text-field
@@ -81,22 +53,22 @@
                   <v-text-field
                     label="Country"
                     class="purple-input"/>
-                </v-flex>
+                </v-flex> -->
                 <v-flex
                   xs12
-                  md4>
+                  >
                   <v-text-field
                     class="purple-input"
-                    label="Postal Code"
+                    label="País"
                     type="number"/>
                 </v-flex>
-                <v-flex xs12>
+                <!-- <v-flex xs12>
                   <v-textarea
                     class="purple-input"
                     label="About Me"
                     value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                   />
-                </v-flex>
+                </v-flex> -->
                 <v-flex
                   xs12
                   text-xs-right
@@ -112,13 +84,13 @@
               </v-layout>
             </v-container>
           </v-form>
-        </material-card>
+
       </v-flex>
       <v-flex
         xs12
         md4
       >
-        <material-card class="v-card-profile">
+       
           <v-avatar
             slot="offset"
             class="mx-auto d-block"
@@ -139,14 +111,28 @@
               class="grey lighten-3 font-weight-light"
             >Saber Mais</v-btn>
           </v-card-text>
-        </material-card>
+       
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  //
+    data () {
+        return {
+            equipa:null,
+            conta:''
+        }
+        },
+        async created(){
+          /** Nota agora vai ler da wallet mas deveria ler do estado mas para nao termos de ir sempre ao login fica assim : this.$store.getters.wallet  */
+          this.conta = window.web3.eth.accounts[0]
+
+          //ir buscar infos a bd
+          var equipa = await axios.get('http://localhost:4000/users?utilizador=' + this.conta + '?tipo=Equipa')
+          console.dir(equipa)
+        }
 }
 </script>
