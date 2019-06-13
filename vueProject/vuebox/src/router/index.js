@@ -10,7 +10,7 @@ import Compras from '@/components/Compras'
 import Confpagamento from '@/components/confirmarPagamento'
 import Equipas from '@/components/Equipas'
 import Equipa from '@/components/Equipa'
-//import Perfil from '@/components/Perfil'
+import Perfil from '@/components/Perfil'
 
 Vue.use(Router)
 
@@ -62,6 +62,12 @@ let router =  new Router({
       name:'Equipa',
       props: true,
       component: Equipa
+    },
+    {
+      path:'/perfil',
+      name:'Perfil',
+      props: true,
+      component: Perfil
     }
   ]
 })

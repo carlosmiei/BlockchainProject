@@ -38,7 +38,7 @@ export default {
   },
   mounted() {
     this.items.push({ title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'})
-    this.items.push({ title: 'Perfil', icon: 'account_box' })
+    this.items.push({ title: 'Perfil', icon: 'account_box' ,route:'/perfil'})
     
     if(this.typeA!=2){
       this.items.push({ title: 'Efetuar Venda', icon: 'transfer_within_a_station',route:'/addTransfer' })
