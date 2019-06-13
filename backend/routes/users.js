@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
 		.then(dados => res.jsonp(dados))
 		.catch(_ => res.status(500).send('Erro na consulta do utilizador: ' + req.query.utilizador))
 	} 
-	else if(req.query.papel){
-		Users.listarPorPapel(req.query.papel)
+	else if(req.query.tipo){
+		Users.listarPorTipo(req.query.tipo)
 		.then(dados => res.jsonp(dados))
 		.catch(_ => res.status(500).send('Erro na consulta de utilizadores por papel'))
 	} 

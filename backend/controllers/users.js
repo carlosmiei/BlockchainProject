@@ -18,9 +18,9 @@ module.exports.consultar = uid => {
         .exec()
 }
 
-module.exports.listarPorPapel = papel => {
+module.exports.listarPorTipo = tipo => {
     return User
-        .find({ papel: papel })
+        .find({ tipo: tipo })
         .exec()
 }
 

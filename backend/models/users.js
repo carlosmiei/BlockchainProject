@@ -12,12 +12,15 @@ var JogadorSchema = new Schema({
 
 var UserSchema = new Schema({
     _id: {type: String, required:true},
-    papel: {type: String, required:true},
+    tipo: {type: String, required:true},
     nome: {type: String, required:false},
     pais: {type: String, required:false},
     liga: {type: String, required:false},
     jogadores: [JogadorSchema],
-    bancos: [{type: String, required:false}]
+    bancos: [{type: String, required:false}],
+    foto: {type: String, required:false},
+    descricao: {type: String, required:false},
+    site: {type: String, required:false},
 })
 
 module.exports = mongoose.model('User',UserSchema,'users')

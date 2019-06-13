@@ -122,7 +122,9 @@ export default {
          })
 
       
-  }
+  }, created() {
+
+  },
 }
 </script>
 

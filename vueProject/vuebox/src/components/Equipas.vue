@@ -71,7 +71,7 @@
             
             async getEquipas(){      
                 
-                var lista = await axios.get('http://localhost:4000/users?papel=Equipa')
+                var lista = await axios.get('http://localhost:4000/users?tipo=Equipa')
                 console.log(lista)
                 return lista.data
 
