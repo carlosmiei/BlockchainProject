@@ -10,6 +10,7 @@ import Compras from '@/components/Compras'
 import Confpagamento from '@/components/confirmarPagamento'
 import Equipas from '@/components/Equipas'
 import Equipa from '@/components/Equipa'
+//import Perfil from '@/components/Perfil'
 
 Vue.use(Router)
 

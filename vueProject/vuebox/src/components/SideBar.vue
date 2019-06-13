@@ -38,19 +38,24 @@ export default {
   },
   mounted() {
     this.items.push({ title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'})
+    this.items.push({ title: 'Perfil', icon: 'account_box' })
+    
     if(this.typeA!=2){
       this.items.push({ title: 'Efetuar Venda', icon: 'transfer_within_a_station',route:'/addTransfer' })
       this.items.push({ title: 'Consultar Vendas', icon: 'list', route:'/vendas'})
       this.items.push({ title: 'Consultar Compras', icon: 'touch_app', route:'/compras' })
+      this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })
+      this.items.push({ title: 'Jogadores', icon: 'person' })
+      this.items.push({ title: 'Account', icon: 'account_box' })
+      this.items.push({ title: 'Admin', icon: 'gavel' })
+    
     }
     if(this.typeA==2){
-      this.items.push({ title: 'Consultar Transferências', icon: 'list', route:'/banco' })
+      this.items.push({ title: 'Transações', icon: 'list', route:'/banco' })
     }
-    this.items.push({ title: 'Perfil', icon: 'dashboard' })
-    this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })
-    this.items.push({ title: 'Jogadores', icon: 'person' })
-    this.items.push({ title: 'Account', icon: 'account_box' })
-    this.items.push({ title: 'Admin', icon: 'gavel' })
+
+    
+
   },
   computed: {
 		typeA() {
