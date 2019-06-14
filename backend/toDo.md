@@ -4,8 +4,9 @@ Falta Fazer:
 
 - Gerar Jogadores [Carlos]
 - Criar Equipas [Carlos]
-- Mecanismo para adicionar Jogadores/Equipas (Federação) [Carlos]
-- Criar mecanismos de impostos, tabela para pagar as que estão "Pago" (Federação) [Peixoto]. 
+- [Feito]Mecanismo para adicionar Jogadores/Equipas (Federação) [Carlos]
+- [Feito] Adiconar Bancos pela Federação [Carlos]
+- Criar mecanismos de impostos, tabela para pagar as que estão "Pago" (Federação) [Carlos]. 
 - [Feito] Data onde foi pago [Peixoto]
 - Atualizar informações de equipa [Peixoto]
 - Apresentação da Equipa e infos do jogador [Peixoto]

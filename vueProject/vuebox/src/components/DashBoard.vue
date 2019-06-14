@@ -29,7 +29,7 @@
 
         <!-- gráficos -->
          <!-- Gráfico linhas  -->
-         <v-container  grid-list-md text-xs-center class="grey lighten-3" >
+         <v-container grid-list-md text-xs-center class="grey lighten-3" >
              <v-layout row>
             <v-flex xs12  ma-0 pa-0>
                 <v-card flat center class="ma-2 grey lighten-3 rounded-card"> 
@@ -107,12 +107,7 @@ export default {
       /** Nota agora vai ler da wallet mas deveria ler do estado mas para nao termos de ir sempre ao login fica assim : this.$store.getters.wallet  */
         this.account = window.web3.eth.accounts[0]
         this.type = this.$store.getters.type
-        this.tipo ='Equipa' // Default
-
-        if (this.type == 3)
-            this.tipo = 'Federação'
-        if(this.type == 2)
-            this.tipo = 'Banco'
+        this.tipo = this.$store.getters.tipo
         
          web3.eth.getBalance(this.account, (error, result)=>{
              if(!error){

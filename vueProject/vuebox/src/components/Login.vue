@@ -43,7 +43,8 @@ export default {
   },
   data () {
     return {
-      loading: true
+      loading: true,
+      value:''
     }
   },created(){
         Transferencias.init()
@@ -60,6 +61,16 @@ export default {
             if (res.c[0]!=0) {
               alert('Sou do tipo: ' + res.c[0])
               this.$store.commit('changeType',res.c[0])
+
+              //guaardar o numero e a string
+              var tipo ='Equipa' // Default
+              if (res.c[0] == 3)
+                  tipo = 'Federação'
+              if(res.c[0] == 2)
+                  tipo = 'Banco'              
+              this.$store.commit('changeTipo',tipo)
+
+
             }else {
               alert('Atenção não é membro!')
               this.$store.commit('changeType',res.c[0])
