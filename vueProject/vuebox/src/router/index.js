@@ -13,6 +13,7 @@ import Equipa from '@/components/Equipa'
 import Perfil from '@/components/Perfil'
 import AddBanco from '@/components/AddBanco'
 import AddEquipa from '@/components/AddEquipa'
+import AddJogador from '@/components/AddJogador'
 
 Vue.use(Router)
 
@@ -78,6 +79,10 @@ let router =  new Router({
       path:'/addequipa',
       name: 'AddEquipa',
       component:AddEquipa
+    },{
+      path:'/addjogador',
+      name: 'AddJogador',
+      component:AddJogador
     }
   ]
 })
