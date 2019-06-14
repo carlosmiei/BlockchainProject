@@ -249,8 +249,6 @@ export default {
                             console.log('ERRO: ' + e)
                         })                    
 
-                    //Desligar o loader
-                    this.showRecibo=true
                 }
             },
             resetForm(){
@@ -267,6 +265,7 @@ export default {
             }, fillPopup(a,b){
                   this.nomeP = a
                   this.equipaP = b 
+                  this.dialog=true
             },
 
               
