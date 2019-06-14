@@ -112,12 +112,13 @@
             readonly
           ></v-text-field>
 
-          <v-text-field
-            v-model="transacao.banco"
+          <v-select
+            v-model="nomeB"
             :counter="256"
             label="Banco"
             required
-          ></v-text-field>
+            :items="nomesBancos"
+          ></v-select>
         </v-layout>
     </v-container> 
       </v-form>
@@ -267,11 +268,16 @@ export default {
            nomes:[],
            equipa:[],
            jogadores:[],
+           bancos:[],
+           nomesBancos:[],
+           nomeB:''
     }
   },async created (){
 
     Transferencias.init()
     var res = await axios.get('http://localhost:4000/users?tipo=Equipa')
+    var resB = await axios.get('http://localhost:4000/users?tipo=Banco')
+    this.bancos = resB.data
     this.equipas =  res.data
     var names = []
     //filtrar so os nomes
@@ -282,23 +288,43 @@ export default {
     this.nomes = names
 
   },watch: {
+    nomeB: function(newQ,old) {
+      
+      var banco = this.bancos.find(x => x.nome === newQ)
+      //alert('recebi' + newQ + 'waççet' + banco._id)
+      this.transacao.banco = banco._id
+    },
     'transacao.valorT': function (newQuestion, oldQuestion) {
           var int =  parseInt(this.transacao.valorT)
           var imposto = int * 0.21
           this.transacao.valorI = imposto.toString()
     },
     equipa: function (newQuestion, oldQuestion) {
-      
+
+      var nomesJogadores = []
+      var namesB = []
+
       var eq = this.equipas.find(x => x.nome === newQuestion)
       this.transacao.to = eq._id
       this.transacao.contribuinteD = eq.contribuinte
-      this.jogadores= eq.jogadores
-      var nomesJogadores = []
-
+   
       eq.jogadores.forEach(function(element) {
          nomesJogadores.push(element.nome)
       }); 
+
       this.jogadores = nomesJogadores
+      
+      this.bancos.forEach(function(elem) {
+
+         if (eq.bancos.includes(elem._id)) {
+           namesB.push(elem.nome)
+         }
+      }); 
+
+      this.nomesBancos = namesB
+
+     
+
     }
   }
   ,methods:{
