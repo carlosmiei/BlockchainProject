@@ -79,6 +79,65 @@
     <v-divider></v-divider>
     <!-- fim tabela pendentes -->
 
+  <!-- inicio tabela em curso -->
+    <v-card color="">
+      <v-card-title color="white">
+        Consultar Pagamentos Pendentes
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="search"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="transacoesEmCurso"
+        :search="search"
+        :loading="false"
+      
+      >
+        <template v-slot:items="props">
+          <td @click="clickTable(props.item)">
+            <v-layout justify-center>
+                {{ props.item._id2 }}
+            </v-layout>
+          </td>
+          <td class="text-xs-right">
+            <v-layout justify-center>
+            
+            {{ props.item.from2 }}
+          </v-layout>
+          </td>
+          <td class="text-xs-right">
+            <v-layout justify-center>
+                {{ props.item.nomeJogador }}
+            </v-layout>
+          <td class="text-xs-right">
+            <v-layout justify-center>
+                {{ props.item.valorT }}
+            </v-layout>
+
+          </td>
+          <td class="text-xs-right"> 
+            <v-layout justify-center>
+                {{ props.item.estado }}
+            </v-layout>
+          </td>
+        </template>
+        <template v-slot:no-results>
+          <v-alert :value="true" color="error" icon="warning">
+            Your search for "{{ search }}" found no results.
+          </v-alert>
+        </template>
+      </v-data-table>
+    </v-card>
+    <v-spacer></v-spacer>
+    <v-divider></v-divider>
+    <v-divider></v-divider>
+    <!-- fim tabela em curso -->
 
     <!-- Tabela do Histórico  -->
     <v-card color="">
@@ -186,7 +245,7 @@ export default {
     
     async getTransacoes(){      
 
-      var lista = await axios.get('http://localhost:4000/transacoes?banco=' + this.account)
+      var lista = await axios.get('http://localhost:4000/transacoes')
       console.log(lista)
       return lista.data
 
@@ -206,17 +265,6 @@ export default {
         }).catch(e => {
             console.log('ERRO: ' + e)
         })
-
-      var obj2 = {}
-      obj2['_id'] = id
-      obj2['data'] = new Date()
-      axios.post('http://localhost:4000/transacoes/setDataPagamento' + obj2)
-        .then(response => {
-            console.log('Correu tudo bem' + response)    
-      
-        }).catch(e => {
-            console.log('ERRO: ' + e)
-        })
       return true
     },
     
@@ -230,14 +278,14 @@ export default {
     },
 
     open(id){
-      (id == 'Em pagamento') ? this.op=['Pago'] : this.op=[]
+      (id == 'Pago') ? this.op=['Completa'] : this.op=[]
     },
     
     async save(idVenda){
 
       switch (this.input) {
-        case 'Pago':
-          alert("entrei pago")
+        case 'Completa':
+          alert("entrei completa")
           var fatura = await Transferencias.recebeFatura(idVenda)
 
           for (var t in this.transacoesPendentes) {
@@ -246,7 +294,7 @@ export default {
                 break;
             }
           }
-          this.alteraEstado(idVenda,"Pago")
+          this.alteraEstado(idVenda,"Completa")
 
           console.log("passei do metamask")
           break; 
@@ -272,12 +320,15 @@ export default {
 
   },
   computed: {
+    transacoesEmCurso(){
+      return this.transacoes.filter(elem => (elem.estado !== 'Pago' && elem.estado !== 'Completa'))
+    },
     transacoesPendentes(){
-      return this.transacoes.filter(elem => elem.estado === 'Em pagamento')
+      return this.transacoes.filter(elem => elem.estado === 'Pago')
     },
 
     transacoesCompletas(){
-      return this.transacoes.filter(elem => elem.estado === 'Pago')
+      return this.transacoes.filter(elem => elem.estado === 'Completa')
     }
   }
 

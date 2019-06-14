@@ -8,6 +8,7 @@ import { store } from '@/store/store'
 import ConsultTrans from '@/components/Vendas'
 import Compras from '@/components/Compras'
 import Confpagamento from '@/components/confirmarPagamento'
+import ConfCota from '@/components/confirmarCota'
 import Equipas from '@/components/Equipas'
 import Equipa from '@/components/Equipa'
 import Perfil from '@/components/Perfil'
@@ -54,6 +55,11 @@ let router =  new Router({
       path:'/banco',
       name:'Confpagamento',
       component: Confpagamento
+    },
+    {
+      path:'/federacao',
+      name:'ConfCota',
+      component: ConfCota
     },
     {
       path:'/equipas',

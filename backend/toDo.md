@@ -8,12 +8,12 @@ Falta Fazer:
 - [Feito] Adiconar Bancos pela Federação [Carlos]
 - Perfil ser comum a bancos/Equipas/Federação 
 - Criar mecanismos de impostos, tabela para pagar as que estão "Pago" (Federação) [Carlos]. 
-- Data onde foi pago [Peixoto]
+- [Feito] Data onde foi pago [Peixoto]
 - Atualizar informações de equipa [Peixoto]
 - Apresentação da Equipa e infos do jogador [Peixoto]
 - [Feito] Alterar Form das transferencias para por os select boxes [Carlos]
 
-**Métodos para os gráficos** [Peixoto]
+[Feito] **Métodos para os gráficos** [Peixoto]
 
 - Dinheiro gasto em compras total e por data
 - Dinheiro gasto em vendas total e por data
