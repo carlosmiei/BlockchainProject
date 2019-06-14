@@ -11,6 +11,7 @@ import Confpagamento from '@/components/confirmarPagamento'
 import Equipas from '@/components/Equipas'
 import Equipa from '@/components/Equipa'
 import Perfil from '@/components/Perfil'
+import AddBanco from '@/components/AddBanco'
 
 Vue.use(Router)
 
@@ -68,6 +69,10 @@ let router =  new Router({
       name:'Perfil',
       props: true,
       component: Perfil
+    }, {
+      path:'/addbanco',
+      name: 'AddBanco',
+      component:AddBanco
     }
   ]
 })

@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
     state: {
         isLogged: false,
         wallet:'default',
-        type:0
+        type:0,
+        tipo:''
       },
       mutations:{
           changeLogged(state,isLogged){
@@ -19,11 +20,14 @@ export const store = new Vuex.Store({
           },
           changeType(state,estado){
               state.type = estado
-          }
+          },changeTipo(state,estado){
+            state.tipo = estado
+        }
       }, getters:{
         wallet: state => state.wallet,
         isLogged: state => state.isLogged,
-        type: state => state.type
+        type: state => state.type,
+        tipo: state => state.tipo
  
             
       }

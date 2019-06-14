@@ -40,7 +40,7 @@ export default {
     this.items.push({ title: 'Dashboard', icon: 'dashboard' ,route:'/dashboard'})
     this.items.push({ title: 'Perfil', icon: 'account_box' ,route:'/perfil'})
     
-    if(this.typeA!=2){
+    if(this.typeA == 1){
       this.items.push({ title: 'Efetuar Venda', icon: 'transfer_within_a_station',route:'/addTransfer' })
       this.items.push({ title: 'Consultar Vendas', icon: 'list', route:'/vendas'})
       this.items.push({ title: 'Consultar Compras', icon: 'touch_app', route:'/compras' })
@@ -52,6 +52,14 @@ export default {
     }
     if(this.typeA==2){
       this.items.push({ title: 'Transações', icon: 'list', route:'/banco' })
+    }
+    if (this.typeA == 3) {
+
+      this.items.push({ title: 'Consultar Transações', icon: 'transfer_within_a_station',route:'/addTransfer' })
+      this.items.push({ title: 'Adicionar Banco', icon: 'list', route:'/addbanco'})   
+      this.items.push({ title: 'Adicionar Equipa', icon: 'list', route:'/vendas'})   
+      this.items.push({ title: 'Adicionar Jogador', icon: 'list', route:'/vendas'})   
+      this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })  
     }
 
     

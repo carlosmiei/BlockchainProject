@@ -55,6 +55,9 @@ contract Transferencias {
         //Bancos Carlos
         bancos.push(0x973A5B3360bc1d5AfAFA88585eFb55F8db972Be2);
         bancos.push(0xE2381C29Ca01ef3179fAd7d55A5C9e4fD9325461);
+
+        //Federação carlos
+        federacao.push(0x38e99B1Aa82E2310065A49fC805CC4E071CA3a79);
         
 
 
