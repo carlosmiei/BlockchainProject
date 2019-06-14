@@ -24,6 +24,14 @@ module.exports.listarPorUtilizador = user => {
         .exec()
 }
 
+module.exports.listarEntreDatas = (data1, data2) => {
+    console.log(data1)
+    console.log(data2)
+    return Transacao
+        .find({ dataP: {$gte: data1, $lte: data2}})
+        .exec()
+}
+
 module.exports.listarPorBanco = b => {
     return Transacao
         .find({ banco: b })
@@ -42,12 +50,85 @@ module.exports.listarToUser = user => {
         .exec()
 }
 
+module.exports.consultarValorTotalVendas = (uid, data1, data2)  => {
+    return Transacao
+        .aggregate(
+            [
+                { $match: {
+                    $and: [
+                        { from: uid },
+                        { dataE: { $gte: data1, $lte: data2 } },
+                        { $or: [
+                            { estado: "Pago" },
+                            { estado: "Completa" }
+                        ]}                
+                    ]
+                } },
+                { $group: { _id : null, total : { $sum: { $add : ["$valorT","$valorI"] } } } },
+            ])
+}
+
+
+module.exports.consultarValorTotalCompras = (uid, data1, data2)  => {
+    return Transacao
+        .aggregate(
+            [
+                { $match: {
+                    $and: [
+                        { to: uid },
+                        { dataE: { $gte: data1, $lte: data2 } },
+                        { $or: [
+                            { estado: "Em pagamento" },
+                            { estado: "Pago" },
+                            { estado: "Completa" }
+                        ]}                
+                    ]
+                } },
+                { $group: { _id : null, total : { $sum: { $add : ["$valorT","$valorI"] } } } },
+            ])
+}
+
+module.exports.consultarTotalVendas = (uid, data1, data2)  => {
+    return Transacao
+        .find(
+            { $and: [ 
+                { from: uid }, 
+                { dataP: {$gte: data1, $lte: data2} },
+                { estado: "Completa" }
+            ]})
+        .countDocuments()
+        .exec()
+}
+
+module.exports.consultarTotalCompras = (uid, data1, data2)  => {
+    return Transacao
+        .find(
+            { $and: [ 
+                { to: uid }, 
+                { dataP: {$gte: data1, $lte: data2} } ,
+                { estado: "Completa" }
+            ]})
+        .countDocuments()
+        .exec()
+}
+
+
+
 
 module.exports.alteraEstado = (tid, e) => {
     return Transacao
         .findOneAndUpdate(
             {_id : tid}, 
             {$set: {estado: e}},
+            {new : true})
+        .exec()
+}
+
+module.exports.alteraDataPagamento = (tid, data) => {
+    return Transacao
+        .findOneAndUpdate(
+            {_id : tid}, 
+            {$set: {dataP: data}},
             {new : true})
         .exec()
 }
