@@ -57,7 +57,7 @@ export default {
 
       this.items.push({ title: 'Consultar Transações', icon: 'transfer_within_a_station',route:'/addTransfer' })
       this.items.push({ title: 'Adicionar Banco', icon: 'list', route:'/addbanco'})   
-      this.items.push({ title: 'Adicionar Equipa', icon: 'list', route:'/vendas'})   
+      this.items.push({ title: 'Adicionar Equipa', icon: 'list', route:'/addequipa'})   
       this.items.push({ title: 'Adicionar Jogador', icon: 'list', route:'/vendas'})   
       this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })  
     }

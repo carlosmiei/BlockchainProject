@@ -188,6 +188,21 @@ const Transferencias = {
       })
     })
 
+  },adicionarEquipa: function(hashF){
+    let self = this
+    console.log(window.web3.eth.accounts[0])
+    return new Promise((resolve, reject) => {
+      self.instance.adicionarEquipa(
+        hashF,
+        {from: window.web3.eth.accounts[0],gas: 900000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
   }
 
 }
