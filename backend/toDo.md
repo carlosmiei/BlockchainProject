@@ -9,7 +9,7 @@ Falta Fazer:
 - Data onde foi pago [Peixoto]
 - Atualizar informações de equipa [Peixoto]
 - Apresentação da Equipa e infos do jogador [Peixoto]
-- Alterar Form das transferencias para por os select boxes [Carlos]
+- [Feito] Alterar Form das transferencias para por os select boxes [Carlos]
 
 **Métodos para os gráficos** [Peixoto]
 

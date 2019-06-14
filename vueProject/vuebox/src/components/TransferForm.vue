@@ -280,6 +280,11 @@ export default {
     this.bancos = resB.data
     this.equipas =  res.data
     var names = []
+    var myId = this.account
+
+    //tirar a minha equipa
+    this.equipas = this.equipas.filter(function(el) { return el._id != myId; }); 
+
     //filtrar so os nomes
     
     this.equipas.forEach(function(element) {
@@ -287,11 +292,12 @@ export default {
     }); 
     this.nomes = names
 
-  },watch: {
+  },
+  
+  watch: {
     nomeB: function(newQ,old) {
       
       var banco = this.bancos.find(x => x.nome === newQ)
-      //alert('recebi' + newQ + 'waççet' + banco._id)
       this.transacao.banco = banco._id
     },
     'transacao.valorT': function (newQuestion, oldQuestion) {
@@ -367,6 +373,8 @@ export default {
       return true
     }, resetForm(){
         // reset Form
+        this.equipa=''
+        this.nomeB=''
         this.transacao.contribuinteD=''
         this.transacao.to= ''
         this.transacao.numFatura= ''
