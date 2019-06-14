@@ -43,7 +43,8 @@ export default {
   },
   data () {
     return {
-      loading: true
+      loading: true,
+      value:''
     }
   },created(){
         Transferencias.init()
