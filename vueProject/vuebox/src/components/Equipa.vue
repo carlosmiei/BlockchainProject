@@ -42,8 +42,9 @@
                 <v-card flat color="grey" @click="clickTable(jogador)" class="clickable jogador-card ma-2 grey lighten-3 rounded-card">
                     <v-layout columns class="h-align" >
                         <v-flex xs3 offset-xs1>
-                            <v-img
-                                src="https://upload.wikimedia.org/wikipedia/pt/f/f0/500px-SL_Benfica_logo_svg.png"
+                            <v-img 
+                                class="rounded-img grey lighten-2"
+                                :src = "jogador.foto"
                                 height="45px"
                                 width="45px"
                                 contain
@@ -123,6 +124,11 @@
   margin-left: auto;
   margin-right: auto;
   width: 40%;
+}
+
+.rounded-img{
+    border-radius:10px;
+    border: 2px solid rgb(102, 102, 102);
 }
 
 .rounded-card{

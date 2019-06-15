@@ -19,7 +19,7 @@
                 <v-layout columns class="h-align" >
                     <v-flex xs3 offset-xs1>
                         <v-img
-                            src="https://upload.wikimedia.org/wikipedia/pt/f/f0/500px-SL_Benfica_logo_svg.png"
+                            :src="equipa.foto"
                             height="45px"
                             width="45px"
                             contain

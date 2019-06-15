@@ -113,7 +113,17 @@ module.exports.consultarTotalCompras = (uid, data1, data2)  => {
 }
 
 
-
+module.exports.consultarTotalCompras = (uid, data1, data2)  => {
+    return Transacao
+        .find(
+            { $and: [ 
+                { to: uid }, 
+                { dataP: {$gte: data1, $lte: data2} } ,
+                { estado: "Completa" }
+            ]})
+        .countDocuments()
+        .exec()
+}
 
 module.exports.alteraEstado = (tid, e) => {
     return Transacao

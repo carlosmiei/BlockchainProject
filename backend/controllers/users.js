@@ -47,18 +47,17 @@ module.exports.alteraNome = (uid, n) => {
 }
 
 module.exports.addJogador = (uid, jogador) => {
-    console.dir(jogador)
-    return User.update(
+    return User.updateOne(
         {_id: uid},
         {$push: { jogadores: jogador }}
     )
 }
 
 module.exports.remJogador = (uid, jogador) => {
-    console.dir(jogador)
-    return User.update(
+    return User.findOneAndUpdate(
         {_id: uid},
-        {$pull: { jogadores: { _id: jogador} }}
+        { $pull: { jogadores: { _id: jogador} }},
+        { projection: {"jogadores": true} }
     )
 }
 
