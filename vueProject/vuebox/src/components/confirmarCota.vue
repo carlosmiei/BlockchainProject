@@ -1,10 +1,9 @@
 <template>
   <div>
   <!-- inicio tabela pendentes -->
-  <!-- Tabela do Histórico  -->
     <v-card color="">
-      <v-card-title color="white">
-        Consultar Pagamentos Pendentes
+      <v-card-title color="white" class="grey lighten-2">
+        Consultar Pagamento de Imposto Pendente
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
@@ -20,6 +19,7 @@
         :search="search"
         :loading="false"
       
+  
       >
         <template v-slot:items="props">
           <td @click="clickTable(props.item)">
@@ -53,7 +53,7 @@
               @save="save(props.item._id)"
               @open="open(props.item.estado)"
             >
-              <div>{{ props.item.estado }}</div>
+              <div><b class="green--text">{{ props.item.estado }}</b>  </div>
               <template v-slot:input>
                 <div class="mt-3 title">Atualizar Estado</div>
               </template>
@@ -81,7 +81,7 @@
 
   <!-- inicio tabela em curso -->
     <v-card color="">
-      <v-card-title color="white">
+      <v-card-title class="grey lighten-2">
         Consultar Pagamentos Pendentes
         <v-spacer></v-spacer>
         <v-text-field
@@ -115,6 +115,7 @@
             <v-layout justify-center>
                 {{ props.item.nomeJogador }}
             </v-layout>
+          </td>
           <td class="text-xs-right">
             <v-layout justify-center>
                 {{ props.item.valorT }}
@@ -123,7 +124,7 @@
           </td>
           <td class="text-xs-right"> 
             <v-layout justify-center>
-                {{ props.item.estado }}
+              <b class="red--text">  {{ props.item.estado }} </b>
             </v-layout>
           </td>
         </template>
@@ -141,7 +142,7 @@
 
     <!-- Tabela do Histórico  -->
     <v-card color="">
-      <v-card-title color="white">
+      <v-card-title class="grey lighten-2">
         Consultar Pagamentos Confirmados
         <v-spacer></v-spacer>
         <v-text-field
@@ -169,6 +170,11 @@
             
             {{ props.item.from2}}
           </v-layout>
+          </td>
+          <td class="text-xs-right">
+            <v-layout justify-center>
+                {{ props.item.nomeJogador }}
+            </v-layout>
           </td>
           <td class="text-xs-right">
             <v-layout justify-center>
@@ -223,6 +229,7 @@ export default {
       headers: [
         {text: 'Id da Venda ',value: 'hash', align: 'center',},
         {text: 'Vendedor', value: 'bloco' },
+        {text: 'Jogador', value: 'bloco' },
         {text: 'Valor', value: 'gas' },
         {text: 'Estado', value: 'estado' }
       ],
