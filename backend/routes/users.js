@@ -59,17 +59,32 @@ router.post("/remJogador", (req, res) => {
 
 router.post("/transfereJogador", (req, res) => {
 	console.dir(req.body)
-	// res.status(500).send('Erro ao adicionar jogador: ')
 	Users.remJogador(req.body.origem, req.body.jogador)
 	.then(dados => {
 		jogadores = dados.jogadores
 		jogador = {}
-		jogador = jogadores.find(x => x._id == req.body.jogador)
+		jogador = jogadores.find(x => x.nome == req.body.jogador)
+		jogador.emTransferencia = false
 		Users.addJogador(req.body.destino, jogador)
 		.then(dados => res.jsonp(dados))
 		.catch(erro => res.status(500).send('Erro ao adicionar jogador' + erro))
 	})
 	.catch(erro => res.status(500).send('Erro ao remover jogador' + erro))
+});
+
+
+router.post("/bloqueiaJogador", (req, res) => {
+	console.dir(req.body)
+	Users.blockJogador(req.body.equipa, req.body.jogador, true)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao adicionar jogador: ' + erro))
+});
+
+router.post("/desbloqueiaJogador", (req, res) => {
+	console.dir(req.body)
+	Users.blockJogador(req.body.equipa, req.body.jogador, false)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao adicionar jogador: ' + erro))
 });
 
 router.post('/', (req, res) => {

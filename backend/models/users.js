@@ -8,7 +8,8 @@ var JogadorSchema = new Schema({
     pais: {type: String, required:true},
     nascimento: {type: String, required:true},
     foto: {type: String, required:false, default:"https://cdn1.imggmi.com/uploads/2019/6/15/23ef57b240d714582dc01cd90cf96a1a-full.jpg"},
-    posicoes: [{type: String, required:false}]
+    posicoes: [{type: String, required:false}],
+    emTransferencia: {type: Boolean, required:true, default:false}
 })
 
 var UserSchema = new Schema({

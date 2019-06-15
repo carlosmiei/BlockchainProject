@@ -39,25 +39,28 @@ contract Transferencias {
         ownerAcc = 0x24BF0ffC4daf52B0df27640882E202b0AAd98B11;
         
         //adicionar os participantes
-        federacao.push(0xC2eF946de5Fa4CF029f0Cd6437048cdbaed8869C);
 
-        equipas.push(0x1Fb4C08AeA29A6642D8C963F1ca01c15C63385bc);
-        equipas.push(0xdB254AFdcaCEa500C4f7449c4b9F9DA3e1224F81);
-        equipas.push(0xe82f3f7C5dc295aa96e9c3b96e53998F240D426F);
-
-        //Benfica Peixoto
+        //Porto Peixoto
+        equipas.push(0x42C5c23F5068bf3d635857EeEBf2b4105ce35112);
+        //Vitória Peixoto
+        equipas.push(0xdbBbfC83B5Dd0e505a6dc12D7c5F993e6c23FD46);
+        //Nacional Peixoto
         equipas.push(0xE0b303c8158BA5b545CbCE21Aa11FC2B62bF73E3);
+
         //Braga Carlos
         equipas.push(0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8);
         
         //Bancos Peixoto
-        bancos.push(0x50C944f45603314164662310295993902121fBee);
+        bancos.push(0x79e96Ee1465e7fa18A60d4B60F06226b4Ef6Ba5F);
+        bancos.push(0xF486B1d966a7ADEbA1C2a293BC2B0B384E7834d9);
         //Bancos Carlos
         bancos.push(0x973A5B3360bc1d5AfAFA88585eFb55F8db972Be2);
         bancos.push(0xE2381C29Ca01ef3179fAd7d55A5C9e4fD9325461);
 
         //Federação carlos
         federacao.push(0x38e99B1Aa82E2310065A49fC805CC4E071CA3a79);
+        //Federação Peixoto
+        federacao.push(0xaD066d98aAe87d8d70699e3B8167fCbded72CB6F);
         
 
 
