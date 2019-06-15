@@ -10,7 +10,7 @@ Falta Fazer:
 - Criar mecanismos de impostos, tabela para pagar as que estão "Pago" (Federação) [Carlos]. 
 - [Feito] Data onde foi pago [Peixoto]
 - Atualizar informações de equipa [Peixoto]
-- Apresentação da Equipa e infos do jogador [Peixoto]
+- [Feito] Apresentação da Equipa e infos do jogador [Peixoto]
 - [Feito] Alterar Form das transferencias para por os select boxes [Carlos]
 
 [Feito] **Métodos para os gráficos** [Peixoto]

@@ -73,7 +73,7 @@ import axios from 'axios';
                 
                 var lista = await axios.get('http://localhost:4000/users?tipo=Equipa')
                 console.log(lista)
-                return lista.data
+                return lista.data.filter(equipa => (equipa._id != window.web3.eth.accounts[0]) )
 
             }
         },
