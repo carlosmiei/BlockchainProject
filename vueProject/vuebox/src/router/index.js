@@ -57,7 +57,7 @@ let router =  new Router({
       component: Confpagamento
     },
     {
-      path:'/federacao',
+      path:'/cotas',
       name:'ConfCota',
       component: ConfCota
     },

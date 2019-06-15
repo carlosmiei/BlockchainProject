@@ -15,8 +15,8 @@
           <v-form>
             <v-container py-0>
               <v-layout wrap>
-                <v-flex
-                  xs6                >
+                <v-flex  v-if="equipa.liga!=-1"
+                  xs6>
                   <v-text-field
                    :value="equipa.liga"
                     mb-0
@@ -66,13 +66,13 @@
                     label="País"
                     />
                 </v-flex>
-                <!-- <v-flex xs12>
-                  <v-textarea
+                <v-flex xs12>
+                  <v-text-field
                     class="purple-input"
-                    label="About Me"
-                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                    label="Contribuinte"
+                    :value="equipa.contribuinte"
                   />
-                </v-flex> -->
+                </v-flex>
                 <v-flex
                   xs12
                   text-xs-right
@@ -107,7 +107,7 @@
             >
           </v-avatar>
           <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-2">Equipa de Futebol</h6>
+            <h5 class="category text-gray font-weight-thin mb-2">{{equipa.tipo}}</h5>
             <!-- <h4 class="card-title font-weight-light">Alec Thompson</h4> -->
             <p class=" card-description font-weight-light">{{equipa.descricao}}</p>
             <v-btn
@@ -134,10 +134,13 @@ export default {
         async created(){
           /** Nota agora vai ler da wallet mas deveria ler do estado mas para nao termos de ir sempre ao login fica assim : this.$store.getters.wallet  */
           this.conta = window.web3.eth.accounts[0]
+          console.log(this.conta)
           //ir buscar infos a bd
           var equipa = await axios.get('http://localhost:4000/users?utilizador=' + this.conta)
           this.equipa = equipa.data
           console.dir(this.equipa)
+          if (!this.equipa.liga)
+            this.equipa.liga =-1
         }
 }
 </script>
