@@ -2,7 +2,7 @@
   <div>
   <!-- inicio tabela pendentes -->
     <v-card color="">
-      <v-card-title color="white" class="grey lighten-2">
+      <v-card-title class="grey lighten-3 subheading">
         Consultar Pagamento de Imposto Pendente
         <v-spacer></v-spacer>
         <v-text-field
@@ -81,7 +81,7 @@
 
   <!-- inicio tabela em curso -->
     <v-card color="">
-      <v-card-title class="grey lighten-2">
+      <v-card-title class="grey lighten-3 subheading ">
         Consultar Pagamentos Pendentes
         <v-spacer></v-spacer>
         <v-text-field
@@ -142,7 +142,7 @@
 
     <!-- Tabela do Histórico  -->
     <v-card color="">
-      <v-card-title class="grey lighten-2">
+      <v-card-title class="grey lighten-3 subheading">
         Consultar Pagamentos Confirmados
         <v-spacer></v-spacer>
         <v-text-field
