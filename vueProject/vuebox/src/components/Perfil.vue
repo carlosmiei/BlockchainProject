@@ -15,7 +15,7 @@
           <v-form>
             <v-container py-0>
               <v-layout wrap>
-                <v-flex  v-if="equipa.liga"
+                <v-flex  v-if="equipa.liga!=-1"
                   xs6>
                   <v-text-field
                    :value="equipa.liga"
@@ -107,7 +107,7 @@
             >
           </v-avatar>
           <v-card-text class="text-xs-center">
-            <h6 class="category text-gray font-weight-thin mb-2">Equipa de Futebol</h6>
+            <h5 class="category text-gray font-weight-thin mb-2">{{equipa.tipo}}</h5>
             <!-- <h4 class="card-title font-weight-light">Alec Thompson</h4> -->
             <p class=" card-description font-weight-light">{{equipa.descricao}}</p>
             <v-btn
@@ -139,6 +139,8 @@ export default {
           var equipa = await axios.get('http://localhost:4000/users?utilizador=' + this.conta)
           this.equipa = equipa.data
           console.dir(this.equipa)
+          if (!this.equipa.liga)
+            this.equipa.liga =-1
         }
 }
 </script>
