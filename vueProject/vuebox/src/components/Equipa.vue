@@ -39,7 +39,7 @@
         <h3 class="ml-3 text-sm-left">Jogadores</h3>
         <v-layout row wrap class="mt-2">
             <v-flex xs12 sm6 md4 lg3 v-for="jogador in equipa.jogadores" :key="jogador._id">
-                <v-card flat color="grey" @click="clickTable(jogador)" class="clickable ma-2 grey lighten-3 rounded-card">
+                <v-card flat color="grey" @click="clickTable(jogador)" class="clickable jogador-card ma-2 grey lighten-3 rounded-card">
                     <v-layout columns class="h-align" >
                         <v-flex xs3 offset-xs1>
                             <v-img
@@ -137,7 +137,10 @@
   cursor: pointer;
 }
 
-.v-card:hover {
+.jogador-card:hover,
+.jogador-card:focus {
   box-shadow: 0 0 5px rgba(35, 93, 211, 0.775); 
+  transform: translateY(-0.25em);
 }
+
 </style>
