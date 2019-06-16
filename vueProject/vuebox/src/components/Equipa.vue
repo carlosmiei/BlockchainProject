@@ -27,7 +27,7 @@
             <v-flex xs12 sm6 md7 lg8>
                 <v-layout wrap fill-height h-align>
                     <p>{{ this.equipa.descricao }}</p>
-                    <v-btn depressed color="primary" class="rounded-card" :href="this.equipa.site">Visitar site</v-btn>
+                    <v-btn target="_blank" depressed color="primary" class="rounded-card" :href="this.equipa.site">Visitar site</v-btn>
                 </v-layout> 
             </v-flex>
         </v-layout>

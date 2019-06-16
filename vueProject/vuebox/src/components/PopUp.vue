@@ -70,12 +70,54 @@
 
       <v-divider></v-divider>
 
+<<<<<<< HEAD
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="primary" flat @click="enviarParent">I accept</v-btn>
       </v-card-actions>
     </v-card>
   </div>
+=======
+          </v-card-title>
+
+          <v-card-text>
+            <v-layout>
+              <v-flex row wrap xs12 sm7 md8 lg9>
+                <b>Nome: </b> {{ this.jogador.nome }} <br>
+                <b>Idade: </b> {{ this.idade }} <br>
+                <b>Nacionalidade: </b> {{ this.jogador.pais }} <br>
+                <b>Posições: </b>
+                <div v-for="pos in jogador.posicoes" :key="pos"> &nbsp;&nbsp; {{ pos }}</div> 
+              </v-flex>
+              <v-flex xs12 sm5 md4 lg43>
+                <v-img
+                    class="img"
+                    :src="jogador.foto"
+                    height="100px"
+                    width="100px"
+                    contain
+                >
+                </v-img>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </div>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            flat
+            @click="enviarParent"
+          >
+            I accept
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
+>>>>>>> 1454a60c446698ac22a0cfb1f243a0ec1aeb1ef5
 </template>
 <script>
 export default {
@@ -90,6 +132,7 @@ export default {
       type: Object,
       required: false
     }
+<<<<<<< HEAD
   },
   components: {},
   data() {
@@ -112,6 +155,26 @@ export default {
       var m = today.getMonth() - birthDate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
+=======
+    ,methods: {
+        enviarParent(event){
+          this.$emit('childToParent', false)
+        }
+    },
+    computed: {
+      idade(){
+        var today = new Date();
+        var birthDate = new Date(this.jogador.nascimento);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        if(isNaN(age)) 
+          return "Não disponível"
+        else 
+          return age + " anos"
+>>>>>>> 1454a60c446698ac22a0cfb1f243a0ec1aeb1ef5
       }
       return age;
     }
