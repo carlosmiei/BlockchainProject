@@ -219,6 +219,8 @@ export default {
       obj['_id'] = id
       obj['estado'] = estado
       alert("pasei obj")
+
+
       axios.post('http://localhost:4000/transacoes/setEstado',obj)
         .then(response => {
             console.log('Correu tudo bem' + response)    
@@ -245,6 +247,30 @@ export default {
         elem['to2'] =  elem.to.substr(0, 20) + '...'
         elem['from2'] =  elem.from.substr(0, 20) + '...'
         return elem
+
+  },alteraData(id,metodo){
+
+    //A data é a atual
+    var data = new Date().toISOString().substr(0, 10)
+    var obj = {_id:id, data:data}
+  
+    //fazer aqui o pedido
+    axios.post('http://localhost:4000/transacoes/setData' + metodo, obj)
+        .then(response => {
+            console.log('Correu tudo bem' + response) 
+
+            //ALTERAR LOCALMENTE
+            var alterar = this.transacoesPendentes.find(x => x._id === id)
+            var index = this.transacoesPendentes.indexOf(alterar)
+            alterar['data'][metodo] = data
+            this.transacoesPendentes[index] = alterar
+                  
+        }).catch(e => {
+            console.log('ERRO: ' + e)
+        })
+
+        return true
+
   },
   async save(idVenda){
     var teste = this.transacoesPendentes
@@ -271,14 +297,17 @@ export default {
        case 'Aceite':
           var fatura = await Transferencias.validaFatura(idVenda,true)
           this.alteraEstado(idVenda,"Aceite", equipa, jogador)
+          this.alteraData(idVenda,"Aceite")
           break;
        case 'Rejeitada':
           var fatura = await Transferencias.validaFatura(idVenda,false)
-          this.alteraEstado(idVenda,"Rejeitada", equipa, jogador)       
+          this.alteraEstado(idVenda,"Rejeitada", equipa, jogador)
+          this.alteraData(idVenda,"Rejeitada")       
           break
        case 'Em pagamento':
           var fatura = await Transferencias.emPagamento(idVenda)
-          this.alteraEstado(idVenda,"Em pagamento", equipa, jogador)       
+          this.alteraEstado(idVenda,"Em pagamento", equipa, jogador) 
+          this.alteraData(idVenda,"EmPagamento")      
           break
        default: 
          alert('Erro a processar alteração de estado')

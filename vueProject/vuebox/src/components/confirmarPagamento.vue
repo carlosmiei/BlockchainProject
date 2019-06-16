@@ -215,7 +215,12 @@ export default {
       obj['data'] = (new Date()).toISOString().slice(0,10)
       axios.post('http://localhost:4000/transacoes/setDataPagamento', obj)
         .then(response => {
-            console.log('Correu tudo bem' + response)    
+            console.log('Correu tudo bem' + response)   
+
+            var alterar = this.transacoes.find(x => x._id === id)
+            var index = this.transacoes.indexOf(alterar)
+            alterar['data']['Pago'] = obj['data']
+            this.transacoes[index] = alterar
       
         }).catch(e => {
             console.log('ERRO: ' + e)
@@ -232,6 +237,7 @@ export default {
       axios.post('http://localhost:4000/users/transfereJogador', obj)
         .then(response => {
             console.log('Correu tudo bem' + response)    
+
       
         }).catch(e => {
             console.log('ERRO: ' + e)
@@ -285,9 +291,8 @@ export default {
       console.dir(elem)
       this.varPassar = elem
 
-    }, 
-    
-    onChildClick(elem){
+
+    },onChildClick(elem){
       this.dialog = elem
     }
 
