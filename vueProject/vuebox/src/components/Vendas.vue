@@ -3,7 +3,7 @@
 <!-- inicio tabela pendentes -->
 <!-- Tabela do Histórico  -->
     <v-card color="">
-    <v-card-title color="white">
+    <v-card-title class="grey lighten-3">
       Consultar Vendas Pendentes
       <v-spacer></v-spacer>
       <v-text-field
@@ -62,7 +62,7 @@
 <!-- fim tabela pendentes -->
 <!-- Tabela do Histórico  -->
     <v-card color="">
-    <v-card-title color="white">
+    <v-card-title class="grey lighten-3">
       Consultar Transações Completas
       <v-spacer></v-spacer>
       <v-text-field

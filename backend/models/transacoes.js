@@ -18,7 +18,8 @@ var TransacaoSchema = new Schema({
     hashTrans: {type: String, required:true},
     numBloco: {type: String, required:true},
     gas: {type: String, required:true},
-    banco: {type: String, required:false}
+    banco: {type: String, required:false},
+    
 })
 
 module.exports = mongoose.model('Transacao',TransacaoSchema,'transacoes')

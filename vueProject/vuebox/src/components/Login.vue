@@ -51,6 +51,7 @@ export default {
   },methods:{
      async  efetuarLogin(){
         var x = window.web3.eth.accounts[0]
+        
         if (x == undefined){
             alert("Certifique-se que tem o metamask ativo!")
         } else {
