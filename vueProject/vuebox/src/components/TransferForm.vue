@@ -339,9 +339,13 @@ export default {
       var enviar = this.transacao
       var res = await Transferencias.adicionaFatura(this.transacao.valorT,this.date,this.transacao._id)
 
+      data = {
+        Emitida: this.date
+      }
       //preprar enviar
       enviar['from'] = this.account
-      enviar['dataE'] = this.date
+      enviar['data'] = data
+
       enviar['hashTrans'] = res["receipt"].transactionHash
       enviar['numBloco'] = (res["receipt"].blockNumber).toString()
       enviar['gas'] = (res["receipt"].gasUsed).toString()

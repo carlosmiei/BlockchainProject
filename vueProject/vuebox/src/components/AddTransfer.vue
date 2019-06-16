@@ -9,21 +9,9 @@
                     <v-card-text class="px-0">Utilizador: <b>{{ account }} </b> </v-card-text>
                   </v-card>
               </v-flex>
-
                 <TransferForm/>
-                <!-- <div> <p> Hash da transação: {{this.recibo}} </p>
-
-                </div> -->
-                 <!-- <div>
-                   <v-btn v-on:click="teste()" color="success">Success</v-btn>
-                   <v-btn color="error">Error</v-btn>
-                   <v-btn color="warning">Warning</v-btn>
-                  <v-btn color="info">Info</v-btn>
-                   </div> -->
              </v-container>
-<!--- PopUp --->
 
-<!--- Footer --->
 
   </div>
 </template>

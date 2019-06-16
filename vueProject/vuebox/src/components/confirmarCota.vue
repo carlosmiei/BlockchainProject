@@ -256,7 +256,24 @@ export default {
       console.log(lista)
       return lista.data
 
-    },
+    },alteraData(id,metodo){
+
+    //A data é a atual
+    var data = new Date().toISOString().substr(0, 10)
+    var obj = {_id:id, data:data}
+  
+    //fazer aqui o pedido
+    axios.post('http://localhost:4000/transacoes/setData' + metodo, obj)
+        .then(response => {
+            console.log('Correu tudo bem' + response) 
+            this.jogadores = this.jogadores.filter(x => x != obj.jogador)      
+        }).catch(e => {
+            console.log('ERRO: ' + e)
+        })
+
+        return true
+
+  },
   
     async alteraEstado(id,estado){
       //alterar estado para emPagamento
@@ -302,6 +319,7 @@ export default {
             }
           }
           this.alteraEstado(idVenda,"Completa")
+          this.alteraData(idVenda,"Completo")
 
           console.log("passei do metamask")
           break; 
