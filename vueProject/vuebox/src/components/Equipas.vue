@@ -15,11 +15,11 @@
         </v-layout>
         <v-layout row wrap>
             <v-flex xs12 sm6 lg4 v-for="equipa in teamFilter" :key="equipa._id">
-                <v-card flat class="ma-2 grey lighten-3 rounded-card">
+                <v-card flat class="equipa-card ma-2 grey lighten-3 rounded-card">
                 <v-layout columns class="h-align" >
                     <v-flex xs3 offset-xs1>
                         <v-img
-                            src="https://upload.wikimedia.org/wikipedia/pt/f/f0/500px-SL_Benfica_logo_svg.png"
+                            :src="equipa.foto"
                             height="45px"
                             width="45px"
                             contain
@@ -94,5 +94,9 @@ import axios from 'axios';
 
 .rounded-card{
     border-radius:10px;
+}
+
+.equipa-card {
+  box-shadow: 0 0 6px rgba(109, 110, 110, 0.775); 
 }
 </style>

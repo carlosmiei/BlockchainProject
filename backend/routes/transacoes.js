@@ -142,6 +142,7 @@ router.post("/setDataPagamento", (req, res) => {
 	.catch(erro => res.status(500).send('Erro ao alterar estado da transação: ' + erro))
 });
 
+
 router.post('/', (req, res) => {
 	console.dir(req.body)
 	

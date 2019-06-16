@@ -50,7 +50,7 @@
               large
               lazy
               persistent
-              @save="save(props.item._id)"
+              @save="save(props.item._id, props.item.from, props.item.to, props.item.nomeJogador)"
               @open="open(props.item.estado)"
             >
               <div>{{ props.item.estado }}</div>
@@ -206,11 +206,30 @@ export default {
         }).catch(e => {
             console.log('ERRO: ' + e)
         })
+      return true
+    },
 
-      var obj2 = {}
-      obj2['_id'] = id
-      obj2['data'] = new Date()
-      axios.post('http://localhost:4000/transacoes/setDataPagamento' + obj2)
+    async alteraDataPagamento(id){
+      var obj = {}
+      obj['_id'] = id
+      obj['data'] = (new Date()).toISOString().slice(0,10)
+      axios.post('http://localhost:4000/transacoes/setDataPagamento', obj)
+        .then(response => {
+            console.log('Correu tudo bem' + response)    
+      
+        }).catch(e => {
+            console.log('ERRO: ' + e)
+        })
+      return true
+    },
+
+    async efetuaTransferencia(origem, destino, jogador){
+      var obj = {}
+      obj['origem'] = origem
+      obj['destino'] = destino
+      obj['jogador'] = jogador
+      console.log(obj)
+      axios.post('http://localhost:4000/users/transfereJogador', obj)
         .then(response => {
             console.log('Correu tudo bem' + response)    
       
@@ -233,7 +252,7 @@ export default {
       (id == 'Em pagamento') ? this.op=['Pago'] : this.op=[]
     },
     
-    async save(idVenda){
+    async save(idVenda, from, to, jogador){
 
       switch (this.input) {
         case 'Pago':
@@ -247,6 +266,8 @@ export default {
             }
           }
           this.alteraEstado(idVenda,"Pago")
+          this.alteraDataPagamento(idVenda)
+          this.efetuaTransferencia(from, to, jogador)
 
           console.log("passei do metamask")
           break; 

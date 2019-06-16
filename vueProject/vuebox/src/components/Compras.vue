@@ -212,7 +212,7 @@ export default {
       var lista  = await axios.get('http://localhost:4000/transacoes?utilizador=' + this.account + '&&tipo=compra' )
       return lista.data
 
-   },async alteraEstado(id,estado){
+   },async alteraEstado(id,estado,equipa,jogador){
      //alterar estado para emPagamento
       alert("Entrei altera estado")
       var obj = {}
@@ -220,9 +220,20 @@ export default {
       obj['estado'] = estado
       alert("pasei obj")
       axios.post('http://localhost:4000/transacoes/setEstado',obj)
-          .then(response => {
-              console.log('Correu tudo bem' + response)    
-        
+        .then(response => {
+            console.log('Correu tudo bem' + response)    
+            if(obj.estado == 'Rejeitada'){
+              var obj2 = {}
+              obj2['equipa'] = equipa
+              obj2['jogador'] = jogador
+              axios.post('http://localhost:4000/users/desbloqueiaJogador/', obj2)
+                .then(response => {
+                  console.log('Correu tudo bem' + response) 
+                  console.log("Jogador: " + obj2.jogador)   
+                }).catch(e => {
+                  console.log('ERRO: ' + e)
+                })
+            }
           }).catch(e => {
               console.log('ERRO: ' + e)
           })
@@ -237,34 +248,37 @@ export default {
   },
   async save(idVenda){
     var teste = this.transacoesPendentes
+    var jogador
+    var equipa
     for (var x in teste) {
 
-       var obj = teste[x]
-       if (obj._id == idVenda){
-          this.transacoesPendentes[x].estado=this.input
-       }
-
+      var obj = teste[x]
+      if (obj._id == idVenda){
+        this.transacoesPendentes[x].estado=this.input
+        equipa = this.transacoesPendentes[x].from
+        jogador = this.transacoesPendentes[x].nomeJogador
+      }
     }
 
      switch (this.input) {
        case 'Recebida':
           alert("entrei recebida")
           var fatura = await Transferencias.recebeFatura(idVenda)
-            this.alteraEstado(idVenda,"Recebida")
+            this.alteraEstado(idVenda,"Recebida", equipa, jogador)
 
           console.log("passei do metamask")
           break; 
        case 'Aceite':
           var fatura = await Transferencias.validaFatura(idVenda,true)
-          this.alteraEstado(idVenda,"Aceite")
+          this.alteraEstado(idVenda,"Aceite", equipa, jogador)
           break;
        case 'Rejeitada':
           var fatura = await Transferencias.validaFatura(idVenda,false)
-          this.alteraEstado(idVenda,"Rejeitada")       
+          this.alteraEstado(idVenda,"Rejeitada", equipa, jogador)       
           break
        case 'Em pagamento':
           var fatura = await Transferencias.emPagamento(idVenda)
-          this.alteraEstado(idVenda,"Em pagamento")       
+          this.alteraEstado(idVenda,"Em pagamento", equipa, jogador)       
           break
        default: 
          alert('Erro a processar alteração de estado')

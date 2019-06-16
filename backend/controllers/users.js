@@ -36,7 +36,6 @@ module.exports.listarPorLiga = liga => {
         .exec()
 }
 
-
 module.exports.alteraNome = (uid, n) => {
     return User
         .findOneAndUpdate(
@@ -47,18 +46,24 @@ module.exports.alteraNome = (uid, n) => {
 }
 
 module.exports.addJogador = (uid, jogador) => {
-    console.dir(jogador)
-    return User.update(
+    return User.updateOne(
         {_id: uid},
         {$push: { jogadores: jogador }}
     )
 }
 
 module.exports.remJogador = (uid, jogador) => {
-    console.dir(jogador)
-    return User.update(
+    return User.findOneAndUpdate(
         {_id: uid},
-        {$pull: { jogadores: { _id: jogador} }}
+        { $pull: { jogadores: { nome: jogador} }},
+        { projection: {"jogadores": true} }
+    )
+}
+
+module.exports.blockJogador = (uid, jogador, bool) => {
+    return User.findOneAndUpdate(
+        {_id: uid, "jogadores.nome": jogador },
+        { $set: { "jogadores.$.emTransferencia": bool }}
     )
 }
 

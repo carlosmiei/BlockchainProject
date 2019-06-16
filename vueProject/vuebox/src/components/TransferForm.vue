@@ -282,16 +282,22 @@ export default {
     var names = []
     var myId = this.account
 
+    //meus jogadores
+    var nomesJogadores = []
+    var eq = this.equipas.find(x => x._id == window.web3.eth.accounts[0])
+    eq.jogadores.filter(x => x.emTransferencia == false).forEach(function(element) {
+        nomesJogadores.push(element.nome)
+    }); 
+    this.jogadores = nomesJogadores
+
     //tirar a minha equipa
     this.equipas = this.equipas.filter(function(el) { return el._id != myId; }); 
 
-    //filtrar so os nomes
-    
+    //filtrar so os nomes    
     this.equipas.forEach(function(element) {
        names.push(element.nome)
     }); 
     this.nomes = names
-
   },
   
   watch: {
@@ -306,20 +312,13 @@ export default {
           this.transacao.valorI = imposto.toString()
     },
     equipa: function (newQuestion, oldQuestion) {
-
-      var nomesJogadores = []
+      
       var namesB = []
 
       var eq = this.equipas.find(x => x.nome === newQuestion)
       this.transacao.to = eq._id
       this.transacao.contribuinteD = eq.contribuinte
-   
-      eq.jogadores.forEach(function(element) {
-         nomesJogadores.push(element.nome)
-      }); 
 
-      this.jogadores = nomesJogadores
-      
       this.bancos.forEach(function(elem) {
 
          if (eq.bancos.includes(elem._id)) {
@@ -348,7 +347,6 @@ export default {
       enviar['gas'] = (res["receipt"].gasUsed).toString()
       // quick fix lower case problem
       enviar['to'] = enviar['to'].toLowerCase()
-
       axios.post('http://localhost:4000/transacoes/',enviar)
           .then(response => {
               console.log('Correu tudo bem' + response)    
@@ -359,7 +357,17 @@ export default {
               console.log('ERRO: ' + e)
           })
 
-     
+      var obj = {}
+      obj['equipa'] = this.account
+      obj['jogador'] = enviar.nomeJogador
+      console.log(obj)
+      axios.post('http://localhost:4000/users/bloqueiaJogador/', obj)
+          .then(response => {
+              console.log('Correu tudo bem' + response) 
+              this.jogadores = this.jogadores.filter(x => x != obj.jogador)      
+          }).catch(e => {
+              console.log('ERRO: ' + e)
+          })
 
       this.loading=false
       this.show=false
