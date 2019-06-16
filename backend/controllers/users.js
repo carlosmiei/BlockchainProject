@@ -54,6 +54,15 @@ module.exports.alteraDesc = (uid, desc) => {
         .exec()
 }
 
+module.exports.alteraFoto = (uid, foto) => {
+    return User
+        .findOneAndUpdate(
+            {_id : uid}, 
+            {$set: {foto: foto}},
+            {new : true})
+        .exec()
+}
+
 module.exports.atualizaPerfil = (uid, nome, pais, cidade, contribuinte, site) => {
     return User
         .findOneAndUpdate(
