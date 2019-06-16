@@ -21,14 +21,28 @@
           {{this.transacao.nomeJogador}}
           <br>
           <b>Valor Total / Valor Iva:</b>
-          {{this.transacao.valorT}} &euro; / {{this.transacao.valorI}} &euro;
+          {{this.transacao.valorT}} &euro; / {{this.transacao.valorI}} &euro; <br>
+          <b>Data de emissão:</b>
+          {{this.transacao.data.Emitida}}
+          <br>
+          <b v-if="this.transacao.data.Aceite">Data Aceitação:</b>
+          {{this.transacao.data.Aceite}}
+          <br>
+          <b>Data Em Pagamento:</b>
+          {{this.transacao.data.EmPagamento}}
+          <br>
+          <b>Data Pago:</b>
+          {{this.transacao.data.Pago}}
+          <br>
+          <b>Data Completo:</b>
+          {{this.transacao.data.Completo}}
           <br>
           <b>Hash Transação:</b>
           {{this.transacao.hashTrans}}
           <br>
-          <b>Gas utilizado:</b>
+          <!-- <b>Gas utilizado:</b>
           {{this.transacao.gas}}
-          <br>
+          <br> -->
           <b>Número da fatura:</b>
           {{this.transacao.numFatura}}
           <br>
@@ -92,6 +106,9 @@ export default {
       type: Object,
       required: false
     }
+  },created() {
+    console.log('Dentro do POPUP')
+    console.dir(this.transacao)
   },
   methods: {
     enviarParent(event) {

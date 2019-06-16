@@ -339,7 +339,7 @@ export default {
       var enviar = this.transacao
       var res = await Transferencias.adicionaFatura(this.transacao.valorT,this.date,this.transacao._id)
 
-      data = {
+      var data = {
         Emitida: this.date
       }
       //preprar enviar

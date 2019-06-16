@@ -49,6 +49,9 @@ contract Transferencias {
 
         //Braga Carlos
         equipas.push(0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8);
+
+        //Porto Carlos
+        equipas.push(0xD7E6fAB8AcFe5aa3692fDE1846b8e07E5A071eF8);
         
         //Bancos Peixoto
         bancos.push(0x79e96Ee1465e7fa18A60d4B60F06226b4Ef6Ba5F);
