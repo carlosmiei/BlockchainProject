@@ -6,8 +6,8 @@ Falta Fazer:
 - Criar Equipas [Carlos]
 - [Feito]  Mecanismo para adicionar Jogadores/Equipas (Federação) [Carlos]
 - [Feito] Adiconar Bancos pela Federação [Carlos]
-- Perfil ser comum a bancos/Equipas/Federação 
-- Criar mecanismos de impostos, tabela para pagar as que estão "Pago" (Federação) [Carlos]. 
+- [Feito] Perfil ser comum a bancos/Equipas/Federação 
+- [Feito] Criar mecanismos de impostos, tabela para pagar as que estão "Pago" (Federaçã[Carlos]
 - [Feito] Data onde foi pago [Peixoto]
 - Atualizar informações de equipa [Peixoto]
 - [Feito] Apresentação da Equipa e infos do jogador [Peixoto]
@@ -33,3 +33,11 @@ Falta Fazer:
 - Adicionar Equipa (cuidado ao adicionar Bancos)
 - Adicionar Jogador
 - Adicionar Banco
+
+**RETA FINAL**
+
+- Guardar/Apresentar Datas de cada estado
+- Unit testes nos contratos
+- Pesquisa na blockchain
+
+

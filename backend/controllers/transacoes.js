@@ -134,11 +134,49 @@ module.exports.alteraEstado = (tid, e) => {
         .exec()
 }
 
+
+
+module.exports.alteraDataAceite = (tid, data) => {
+    return Transacao
+        .findOneAndUpdate(
+            {_id : tid}, 
+            {$set: {'data.Aceite': data}},
+            {new : true})
+        .exec()
+}
+
+module.exports.alteraDataRejeitada = (tid, data) => {
+    return Transacao
+        .findOneAndUpdate(
+            {_id : tid}, 
+            {$set: {'data.Rejeitada': data}},
+            {new : true})
+        .exec()
+}
+
+module.exports.alteraDataEmPagamento = (tid, data) => {
+    return Transacao
+        .findOneAndUpdate(
+            {_id : tid}, 
+            {$set: {'data.EmPagamento': data}},
+            {new : true})
+        .exec()
+}
+
 module.exports.alteraDataPagamento = (tid, data) => {
     return Transacao
         .findOneAndUpdate(
             {_id : tid}, 
-            {$set: {dataP: data}},
+            {$set: {'data.Pago': data}},
+            {new : true})
+        .exec()
+}
+
+module.exports.alteraDataCompleto = (tid, data) => {
+    return Transacao
+        .findOneAndUpdate(
+            {_id : tid}, 
+            {$set: {'data.Completo': data}},
             {new : true})
         .exec()
 }
@@ -146,3 +184,4 @@ module.exports.alteraDataPagamento = (tid, data) => {
 module.exports.inserir = transacao => {
     return Transacao.create(transacao)
 }
+

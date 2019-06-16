@@ -135,12 +135,51 @@ router.post("/setEstado", (req, res) => {
 	.catch(erro => res.status(500).send('Erro ao alterar estado da transação: ' + erro))
 });
 
+
+
+// Data Aceite
+router.post("/setDataAceite", (req, res) => {
+	console.dir(req.body)
+	Transacoes.alteraDataAceite(req.body._id, req.body.data)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao alterar estado da transação: ' + erro))
+});
+
+//Rejeitada
+router.post("/setDataRejeitada", (req, res) => {
+	console.dir(req.body)
+	Transacoes.alteraDataRejeitada(req.body._id, req.body.data)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao alterar estado da transação: ' + erro))
+});
+
+//EmPagamento
+router.post("/setDataEmPagamento", (req, res) => {
+	console.dir(req.body)
+	Transacoes.alteraDataEmPagamento(req.body._id, req.body.data)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao alterar estado da transação: ' + erro))
+});
+
+//Pago
+
 router.post("/setDataPagamento", (req, res) => {
 	console.dir(req.body)
 	Transacoes.alteraDataPagamento(req.body._id, req.body.data)
 	.then(dados => res.jsonp(dados))
 	.catch(erro => res.status(500).send('Erro ao alterar estado da transação: ' + erro))
 });
+
+//	Completo
+router.post("/setDataCompleto", (req, res) => {
+	console.dir(req.body)
+	Transacoes.alteraDataCompleto(req.body._id, req.body.data)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao alterar estado da transação: ' + erro))
+});
+
+
+
 
 
 router.post('/', (req, res) => {
