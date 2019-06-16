@@ -48,6 +48,11 @@ router.post("/alteraDesc", (req, res) => {
 	.catch(erro => res.status(500).send('Erro ao alterar descrição do utilizador: ' + erro))
 });
 
+router.post("/alteraFoto", (req, res) => {
+	Users.alteraFoto(req.body._id, req.body.foto)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao alterar foto do utilizador: ' + erro))
+});
 
 router.post("/atualizaPerfil", (req, res) => {
 	console.log(req.body)
