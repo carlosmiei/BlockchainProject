@@ -38,7 +38,7 @@
             <v-layout>
               <v-flex row wrap xs12 sm7 md8 lg9>
                 <b>Nome: </b> {{ this.jogador.nome }} <br>
-                <b>Idade: </b> {{ this.idade }} anos <br>
+                <b>Idade: </b> {{ this.idade }} <br>
                 <b>Nacionalidade: </b> {{ this.jogador.pais }} <br>
                 <b>Posições: </b>
                 <div v-for="pos in jogador.posicoes" :key="pos"> &nbsp;&nbsp; {{ pos }}</div> 
@@ -112,7 +112,10 @@ export default {
         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
             age--;
         }
-        return age;
+        if(isNaN(age)) 
+          return "Não disponível"
+        else 
+          return age + " anos"
       }
     }
 }

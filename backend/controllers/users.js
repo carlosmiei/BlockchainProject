@@ -45,6 +45,29 @@ module.exports.alteraNome = (uid, n) => {
         .exec()
 }
 
+module.exports.alteraDesc = (uid, desc) => {
+    return User
+        .findOneAndUpdate(
+            {_id : uid}, 
+            {$set: {descricao: desc}},
+            {new : true})
+        .exec()
+}
+
+module.exports.atualizaPerfil = (uid, nome, pais, cidade, contribuinte, site) => {
+    return User
+        .findOneAndUpdate(
+            {_id : uid}, 
+            {$set: {nome: nome, 
+                    pais: pais, 
+                    cidade: cidade, 
+                    contribuinte: contribuinte, 
+                    site: site}
+            },
+            {new : true})
+        .exec()
+}
+
 module.exports.addJogador = (uid, jogador) => {
     return User.updateOne(
         {_id: uid},

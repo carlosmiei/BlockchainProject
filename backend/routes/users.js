@@ -42,6 +42,21 @@ router.post("/alteraNome", (req, res) => {
 	.catch(erro => res.status(500).send('Erro ao alterar nome do utilizador: ' + erro))
 });
 
+router.post("/alteraDesc", (req, res) => {
+	Users.alteraDesc(req.body._id, req.body.desc)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao alterar descrição do utilizador: ' + erro))
+});
+
+
+router.post("/atualizaPerfil", (req, res) => {
+	console.log(req.body)
+	Users.atualizaPerfil(req.body._id, req.body.nome, req.body.pais, req.body.cidade, req.body.contribuinte, req.body.site)
+	.then(dados => res.jsonp(dados))
+	.catch(erro => res.status(500).send('Erro ao alterar descrição do utilizador: ' + erro))
+});
+
+
 router.post("/addJogador", (req, res) => {
 	console.dir(req.body.jogador)
 	Users.addJogador(req.body._id, req.body.jogador)
