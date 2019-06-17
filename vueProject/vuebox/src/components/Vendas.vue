@@ -23,13 +23,13 @@
       <template v-slot:items="props">
         <td @click="clickTable(props.item)"> 
           <v-layout justify-center>
-              {{ props.item._id }}
+              {{ props.item._id2 }}
           </v-layout>
         </td>
         <td class="text-xs-right">
           <v-layout justify-center>
           
-          {{ props.item.to }}
+          {{ props.item.to2 }}
          </v-layout>
         </td>
         <td class="text-xs-right">
@@ -82,13 +82,13 @@
       <template v-slot:items="props">
         <td @click="clickTable(props.item)">
           <v-layout justify-center>
-              {{ props.item._id }}
+              {{ props.item._id2 }}
           </v-layout>
         </td>
         <td class="text-xs-right">
           <v-layout justify-center>
           
-          {{ props.item.to }}
+          {{ props.item.to2 }}
          </v-layout>
         </td>
         <td class="text-xs-right">
@@ -221,9 +221,12 @@ export default {
         obj['estado'] = 'Completa'
         this.transacoes.push(obj)
 },cutS(elem){
-  elem['_id'] = '0x' + elem._id.substr(0, 20) + '...'
-  elem['to'] =  elem.to.substr(0, 20) + '...'
-  return elem
+        elem['_id2'] = /*'0x' +*/ elem._id.substr(0, 20) + '...'
+        elem['_id'] = /*'0x' +*/ elem._id //.substr(0, 20) + '...'
+        elem['to'] =  elem.to
+        elem['to2'] =  elem.to.substr(0, 20) + '...'
+        elem['from2'] =  elem.from.substr(0, 20) + '...'
+        return elem
 
 }, onChildClick(elem){
     this.dialog = elem
