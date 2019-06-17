@@ -203,6 +203,18 @@ const Transferencias = {
       })
     })
 
+  },getBlockNumber: function(){
+    let self = this
+    return new Promise((resolve, reject) => {
+      web3.eth.getBlockNumber()
+       .then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
   }
 
 }

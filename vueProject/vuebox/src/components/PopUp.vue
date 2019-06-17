@@ -8,6 +8,8 @@
         </v-card-title>
 
         <v-card-text>
+          <h4>Informações transação</h4>
+          <p class="borda">
           <b>Id de Venda:</b>
           {{this.transacao._id}}
           <br>
@@ -20,35 +22,52 @@
           <b>Nome do Jogador:</b>
           {{this.transacao.nomeJogador}}
           <br>
-          <b>Valor Total / Valor Iva:</b>
-          {{this.transacao.valorT}} &euro; / {{this.transacao.valorI}} &euro; <br>
-          <b>Data de emissão:</b>
-          {{this.transacao.data.Emitida}}
-          <br>
-          <b v-if="this.transacao.data.Aceite">Data Aceitação:</b>
-          {{this.transacao.data.Aceite}}
-          <br>
-          <b>Data Em Pagamento:</b>
-          {{this.transacao.data.EmPagamento}}
-          <br>
-          <b>Data Pago:</b>
-          {{this.transacao.data.Pago}}
-          <br>
-          <b>Data Completo:</b>
-          {{this.transacao.data.Completo}}
-          <br>
-          <b>Hash Transação:</b>
-          {{this.transacao.hashTrans}}
-          <br>
-          <!-- <b>Gas utilizado:</b>
-          {{this.transacao.gas}}
-          <br> -->
           <b>Número da fatura:</b>
           {{this.transacao.numFatura}}
           <br>
+          <b>Valor Total / Valor Iva:</b>
+          {{this.transacao.valorT}} &euro; / {{this.transacao.valorI}} &euro; 
+          </p>
+          
+          <h4> Datas </h4>
+          <p class="borda">
+        
+          <b>Data de Emissão:</b>
+          {{this.transacao.data.Emitida}}
+          <br>
+          <span v-if="this.transacao.data.Aceite">
+          <b>Data Aceitação:</b>
+          {{this.transacao.data.Aceite}}
+          <br>
+          </span>
+           <span v-if="this.transacao.data.EmPagamento">
+          <b>Data Em Pagamento:</b>
+          {{this.transacao.data.EmPagamento}}
+          <br>
+          </span>
+          <span v-if="this.transacao.data.Pago">
+          <b>Data Pago:</b>
+          {{this.transacao.data.Pago}}
+          <br>
+          </span>
+           <span v-if="this.transacao.data.Completo">
+          <b>Data Completo:</b>
+          {{this.transacao.data.Completo}}
+           </span>
+          </p>
+          <h4> Informações blockchain</h4>
+          <p class="borda">
+          <b>Hash Transação:</b>
+          {{this.transacao.hashTrans}}
+          <br>
+          <b>Gas utilizado:</b>
+          {{this.transacao.gas}}
+          <br>
+
           <b>Número do bloco:</b>
           {{this.transacao.numBloco}}
           <br>
+          </p>
           <b>Estado:</b>
           {{this.transacao.estado}}
         </v-card-text>
@@ -137,5 +156,11 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.borda{
+  border-style: solid;
+   border-radius: 5px;
+
 }
 </style>

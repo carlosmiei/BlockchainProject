@@ -15,6 +15,7 @@ import Perfil from '@/components/Perfil'
 import AddBanco from '@/components/AddBanco'
 import AddEquipa from '@/components/AddEquipa'
 import AddJogador from '@/components/AddJogador'
+import PesquisaBlockchain from '@/components/PesquisaBlockchain'
 
 Vue.use(Router)
 
@@ -89,6 +90,10 @@ let router =  new Router({
       path:'/addjogador',
       name: 'AddJogador',
       component:AddJogador
+    },{
+      path:'/pesquisa',
+      name: 'pesquisa',
+      component:PesquisaBlockchain
     }
   ]
 })

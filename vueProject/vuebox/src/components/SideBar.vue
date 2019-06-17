@@ -46,8 +46,8 @@ export default {
       this.items.push({ title: 'Consultar Compras', icon: 'touch_app', route:'/compras' })
       this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })
       this.items.push({ title: 'Jogadores', icon: 'person' })
-      this.items.push({ title: 'Account', icon: 'account_box' })
-      this.items.push({ title: 'Admin', icon: 'gavel' })
+      // this.items.push({ title: 'Account', icon: 'account_box' })
+      // this.items.push({ title: 'Admin', icon: 'gavel' })
     
     }
     if(this.typeA==2){
@@ -62,7 +62,7 @@ export default {
       this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })  
     }
 
-    
+    this.items.push({ title: 'Pesquisa Blockchain', icon: 'search' ,route:'/pesquisa'})
 
   },
   computed: {
