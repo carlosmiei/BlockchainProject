@@ -4,7 +4,7 @@
 <!-- Tabela do Histórico  -->
     <v-card  color="">
     <v-card-title class="grey lighten-3 title">
-      Consultar Blocos Blockchain
+      Consultar Blocos Blockchain (Blocos: {{this.numero}})
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -92,7 +92,6 @@ export default {
   }, watch: {
     search: async function(newQ,old) {
         
-
     if (newQ < (this.numero-20)) {
         //alert(newQ)
         var bloco = await this.getBlock(newQ)
