@@ -76,12 +76,12 @@ export default {
                 search:'',
                 numero:'',
                 blocos:[],
-                headers:[{text:'Numero'},
-                {text:'Gas Utilizado'},
-                {text:'Timestamp'},
-                {text: 'Nonce'},
-                {text: 'ParentHash'},
-                {text:'Miner'}
+                headers:[{text:'Numero', value:'number'},
+                {text:'Gas Utilizado',  value:'gasUsed'},
+                {text:'Timestamp',  value:'timestamp'},
+                {text: 'Nonce',  value:'nonce'},
+                {text: 'ParentHash',  value:'parentHash'},
+                {text:'Miner',  value:'miner'}
                 ],rowsPerPageItems: [10, 20, 30, 40],
                 pagination: {
                     rowsPerPage: 20
@@ -89,12 +89,24 @@ export default {
                 
             
     }
-  },async mounted() {
+  }, watch: {
+    search: async function(newQ,old) {
+        
+
+    if (newQ < (this.numero-20)) {
+        //alert(newQ)
+        var bloco = await this.getBlock(newQ)
+        if (!this.blocos.some(e => e.number == newQ))
+            this.blocos.push(bloco)
+    }
+      
+    }
+    },async mounted() {
 
       var res = await this.getBlockNumber()
-
+      this.numero = res
       //ir buscar os ultimos 10
-      for (var i=0;i<10;i++) {
+      for (var i=0;i<20;i++) {
           var bloco = await this.getBlock(res-i)
           this.blocos.push(bloco)
       }
