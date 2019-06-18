@@ -5,6 +5,7 @@ contract Transferencias {
     address[] public equipas;
     address[] public bancos;
     address[] public federacao;
+    address public tester;
     address public ownerAcc;
     string public owner;
     bytes32 public owner2;
@@ -38,6 +39,10 @@ contract Transferencias {
         owner = "primeiro";
         owner2 = calculateHash("primeiro");
         ownerAcc = 0x24BF0ffC4daf52B0df27640882E202b0AAd98B11;
+
+        //address do endereço que corre os testes
+        tester= 0xe82f3f7C5dc295aa96e9c3b96e53998F240D426F;
+
         
         //adicionar os participantes
 
@@ -71,13 +76,15 @@ contract Transferencias {
 
     }
 
-    function adicionaFatura(uint valor, string memory emitData, address  hash) public {
-       // //require(isMember(msg.sender) == true,"Sender not authorized.");
+    function adicionaFatura(uint valor, string memory emitData, address  hash) public   returns (address carteira) {
+        require(isMember(msg.sender) == true,"Sender not authorized.");
         
         Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
         KeysFaturas.push(hash);
         transacoes[hash] = myStruct;
+        transacoesCount++;
         emit nextStage(hash,1);
+        return msg.sender;
     }
 
     function testarS(string memory teste, bytes32 valor, address hash)public {
@@ -204,7 +211,7 @@ contract Transferencias {
     }
 
     function isMember(address add) public view returns (bool res) {
-        return (isTeam(add) || isBank(add) || isFederation(add) || add == ownerAcc);
+        return (isTeam(add) || isBank(add) || isFederation(add) || add == ownerAcc || add == tester) ;
     }
         
     function typeA(address add) public view returns (uint res) {
