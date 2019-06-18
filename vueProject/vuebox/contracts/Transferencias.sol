@@ -17,6 +17,7 @@ contract Transferencias {
 
     address[] KeysFaturas;
     mapping (address => Fatura) transacoes;
+    uint public transacoesCount;
     
     //eventos teste 
     event nextStage(
@@ -162,7 +163,7 @@ contract Transferencias {
 
     function getFederationsLength() public view returns (uint count) {
         //require(isMember(msg.sender) == true,"Sender not authorized.");
-        return bancos.length;
+        return federacao.length;
     }
 
     function calculateHash(string memory s ) internal pure returns (bytes32 res) {
