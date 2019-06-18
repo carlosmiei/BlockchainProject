@@ -15,9 +15,38 @@
         return Transferencias.deployed().then(function(instance) {
           return instance.getFederationsLength();
         }).then(function(count) {
+            //na versão final pomos aqui 1
           assert.equal(count, 2);
         });
       });
+
+      it("adiciona equipa", function() {
+        return Transferencias.deployed().then(function(instance) {
+
+          electionInstance = instance;
+          return electionInstance.adicionarEquipa('0x2B478D4A4009AD7E8651fC059847B0172cf1D40B');
+        }).then(function(equipa) {
+
+          return electionInstance.getTeamsLength();
+        }).then(function(equipas) {
+          assert.equal(equipas.length,1, "contem uma equipa");
+         
+        });
+    });
+    it("adiciona banco", function() {
+        return Transferencias.deployed().then(function(instance) {
+
+          electionInstance = instance;
+          return electionInstance.adicionarBanco('0x2B478D4A4009AD7E8651fC059847B0172cf1D40B');
+        }).then(function(equipa) {
+
+          return electionInstance.getBanksLength();
+        }).then(function(equipas) {
+          assert.equal(equipas.length,1, "contem um banco");
+         
+        });
+    });
+    
 
 })
 
