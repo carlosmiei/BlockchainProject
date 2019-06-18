@@ -76,7 +76,7 @@ contract Transferencias {
 
     }
 
-    function adicionaFatura(uint valor, string memory emitData, address  hash) public   returns (address carteira) {
+    function adicionaFatura(uint valor, string memory emitData, address  hash) public  {
         require(isMember(msg.sender) == true,"Sender not authorized.");
         
         Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
@@ -84,7 +84,6 @@ contract Transferencias {
         transacoes[hash] = myStruct;
         transacoesCount++;
         emit nextStage(hash,1);
-        return msg.sender;
     }
 
     function testarS(string memory teste, bytes32 valor, address hash)public {
