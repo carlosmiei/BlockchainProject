@@ -10,18 +10,40 @@
         <v-layout pa-1 row wrap justify-space-around>
             <v-flex xs4>
                 <v-card dark color="blue lighten-1">
-                     <!-- <b><animated :number="90"></animated> ETH </b><br> Saldo <br> -->
-                   <v-card-text class="px-0"><b>{{this.saldo}} </b><br>Saldo</v-card-text>
+                  
+                   <v-card-text class="px-0"><b>
+                       <animated-number 
+                            :value="saldo" 
+                            :formatValue="formatToPrice" 
+                            :duration="duration"
+                        /> 
+                    </b><br>Saldo
+                     </v-card-text>
+
         </v-card>
             </v-flex>
             <v-flex xs4>
                 <v-card dark color="blue lighten-2">
-          <v-card-text class="px-0"><b>12 </b><br>Operações</v-card-text>
+          <v-card-text class="px-0"><b>
+                    <animated-number 
+                        :value="operacoes" 
+                        :formatValue="format" 
+                        :duration="duration2"
+                    />    
+              
+        </b><br>Operações</v-card-text>
         </v-card>
             </v-flex>
             <v-flex xs4>
                 <v-card dark color="blue lighten-1">
-          <v-card-text class="px-0"> <b>12 </b> <br> Movimentos</v-card-text>
+          <v-card-text class="px-0"> <b>
+                    <animated-number 
+                        :value="operacoes" 
+                        :formatValue="format" 
+                        :duration="duration2"
+                    />     
+         
+         </b> <br> Movimentos</v-card-text>
         </v-card>
             </v-flex>
         </v-layout>
@@ -77,10 +99,18 @@
 
 <script>
 import axios from 'axios';
+import AnimatedNumber from "animated-number-vue";
 export default {
     name: 'DashBoard',
+    components: {
+        AnimatedNumber
+    },
       data () {
             return {
+                value: 1000,
+                duration: 2000,
+                duration2: 2500,
+                operacoes:12,
                 nome:'',
                 account:'ola',
                 type:-1,
@@ -106,7 +136,7 @@ export default {
     }
   }, mounted() { 
       /** Nota agora vai ler da wallet mas deveria ler do estado mas para nao termos de ir sempre ao login fica assim : this.$store.getters.wallet  */
-        this.account = window.web3.eth.accounts[0]
+        
         this.type = this.$store.getters.type
         this.tipo = this.$store.getters.tipo
         this.nome = this.$store.getters.name
@@ -123,6 +153,15 @@ export default {
 
       
   }, created() {
+
+      this.account = window.web3.eth.accounts[0]
+               web3.eth.getBalance(this.account, (error, result)=>{
+             if(!error){
+                this.saldo=result.c[0]/10000;
+             }else{
+                 console.error(error)
+             }
+         })
 
      // var equipa = {
      //     _id: '0x685D6296B4Fd9D0F00d8CC2F634a2160B2a183A8',
@@ -146,6 +185,14 @@ export default {
      //           })
      // 
 
+  },
+  methods: {
+    formatToPrice(value) {
+      return `ETH ${Number(value).toFixed(4)}`;
+    },
+    format(value) {
+      return ` ${Number(value).toFixed(0)}`;
+    }
   },
 }
 </script>
