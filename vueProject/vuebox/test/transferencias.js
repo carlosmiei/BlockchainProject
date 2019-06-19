@@ -169,7 +169,32 @@
             assert.equal(estado,6, "Tem o estado em Completa");
         })
     });
-    
+    it("Método: isTeam", function() {
+      return Transferencias.deployed().then(function(instance) {
+
+        TransferenciaInstance = instance;
+        return TransferenciaInstance.adicionarEquipa('0x2B478D4A4009AD7E8651fC059847B0172cf1D40B');
+      }).then(function(equipa) {
+
+        return TransferenciaInstance.isMember('0x2B478D4A4009AD7E8651fC059847B0172cf1D40B');
+      }).then(function(res) {
+        assert.equal(res,true, "É equipa!");
+       
+      });
+  });
+  it("Método: isBank", function() {
+    return Transferencias.deployed().then(function(instance) {
+
+      TransferenciaInstance = instance;
+      return TransferenciaInstance.adicionarBanco('0x2B478D4A4009AD7E8651fC059847B0172cf1D40B');
+    }).then(function(equipa) {
+
+      return TransferenciaInstance.isMember('0x2B478D4A4009AD7E8651fC059847B0172cf1D40B');
+    }).then(function(res) {
+      assert.equal(res,true, "É banco!");
+     
+    });
+});
     
 
 })
