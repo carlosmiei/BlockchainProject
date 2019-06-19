@@ -28,13 +28,14 @@
           <b>Valor Total / Valor Iva:</b>
           {{this.transacao.valorT}} &euro; / {{this.transacao.valorI}} &euro; 
           </p>
-          
+          <span v-if="this.transacao.data">
           <h4> Datas </h4>
           <p class="borda">
-        
+           <span v-if="this.transacao.data.Emitida">
           <b>Data de Emissão:</b>
           {{this.transacao.data.Emitida}}
           <br>
+           </span>
           <span v-if="this.transacao.data.Aceite">
           <b>Data Aceitação:</b>
           {{this.transacao.data.Aceite}}
@@ -55,6 +56,7 @@
           {{this.transacao.data.Completo}}
            </span>
           </p>
+          </span>
           <h4> Informações blockchain</h4>
           <p class="borda">
           <b>Hash Transação:</b>

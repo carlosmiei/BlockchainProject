@@ -85,7 +85,7 @@
         Consultar Pagamentos Pendentes
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="search"
+          v-model="search2"
           append-icon="search"
           label="Search"
           single-line
@@ -95,7 +95,7 @@
       <v-data-table
         :headers="headers"
         :items="transacoesEmCurso"
-        :search="search"
+        :search="search2"
         :loading="false"
       
       >
@@ -130,7 +130,7 @@
         </template>
         <template v-slot:no-results>
           <v-alert :value="true" color="error" icon="warning">
-            Your search for "{{ search }}" found no results.
+            Your search for "{{ search2 }}" found no results.
           </v-alert>
         </template>
       </v-data-table>
@@ -146,7 +146,7 @@
         Consultar Pagamentos Confirmados
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="search"
+          v-model="search3"
           append-icon="search"
           label="Search"
           single-line
@@ -156,7 +156,7 @@
       <v-data-table
         :headers="headers"
         :items="transacoesCompletas"
-        :search="search"
+        :search="search3"
         :loading="false"
       >
         <template v-slot:items="props">
@@ -190,7 +190,7 @@
         </template>
         <template v-slot:no-results>
           <v-alert :value="true" color="error" icon="warning">
-            Your search for "{{ search }}" found no results.
+            Your search for "{{ search3 }}" found no results.
           </v-alert>
         </template>
       </v-data-table>
@@ -226,13 +226,14 @@ export default {
       op:[],
       bloco:'',
       search:'',
+      search2:'',
+      search3:'',
       headers: [
-        {text: 'Id da Venda ',value: 'hash', align: 'center',},
-        {text: 'Vendedor', value: 'bloco' },
-        {text: 'Jogador', value: 'bloco' },
-        {text: 'Valor', value: 'gas' },
-        {text: 'Estado', value: 'estado' }
-      ],
+      {text: 'Id da Venda ',value: '_id', align: 'center'},
+      {text: 'Comprador', value: 'to' },
+      {text: 'Jogador', value: 'nomeJogador' },
+      {text: 'Valor', value: 'valorT' },
+      {text: 'Estado', value: 'estado' }],
       transacoes: [ ],
       input:''
     }
