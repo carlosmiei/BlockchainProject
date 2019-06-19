@@ -70,9 +70,6 @@ contract Transferencias {
         federacao.push(0x38e99B1Aa82E2310065A49fC805CC4E071CA3a79);
         //Federação Peixoto
         federacao.push(0xaD066d98aAe87d8d70699e3B8167fCbded72CB6F);
-        
-
-
 
     }
 
@@ -86,10 +83,6 @@ contract Transferencias {
         emit nextStage(hash,1);
     }
 
-    function testarS(string memory teste, bytes32 valor, address hash)public {
-        emit nextStage(hash,1);
-        
-    }
 
     function recebeFatura(address hash) public{
         //require(isMember(msg.sender) == true,"Sender not authorized.");
@@ -227,8 +220,6 @@ contract Transferencias {
         }
         return val;
     }
-    function testParams(address a,address b,address v,address f,bytes32 e, bytes32 d) public  returns (uint count) {
-        return 1;
-    }
+
 
 }

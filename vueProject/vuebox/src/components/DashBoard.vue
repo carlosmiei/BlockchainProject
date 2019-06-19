@@ -4,7 +4,7 @@
     <v-container grid-list-md text-xs-center >
         <v-flex xs12  >
                  <v-card dark color="primary">
-                    <v-card-text class="px-0">Utilizador:  <b> [{{tipo}}] {{account}} </b> </v-card-text>
+                    <v-card-text class="px-0">Utilizador:  <b> [{{tipo}}] {{this.nome}} [{{account}}] </b> </v-card-text>
                   </v-card>
         </v-flex>
         <v-layout pa-1 row wrap justify-space-around>
@@ -81,6 +81,7 @@ export default {
     name: 'DashBoard',
       data () {
             return {
+                nome:'',
                 account:'ola',
                 type:-1,
                 tipo:'',
@@ -108,6 +109,9 @@ export default {
         this.account = window.web3.eth.accounts[0]
         this.type = this.$store.getters.type
         this.tipo = this.$store.getters.tipo
+        this.nome = this.$store.getters.name
+
+        console.dir(this.nome)
         
          web3.eth.getBalance(this.account, (error, result)=>{
              if(!error){

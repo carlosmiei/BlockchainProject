@@ -6,7 +6,7 @@
             <v-container>
               <v-flex xs12>
                  <v-card dark color="primary">
-                    <v-card-text class="px-0">Utilizador: <b>{{ account }} </b> </v-card-text>
+                     <v-card-text class="px-0">Utilizador:  <b> [{{tipo}}] {{this.nome}} [{{account}}] </b> </v-card-text>
                   </v-card>
               </v-flex>
                 <TransferForm/>
@@ -33,7 +33,9 @@ export default {
       account: window.web3.eth.accounts[0],
       saldo:0,
       owner:'',
-      recibo:''
+      recibo:'',
+      tipo:'',
+      nome:''
 
     }
   },
@@ -42,6 +44,9 @@ export default {
     created () {
     
     this.account = window.web3.eth.accounts[0]
+    this.tipo = this.$store.getters.tipo
+    this.nome = this.$store.getters.name
+
 
     web3.eth.getBalance(this.account, (error, result)=>{
         if(!error){
@@ -54,7 +59,6 @@ export default {
     },
   methods: {
     async teste(){
-      alert('top')
       var res = "ola"
 
       var res2 = await Transferencias.testParams(res)

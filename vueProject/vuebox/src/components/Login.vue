@@ -36,7 +36,7 @@
 
 <script>
 import Transferencias from '@/js/transferencias'
-
+import axios from 'axios';
 export default {
    name: 'Login',
   components:{
@@ -68,21 +68,25 @@ export default {
               if (res.c[0] == 3)
                   tipo = 'Federação'
               if(res.c[0] == 2)
-                  tipo = 'Banco'              
-              this.$store.commit('changeTipo',tipo)
+                  tipo = 'Banco'
 
+              // Ir a BD buscar informacoes do user     
+              var equipa = await axios.get('http://localhost:4000/users?utilizador=' + x)
+              equipa = equipa.data
+
+              //alteracoes no estado da aplicacao: set de Variaveis
+              this.$store.commit('changeName',equipa.nome)
+              this.$store.commit('changeTipo',tipo)
+              this.$store.commit('changeWallet',x)
+              this.$store.commit('changeLogged',true)
+              this.$router.push('/dashboard')
 
             }else {
-              alert('Atenção não é membro!')
-              this.$store.commit('changeType',res.c[0])
+              alert('ERRO: Não é membro!')
+              //this.$store.commit('changeType',res.c[0])
+              //this.$router.push('/login')
             }
-            this.loading=true;
-            //alert('entrei else')
-            setTimeout(function(){this.loading=false; }, 2000);
             
-            this.$store.commit('changeWallet',x)
-            this.$store.commit('changeLogged',true)
-            this.$router.push('/dashboard')
         }
 
 

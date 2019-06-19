@@ -40,4 +40,3 @@ Falta Fazer:
 - Unit testes nos contratos
 - Pesquisa na blockchain
 
-
