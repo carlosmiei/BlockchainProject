@@ -124,7 +124,8 @@
           </td>
           <td class="text-xs-right"> 
             <v-layout justify-center>
-              <b class="red--text">  {{ props.item.estado }} </b>
+              <b v-if="atrasado(props.item,props.item.estado)" class="red--text">  {{ props.item.estado }} </b>
+              <b v-else  class="amber--text">  {{ props.item.estado }} </b>
             </v-layout>
           </td>
         </template>
@@ -235,7 +236,10 @@ export default {
       {text: 'Valor', value: 'valorT' },
       {text: 'Estado', value: 'estado' }],
       transacoes: [ ],
-      input:''
+      input:'',
+      ms : 1000 * 60 * 60 * 24,
+      hoje: new Date().toISOString().substr(0, 10),
+      atrasoMaximo:30
     }
 
   },  
@@ -342,8 +346,26 @@ export default {
     
     onChildClick(elem){
       this.dialog = elem
-    }
 
+    },atrasado(obj,id){
+      
+      if (obj.data && obj.data.Pago) {
+       var a = new Date(obj.data.Pago)
+       var b = new Date(this.hoje)
+       var x = this.dateDiffInDays(a, b)
+       if (x> this.atrasoMaximo) {
+          return true
+       }
+
+      }
+      return false
+
+    }, dateDiffInDays(a, b) {
+      // Discard the time and time-zone information.
+      var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+      var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+      return Math.floor((utc2 - utc1) / this.ms);
+    },
   },
   computed: {
     transacoesEmCurso(){
