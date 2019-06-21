@@ -86,7 +86,7 @@
         Consultar Pagamentos Confirmados
         <v-spacer></v-spacer>
         <v-text-field
-          v-model="search"
+          v-model="search2"
           append-icon="search"
           label="Search"
           single-line
@@ -96,7 +96,7 @@
       <v-data-table
         :headers="headers"
         :items="transacoesCompletas"
-        :search="search"
+        :search="search2"
         :loading="false"
       >
         <template v-slot:items="props">
@@ -161,12 +161,13 @@ export default {
       op:[],
       bloco:'',
       search:'',
+      search2:'',
       headers: [
-        {text: 'Id da Venda ',value: 'hash', align: 'center',},
-        {text: 'Vendedor', value: 'bloco' },
-        {text: 'Valor', value: 'gas' },
-        {text: 'Estado', value: 'estado' }
-      ],
+      {text: 'Id da Venda ',value: '_id', align: 'center'},
+      {text: 'Comprador', value: 'to' },
+      {text: 'Jogador', value: 'nomeJogador' },
+      {text: 'Valor', value: 'valorT' },
+      {text: 'Estado', value: 'estado' }],
       transacoes: [ ],
       input:''
     }

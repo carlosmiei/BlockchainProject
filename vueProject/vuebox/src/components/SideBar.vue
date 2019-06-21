@@ -33,6 +33,7 @@ export default {
   data () {
     return {
       msg: 'Bem vindo!',
+      id:this.$store.getters.wallet,
       items: []
     }
   },
@@ -44,6 +45,7 @@ export default {
       this.items.push({ title: 'Efetuar Venda', icon: 'transfer_within_a_station',route:'/addTransfer' })
       this.items.push({ title: 'Consultar Vendas', icon: 'list', route:'/vendas'})
       this.items.push({ title: 'Consultar Compras', icon: 'touch_app', route:'/compras' })
+      this.items.push({ title: 'Minha Equipa', icon: 'location_city', route:'/minhaEquipa/'+this.id })
       this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })
       this.items.push({ title: 'Jogadores', icon: 'person' })
       // this.items.push({ title: 'Account', icon: 'account_box' })

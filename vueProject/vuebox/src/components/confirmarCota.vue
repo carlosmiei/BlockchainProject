@@ -53,7 +53,11 @@
               @save="save(props.item._id)"
               @open="open(props.item.estado)"
             >
-              <div><b class="green--text">{{ props.item.estado }}</b>  </div>
+              <div>
+                <b v-if="atrasado(props.item,props.item.estado)" class="red--text">  {{ props.item.estado }} </b>
+                <b v-else  class="amber--text">  {{ props.item.estado }} </b>
+              
+              </div>
               <template v-slot:input>
                 <div class="mt-3 title">Atualizar Estado</div>
               </template>
@@ -124,8 +128,7 @@
           </td>
           <td class="text-xs-right"> 
             <v-layout justify-center>
-              <b v-if="atrasado(props.item,props.item.estado)" class="red--text">  {{ props.item.estado }} </b>
-              <b v-else  class="amber--text">  {{ props.item.estado }} </b>
+               <b> {{ props.item.estado}}</b>
             </v-layout>
           </td>
         </template>
@@ -185,7 +188,7 @@
           </td>
           <td class="text-xs-right" >
             <v-layout justify-center>
-              <b> {{ props.item.estado}}</b>
+              <b class="green--text"> {{ props.item.estado}}</b>
             </v-layout>
           </td>
         </template>
@@ -239,7 +242,7 @@ export default {
       input:'',
       ms : 1000 * 60 * 60 * 24,
       hoje: new Date().toISOString().substr(0, 10),
-      atrasoMaximo:30
+      atrasoMaximo:31
     }
 
   },  

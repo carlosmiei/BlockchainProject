@@ -62,6 +62,14 @@
             </v-flex>
         </v-layout>
 
+        <v-divider></v-divider>
+        <v-divider></v-divider>
+        <v-divider></v-divider>
+
+        <v-layout mt-2 wrap fill-height h-align>
+            <v-btn block depressed color="primary" class="rounded-card" href="/#/equipas">Voltar</v-btn>
+        </v-layout> 
+
     </v-container>
   </div>
 </template>

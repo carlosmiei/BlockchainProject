@@ -24,8 +24,8 @@ let router =  new Router({
 
     {
       path: '/',
-      name: 'init',
-      component: Init
+      name: 'Dashboard',
+      component: DashBoard
     },
     {
       path: '/addTransfer',
@@ -94,13 +94,18 @@ let router =  new Router({
       path:'/pesquisa',
       name: 'pesquisa',
       component:PesquisaBlockchain
+    },{
+      path:'/minhaEquipa/:id',
+      props: true,
+      name: 'minhaEquipa',
+      component:Equipa
     }
   ]
 })
 
 
 router.beforeEach((to, from, next) => {
-  /*
+  
   if (to.fullPath != '/login' && !store.getters.isLogged) {
     console.log("nao estou logado")
     next('/login') 
@@ -110,9 +115,20 @@ router.beforeEach((to, from, next) => {
     console.log('!!!!1estou logafo!!')
     next('/') 
     return
-
   }
-  */
+
+  if (store.getters.isLogged) {
+      if (window.web3.eth.accounts[0] != store.getters.wallet) {
+        console.log("mudaste de wallet?")
+        store.commit('changeWallet','')
+        store.commit('changeLogged',false)
+        next('/login')
+        return
+      }
+  }
+
+
+  
   next()
   return
 })

@@ -6,8 +6,8 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn @click="logOut" class="white--text" flat>Log Out</v-btn>
-      <v-btn class="white--text" flat>Link Two</v-btn>
-      <v-btn class="white--text" flat>Link Three</v-btn>
+      <v-btn @click="logOut" class="white--text" flat></v-btn>
+      <v-btn @click="logOut" class="white--text" flat></v-btn>
     </v-toolbar-items>
     </v-toolbar>
     </div>
