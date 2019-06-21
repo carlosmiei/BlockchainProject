@@ -6,7 +6,7 @@ contract Transferencias {
     address[] public bancos;
     address[] public federacao;
     address public admin;
-    address public ownerAcc;
+    address public admin;
 
     struct Fatura{
         uint valorTotal;
@@ -30,6 +30,9 @@ contract Transferencias {
 
     event addBanco(
        address banco
+    );
+    event addFederacao(
+       address fed
     );
     
     /// The smart contract's constructor
@@ -101,18 +104,25 @@ contract Transferencias {
     }
 
     function adicionarEquipa(address add) public{
-        require(msg.sender == ownerAcc, "Sender not authorized.");
-        require(!isMember(add), "Account already in use");
+        require(msg.sender == admin, "Sender not authorized.");
+        require(!isMemberCreate(add), "Account already in use");
         equipas.push(add);
         emit addEquipa(add); 
     }
 
     function adicionarBanco(address add) public{
-        require(msg.sender == ownerAcc, "Sender not authorized.");
-        require(!isMember(add), "Account already in use");
+        require(msg.sender == admin, "Sender not authorized.");
+        require(!isMemberCreate(add), "Account already in use");
         bancos.push(add);
         emit addBanco(add); 
     }
+    function adicionarFederacao(address add) public{
+        require(msg.sender == admin, "Sender not authorized.");
+        require(!isMemberCreate(add), "Account already in use");
+        federacao.push(add);
+        emit addFederacao(add); 
+    }
+
 
     function getTeamsLength() public view returns (uint count) {
         require(isMember(msg.sender) == true,"Sender not authorized.");
@@ -167,7 +177,10 @@ contract Transferencias {
     }
 
     function isMember(address add) public view returns (bool res) {
-        return (isTeam(add) || isBank(add) || isFederation(add) || add == ownerAcc || add == admin) ;
+        return (isTeam(add) || isBank(add) || isFederation(add) ||  add == admin) ;
+    }
+    function isMemberCreate(address add) public view returns (bool res) {
+        return (isTeam(add) || isBank(add) || isFederation(add)) ;
     }
         
     function typeA(address add) public view returns (uint res) {
