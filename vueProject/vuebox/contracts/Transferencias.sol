@@ -6,7 +6,6 @@ contract Transferencias {
     address[] public bancos;
     address[] public federacao;
     address public admin;
-    address public admin;
 
     struct Fatura{
         uint valorTotal;
@@ -37,7 +36,7 @@ contract Transferencias {
     
     /// The smart contract's constructor
     constructor() public {
-
+        admin = msg.sender;
     }
 
     function adicionaFatura(uint valor, string memory emitData, address  hash) public  {
