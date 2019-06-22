@@ -1,11 +1,12 @@
-[{"nome":"Framelin Ohoulo","contribuinte":"1000422725","pais":"Portugal","posicoes":["Guarda Redes"]},
-{"nome":"Nuno Campos","contribuinte":"1095959341","pais":"Portugal","posicoes":["Defesa"]},
-{"nome":"Diogo Coelho","contribuinte":"1053656123","pais":"Portugal","posicoes":["Defesa"]},
-{"nome":"Mauro Cerqueira","contribuinte":"1043900054","pais":"Portugal","posicoes":["Defesa"]},
-{"nome":"Alhassan","contribuinte":"1054717164","pais":"Portugal","posicoes":["Médio"]},
-{"nome":"Arabidze","contribuinte":"1014642406","pais":"Portugal","posicoes":["Médio"]},
-{"nome":"Jota","contribuinte":"1047532064","pais":"Portugal","posicoes":["Médio"]},
-{"nome":"Diego Barcelos","contribuinte":"1110612608","pais":"Portugal","posicoes":["Médio"]},
-{"nome":"Okacha Hamzoui","contribuinte":"1088610462","pais":"Portugal","posicoes":["Avançado"]},
-{"nome":"Bryan Riascos","contribuinte":"1022406081","pais":"Portugal","posicoes":["Avançado"]},
-{"nome":"Camacho","contribuinte":"1088205299","pais":"Portugal","posicoes":["Avançado"]}]
+[{"nome":"Framelin Ohoulo","contribuinte":"1000422725","pais":"Portugal","posicoes":["Guarda Redes"],"foto":"https://i.ibb.co/n14mnKp/151741.png"},
+{"nome":"Nuno Campos","contribuinte":"1095959341","pais":"Portugal","posicoes":["Defesa"],"foto":"https://i.ibb.co/8YbF8Fp/5220454.png"},
+{"nome":"Diogo Coelho","contribuinte":"1053656123","pais":"Portugal","posicoes":["Defesa"],"foto":"https://i.ibb.co/cwNL5Jr/12021720.png"},
+{"nome":"Mauro Cerqueira","contribuinte":"1043900054","pais":"Portugal","posicoes":["Defesa"],"foto":"https://i.ibb.co/WpfFCvK/18032188.png"},
+{"nome":"Alhassan","contribuinte":"1054717164","pais":"Portugal","posicoes":["Médio"],"foto":"https://i.ibb.co/ZGM0KJS/28025033.png"},
+{"nome":"Arabidze","contribuinte":"1014642406","pais":"Portugal","posicoes":["Médio"],"foto":"https://i.ibb.co/dPyWPjq/28029911.png"},
+{"nome":"Jota","contribuinte":"1047532064","pais":"Portugal","posicoes":["Médio"],"foto":"https://i.ibb.co/LtLCGH2/28058545.png"},
+{"nome":"Diego Barcelos","contribuinte":"1110612608","pais":"Portugal","posicoes":["Médio"],"foto":"https://i.ibb.co/CwbX8wS/29022616.png"},
+{"nome":"Okacha Hamzoui","contribuinte":"1088610462","pais":"Portugal","posicoes":["Avançado"],"foto":"https://i.ibb.co/5jnKQwh/53015044.png"},
+{"nome":"Bryan Riascos","contribuinte":"1022406081","pais":"Portugal","posicoes":["Avançado"],"foto":"https://i.ibb.co/yN3h63p/67055991.png"},
+{"nome":"Camacho","contribuinte":"1088205299","pais":"Portugal","posicoes":["Avançado"],"foto":"https://i.ibb.co/7Qk2Cx4/67063933.png"}]
+
