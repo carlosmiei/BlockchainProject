@@ -1,7 +1,7 @@
 <template>
   <div>
-  <!-- inicio tabela pendentes -->
-  <!-- Tabela do Histórico  -->
+    <!-- inicio tabela pendentes -->
+    <!-- Tabela do Histórico  -->
     <v-card color="">
       <v-card-title color="white">
         Consultar Pagamentos Pendentes
@@ -100,7 +100,7 @@
         :loading="false"
       >
         <template v-slot:items="props">
-          <td>
+          <td @click="clickTable(props.item)">
             <v-layout justify-center>
                 {{ props.item._id2 }}
             </v-layout>
@@ -138,20 +138,25 @@
     >
       <PopUp v-if="dialog" :transacao="varPassar" v-on:childToParent="onChildClick" ></PopUp>
     </v-dialog>
-  <!-- Fim do popup -->
+    <!-- Fim do popup -->
+
+    <!-- Snackbar -->
+    <Snackbar v-if="snackbarUpd" :msg="msg" v-on:childToParentSnackbar="onChildClickSnackbar"></Snackbar>
+
   </div>
 </template>
 
 <script>
 import Transferencias from '../js/transferencias.js'
 import PopUp from './PopUp.vue'
+import Snackbar from './Snackbar.vue'
 import Vue from "vue";
 import axios from 'axios';
 export default {
   name: 'ConsultTrans',
   components:{
-    PopUp
-
+    PopUp,
+    Snackbar
   },
   data () {
     return {
@@ -165,11 +170,12 @@ export default {
       headers: [
       {text: 'Id da Venda ',value: '_id', align: 'center'},
       {text: 'Comprador', value: 'to' },
-      {text: 'Jogador', value: 'nomeJogador' },
       {text: 'Valor', value: 'valorT' },
       {text: 'Estado', value: 'estado' }],
       transacoes: [ ],
-      input:''
+      input:'',
+      snackbarUpd: false,
+      msg: ''
     }
 
   },  
@@ -195,11 +201,11 @@ export default {
   
     async alteraEstado(id,estado){
       //alterar estado para emPagamento
-      alert("Entrei altera estado")
+      console.log("Entrei altera estado")
       var obj = {}
       obj['_id'] = id
       obj['estado'] = estado
-      alert("pasei obj")
+      console.log("pasei obj")
       axios.post('http://localhost:4000/transacoes/setEstado',obj)
         .then(response => {
             console.log('Correu tudo bem' + response)    
@@ -260,11 +266,18 @@ export default {
     },
     
     async save(idVenda, from, to, jogador){
+      console.log(idVenda)
 
       switch (this.input) {
         case 'Pago':
-          alert("entrei pago")
-          var fatura = await Transferencias.recebeFatura(idVenda)
+          console.log("entrei pago")
+
+          var fatura = await Transferencias.validaPagamento(idVenda)
+          this.alteraEstado(idVenda,"Pago")
+          this.alteraDataPagamento(idVenda)
+          this.efetuaTransferencia(from, to, jogador)
+          this.msg = "Estado atualizado"
+          this.snackbarUpd = true
 
           for (var t in this.transacoesPendentes) {
             if (this.transacoesPendentes[t]._id == idVenda){
@@ -272,14 +285,10 @@ export default {
                 break;
             }
           }
-          this.alteraEstado(idVenda,"Pago")
-          this.alteraDataPagamento(idVenda)
-          this.efetuaTransferencia(from, to, jogador)
-
           console.log("passei do metamask")
           break; 
         default: 
-          alert('Erro a processar alteração de estado')
+          console.log('Erro a processar alteração de estado')
           break
       }
 
@@ -295,6 +304,9 @@ export default {
 
     },onChildClick(elem){
       this.dialog = elem
+
+    }, onChildClickSnackbar(elem){
+      this.snackbarUpd = elem
     }
 
   },

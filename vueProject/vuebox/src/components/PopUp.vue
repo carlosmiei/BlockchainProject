@@ -7,69 +7,75 @@
           <v-icon color="green" x-large>check</v-icon>
         </v-card-title>
 
-        <v-card-text>
+        <v-card-text >
           <h4>Informações transação</h4>
-          <p class="borda">
-          <b>Id de Venda:</b>
-          {{this.transacao._id}}
-          <br>
-          <b>Vendedor:</b>
-          {{this.transacao.from}}
-          <br>
-          <b>Comprador:</b>
-          {{this.transacao.to}}
-          <br>
-          <b>Nome do Jogador:</b>
-          {{this.transacao.nomeJogador}}
-          <br>
-          <b>Número da fatura:</b>
-          {{this.transacao.numFatura}}
-          <br>
-          <b>Valor Total / Valor Iva:</b>
-          {{this.transacao.valorT}} &euro; / {{this.transacao.valorI}} &euro; 
-          </p>
+          <div class="borda mt-1 mb-3">
+            <div class="ma-2">
+              <b>Id de Venda:</b>
+              {{this.transacao._id}}
+              <br>
+              <b>Vendedor:</b>
+              {{this.transacao.from}}
+              <br>
+              <b>Comprador:</b>
+              {{this.transacao.to}}
+              <br>
+              <b>Nome do Jogador:</b>
+              {{this.transacao.nomeJogador}}
+              <br>
+              <b>Número da fatura:</b>
+              {{this.transacao.numFatura}}
+              <br>
+              <b>Valor Total / Valor Iva:</b>
+              {{this.transacao.valorT}} &euro; / {{this.transacao.valorI}} &euro; 
+            </div>
+          </div>
           <span v-if="this.transacao.data">
           <h4> Datas </h4>
-          <p class="borda">
-           <span v-if="this.transacao.data.Emitida">
-          <b>Data de Emissão:</b>
-          {{this.transacao.data.Emitida}}
-          <br>
-           </span>
-          <span v-if="this.transacao.data.Aceite">
-          <b>Data Aceitação:</b>
-          {{this.transacao.data.Aceite}}
-          <br>
-          </span>
-           <span v-if="this.transacao.data.EmPagamento">
-          <b>Data Em Pagamento:</b>
-          {{this.transacao.data.EmPagamento}}
-          <br>
-          </span>
-          <span v-if="this.transacao.data.Pago">
-          <b>Data Pago:</b>
-          {{this.transacao.data.Pago}}
-          <br>
-          </span>
-           <span v-if="this.transacao.data.Completo">
-          <b>Data Completo:</b>
-          {{this.transacao.data.Completo}}
-           </span>
-          </p>
+          <div class="borda mt-1 mb-3">
+            <div class="ma-2">
+              <span v-if="this.transacao.data.Emitida">
+              <b>Data de Emissão:</b>
+              {{this.transacao.data.Emitida}}
+              <br>
+              </span>
+              <span v-if="this.transacao.data.Aceite">
+              <b>Data Aceitação:</b>
+              {{this.transacao.data.Aceite}}
+              <br>
+              </span>
+              <span v-if="this.transacao.data.EmPagamento">
+              <b>Data Em Pagamento:</b>
+              {{this.transacao.data.EmPagamento}}
+              <br>
+              </span>
+              <span v-if="this.transacao.data.Pago">
+              <b>Data Pago:</b>
+              {{this.transacao.data.Pago}}
+              <br>
+              </span>
+              <span v-if="this.transacao.data.Completo">
+              <b>Data Completo:</b>
+              {{this.transacao.data.Completo}}
+              </span>
+            </div>
+          </div>
           </span>
           <h4> Informações blockchain</h4>
-          <p class="borda">
-          <b>Hash Transação:</b>
-          {{this.transacao.hashTrans}}
-          <br>
-          <b>Gas utilizado:</b>
-          {{this.transacao.gas}}
-          <br>
+          <div class="borda mt-1 mb-3">
+            <div class="ma-2">
+              <b>Hash Transação:</b>
+              {{this.transacao.hashTrans}}
+              <br>
+              <b>Gas utilizado:</b>
+              {{this.transacao.gas}}
+              <br>
 
-          <b>Número do bloco:</b>
-          {{this.transacao.numBloco}}
-          <br>
-          </p>
+              <b>Número do bloco:</b>
+              {{this.transacao.numBloco}}
+              <br>
+            </div>
+          </div>
           <b>Estado:</b>
           {{this.transacao.estado}}
         </v-card-text>
@@ -162,7 +168,7 @@ export default {
 
 .borda{
   border-style: solid;
-   border-radius: 5px;
+  border-radius: 5px;
 
 }
 </style>

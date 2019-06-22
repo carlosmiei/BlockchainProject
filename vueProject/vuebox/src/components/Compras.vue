@@ -140,20 +140,25 @@
       >
       <PopUp v-if="dialog" :transacao="varPassar" v-on:childToParent="onChildClick" ></PopUp>
       </v-dialog>
-  <!-- Fim do popup -->
+    <!-- Fim do popup -->
+
+    <!-- Snackbar -->
+    <Snackbar v-if="snackbarUpd" :msg="msg" v-on:childToParentSnackbar="onChildClickSnackbar"></Snackbar>
+
  </div>
 </template>
 
 <script>
 import Transferencias from '../js/transferencias.js'
 import PopUp from './PopUp.vue'
+import Snackbar from './Snackbar.vue'
 import Vue from "vue";
 import axios from 'axios';
 export default {
     name: 'ConsultTrans',
     components:{
-      PopUp
-
+      PopUp,
+      Snackbar
     },
       data () {
             return {
@@ -172,7 +177,9 @@ export default {
               {text: 'Estado', value: 'estado' }],
               transacoes: [ ],
               transacoesPendentes:[],
-              input:''
+              input:'',
+              snackbarUpd: false,
+              msg: ''
              
     }
   },async mounted(){
@@ -213,17 +220,16 @@ export default {
       return lista.data
 
    },async alteraEstado(id,estado,equipa,jogador){
-     //alterar estado para emPagamento
-      alert("Entrei altera estado")
       var obj = {}
       obj['_id'] = id
       obj['estado'] = estado
-      alert("pasei obj")
-
 
       axios.post('http://localhost:4000/transacoes/setEstado',obj)
         .then(response => {
-            console.log('Correu tudo bem' + response)    
+            console.log('Correu tudo bem' + response)       
+            this.msg = "Estado atualizado"
+            this.snackbarUpd = true 
+
             if(obj.estado == 'Rejeitada'){
               var obj2 = {}
               obj2['equipa'] = equipa
@@ -286,44 +292,48 @@ export default {
       }
     }
 
-     switch (this.input) {
-       case 'Recebida':
-          alert("entrei recebida")
-          var fatura = await Transferencias.recebeFatura(idVenda)
-            this.alteraEstado(idVenda,"Recebida", equipa, jogador)
+      switch (this.input) {
+        case 'Recebida':
+            alert("entrei recebida")
+            var fatura = await Transferencias.recebeFatura(idVenda)
+              this.alteraEstado(idVenda,"Recebida", equipa, jogador)
 
-          console.log("passei do metamask")
-          break; 
-       case 'Aceite':
-          var fatura = await Transferencias.validaFatura(idVenda,true)
-          this.alteraEstado(idVenda,"Aceite", equipa, jogador)
-          this.alteraData(idVenda,"Aceite")
-          break;
-       case 'Rejeitada':
-          var fatura = await Transferencias.validaFatura(idVenda,false)
-          this.alteraEstado(idVenda,"Rejeitada", equipa, jogador)
-          this.alteraData(idVenda,"Rejeitada")       
+            console.log("passei do metamask")
+            break; 
+        case 'Aceite':
+            var fatura = await Transferencias.validaFatura(idVenda,true)
+            this.alteraEstado(idVenda,"Aceite", equipa, jogador)
+            this.alteraData(idVenda,"Aceite")
+            break;
+        case 'Rejeitada':
+            var fatura = await Transferencias.validaFatura(idVenda,false)
+            this.alteraEstado(idVenda,"Rejeitada", equipa, jogador)
+            this.alteraData(idVenda,"Rejeitada")       
+            break
+        case 'Em pagamento':
+            var fatura = await Transferencias.pagaFatura(idVenda)
+            this.alteraEstado(idVenda,"Em pagamento", equipa, jogador) 
+            this.alteraData(idVenda,"EmPagamento")      
+            break
+        default: 
+          alert('Erro a processar alteração de estado')
           break
-       case 'Em pagamento':
-          var fatura = await Transferencias.emPagamento(idVenda)
-          this.alteraEstado(idVenda,"Em pagamento", equipa, jogador) 
-          this.alteraData(idVenda,"EmPagamento")      
-          break
-       default: 
-         alert('Erro a processar alteração de estado')
-         break
-       }
+      }
 
       return true;
   
-  }, clickTable(elem){
-     this.dialog = true
-     console.dir(elem)
-     this.varPassar = elem
+    }, clickTable(elem){
+      this.dialog = true
+      console.dir(elem)
+      this.varPassar = elem
 
-  }, onChildClick(elem){
-    this.dialog = elem
-  }
+    }, onChildClick(elem){
+      this.dialog = elem
+
+    }, 
+    onChildClickSnackbar(elem){
+      this.snackbarUpd = elem
+    }
 }
 
 }

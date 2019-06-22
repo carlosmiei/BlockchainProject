@@ -207,20 +207,25 @@
     >
       <PopUp v-if="dialog" :transacao="varPassar" v-on:childToParent="onChildClick" ></PopUp>
     </v-dialog>
-  <!-- Fim do popup -->
+    <!-- Fim do popup -->
+
+    <!-- Snackbar -->
+    <Snackbar v-if="snackbarUpd" :msg="msg" v-on:childToParentSnackbar="onChildClickSnackbar"></Snackbar>
+
   </div>
 </template>
 
 <script>
 import Transferencias from '../js/transferencias.js'
 import PopUp from './PopUp.vue'
+import Snackbar from './Snackbar.vue'
 import Vue from "vue";
 import axios from 'axios';
 export default {
   name: 'ConsultTrans',
   components:{
-    PopUp
-
+    PopUp,
+    Snackbar
   },
   data () {
     return {
@@ -242,7 +247,9 @@ export default {
       input:'',
       ms : 1000 * 60 * 60 * 24,
       hoje: new Date().toISOString().substr(0, 10),
-      atrasoMaximo:31
+      atrasoMaximo:31,
+      snackbarUpd: false,
+      msg: ''
     }
 
   },  
@@ -285,11 +292,11 @@ export default {
   
     async alteraEstado(id,estado){
       //alterar estado para emPagamento
-      alert("Entrei altera estado")
+      console.log("Entrei altera estado")
       var obj = {}
       obj['_id'] = id
       obj['estado'] = estado
-      alert("pasei obj")
+      console.log("pasei obj")
       axios.post('http://localhost:4000/transacoes/setEstado',obj)
         .then(response => {
             console.log('Correu tudo bem' + response)    
@@ -317,8 +324,7 @@ export default {
 
       switch (this.input) {
         case 'Completa':
-          alert("entrei completa")
-          var fatura = await Transferencias.recebeFatura(idVenda)
+          console.log("entrei completa")
 
           for (var t in this.transacoesPendentes) {
             if (this.transacoesPendentes[t]._id == idVenda){
@@ -326,8 +332,11 @@ export default {
                 break;
             }
           }
+          var fatura = await Transferencias.pagaPercentagem(idVenda)
           this.alteraEstado(idVenda,"Completa")
           this.alteraData(idVenda,"Completo")
+          this.msg = "Estado atualizado"
+          this.snackbarUpd = true
 
           console.log("passei do metamask")
           break; 
@@ -350,7 +359,12 @@ export default {
     onChildClick(elem){
       this.dialog = elem
 
-    },atrasado(obj,id){
+    }, 
+    onChildClickSnackbar(elem){
+      this.snackbarUpd = elem
+    },
+    
+    atrasado(obj,id){
       
       if (obj.data && obj.data.Pago) {
        var a = new Date(obj.data.Pago)
@@ -368,7 +382,7 @@ export default {
       var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
       var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
       return Math.floor((utc2 - utc1) / this.ms);
-    },
+    }
   },
   computed: {
     transacoesEmCurso(){
@@ -377,7 +391,6 @@ export default {
     transacoesPendentes(){
       return this.transacoes.filter(elem => elem.estado === 'Pago')
     },
-
     transacoesCompletas(){
       return this.transacoes.filter(elem => elem.estado === 'Completa')
     }

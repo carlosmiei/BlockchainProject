@@ -99,21 +99,6 @@ const Transferencias = {
       })
     })
 
-  },emPagamento: function(fatura){
-    let self = this
-
-    return new Promise((resolve, reject) => {
-      self.instance.pagaFatura(
-        fatura,
-        {from: window.web3.eth.accounts[0],gas: 300000}
-      ).then(exists => {
-        resolve(exists)
-      }).catch(err => {
-        reject(err)
-        console.log('erro: ' + err)
-      })
-    })
-
   },recebeFatura: function(fatura){
     let self = this
 
@@ -134,6 +119,51 @@ const Transferencias = {
     return new Promise((resolve, reject) => {
       self.instance.validaFatura(
         fatura,aceitar,
+        {from: window.web3.eth.accounts[0],gas: 300000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
+  },pagaFatura: function(fatura){
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.pagaFatura(
+        fatura,
+        {from: window.web3.eth.accounts[0],gas: 300000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
+  },validaPagamento: function(fatura){
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.validaPagamento(
+        fatura,
+        {from: window.web3.eth.accounts[0],gas: 300000}
+      ).then(exists => {
+        resolve(exists)
+      }).catch(err => {
+        reject(err)
+        console.log('erro: ' + err)
+      })
+    })
+
+  },pagaPercentagem: function(fatura){
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.pagaPercentagem(
+        fatura,
         {from: window.web3.eth.accounts[0],gas: 300000}
       ).then(exists => {
         resolve(exists)

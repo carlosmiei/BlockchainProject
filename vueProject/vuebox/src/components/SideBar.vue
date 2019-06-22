@@ -59,12 +59,12 @@ export default {
 
       this.items.push({ title: 'Consultar Transações', icon: 'transfer_within_a_station',route:'/cotas' })
       this.items.push({ title: 'Adicionar Banco', icon: 'attach_money', route:'/addbanco'})   
-      this.items.push({ title: 'Adicionar Equipa', icon: 'view_week', route:'/addequipa'})   
-      this.items.push({ title: 'Adicionar Jogador', icon: 'tag_faces', route:'/addjogador'})   
+      this.items.push({ title: 'Adicionar Equipa', icon: 'group_add', route:'/addequipa'})   
+      this.items.push({ title: 'Adicionar Jogador', icon: 'person_add', route:'/addjogador'})   
       this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })  
     }
 
-    this.items.push({ title: 'Pesquisa Blockchain', icon: 'search' ,route:'/pesquisa'})
+    this.items.push({ title: 'Pesquisa na Blockchain', icon: 'search' ,route:'/pesquisa'})
 
   },
   computed: {

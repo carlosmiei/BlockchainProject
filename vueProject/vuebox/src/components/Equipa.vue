@@ -45,7 +45,7 @@
         </div>
         <v-layout row wrap class="my-2">
             <v-flex xs12 sm6 md4 lg3 v-for="jogador in equipa.jogadores" :key="jogador._id">
-                <v-card flat color="grey" @click="clickTable(jogador)" class="clickable jogador-card ma-2 grey lighten-3 rounded-card">
+                <v-card flat height="110" color="grey" @click="clickTable(jogador)" class="h-align clickable jogador-card ma-2 grey lighten-3 rounded-card">
                     <v-layout columns class="h-align" >
                         <v-flex xs3 offset-xs1>
                             <v-img 

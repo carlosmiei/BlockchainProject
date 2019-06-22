@@ -3,6 +3,10 @@
     fill-height
     fluid
     grid-list-xl>
+
+    <!-- Snackbar -->
+    <Snackbar v-if="snackbarUpd" :msg="msg" v-on:childToParentSnackbar="onChildClick"></Snackbar>
+
     <v-layout
       justify-center
       wrap
@@ -12,10 +16,9 @@
         <v-form>
           <v-container>
             <v-layout wrap>
-              <v-flex  v-if="equipa.liga!=-1" xs12 sm6>
+              <v-flex v-if="equipa.liga" xs12 sm6>
                 <v-text-field
                   :value="equipa.liga"
-                  mb-0
                   label="Federação"
                   disabled/>
               </v-flex>
@@ -72,7 +75,7 @@
                 <v-btn
                   block
                   @click="atualizaPerfil()"
-                  class="font-weight-light grey lighten-3"
+                  class="font-weight-light grey lighten-3 rounded"
                   
                 >
                   Atualizar Perfil
@@ -154,12 +157,19 @@
 
           
           <v-spacer></v-spacer>
+          <v-tooltip top slot="activator">
           <v-btn 
+            slot="activator"
             v-bind:href="site"
             target="_blank"
             round
-            class="mt-4 grey lighten-3 font-weight-light"
-          >Saber Mais</v-btn>
+            class="mt-4 grey lighten-3 font-weight-light">
+              <v-icon small left>open_in_new</v-icon>
+              <span>Saber Mais</span>
+            </v-btn>
+            <span>Visitar website</span>
+          </v-tooltip>
+
         </v-card-text>
        
       </v-flex>
@@ -169,11 +179,13 @@
 </template>
 
 <script>
+import Snackbar from './Snackbar.vue'
 import axios from 'axios';
+
 export default {
     data () {
         return {
-            equipa:null,
+            equipa: '',
             conta:'',
             site: '',
             descricao: '',
@@ -181,8 +193,13 @@ export default {
             loading: false,
             dialog: false,
             loading2: false,
-            dialog2: false
-    }
+            dialog2: false,
+            snackbarUpd: false,
+            msg: ''
+      }
+    },
+    components:{
+      Snackbar
     },
     async created(){
       /** Nota agora vai ler da wallet mas deveria ler do estado mas para nao termos de ir sempre ao login fica assim : this.$store.getters.wallet  */
@@ -192,8 +209,6 @@ export default {
       var equipa = await axios.get('http://localhost:4000/users?utilizador=' + this.conta)
       this.equipa = equipa.data
       console.dir(this.equipa)
-      if (!this.equipa.liga)
-        this.equipa.liga =-1
 
       this.site = this.equipa.site
       this.descricao = this.equipa.descricao
@@ -209,6 +224,8 @@ export default {
         axios.post('http://localhost:4000/users/alteraDesc', obj)
         .then(response => {
           console.log('Correu tudo bem' + response)    
+          this.msg = "Descrição atualizada"
+          this.snackbarUpd = true
           this.descricao = this.equipa.descricao
         }).catch(e => {
           console.log('ERRO: ' + e)
@@ -227,7 +244,9 @@ export default {
         console.log(obj)
         axios.post('http://localhost:4000/users/alteraFoto', obj)
         .then(response => {
-          console.log('Correu tudo bem' + response)    
+          console.log('Correu tudo bem' + response)     
+          this.msg = "Fotografia atualizada"
+          this.snackbarUpd = true 
           this.foto = this.equipa.foto
         }).catch(e => {
           console.log('ERRO: ' + e)
@@ -250,19 +269,25 @@ export default {
         console.log(obj)
         axios.post('http://localhost:4000/users/atualizaPerfil', obj)
         .then(response => {
-          console.log('Correu tudo bem' + response)    
+          console.log('Correu tudo bem' + response)        
+          this.msg = "Perfil atualizado"
+          this.snackbarUpd = true 
           this.site = this.equipa.site
         }).catch(e => {
           console.log('ERRO: ' + e)
         })
 
         return true
-      }
+
+        }, 
+        onChildClick(elem){
+          this.snackbarUpd = elem
+        }
     }
 }
 </script>
 
-<style>
+<style scoped>
   .border{
         border-style: solid;
         border-width: 5px;
