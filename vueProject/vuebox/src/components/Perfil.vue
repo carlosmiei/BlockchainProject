@@ -129,7 +129,7 @@
               <v-btn small slot="activator" depressed class="rounded" color="primary">
                 <v-icon small left>edit</v-icon>
                 <span v-if="this.descricao" >Atualizar descrição</span>
-                <span v-if="!this.descricao" >Adicionar descrição</span>
+                <span v-else>Adicionar descrição</span>
               </v-btn>
               <span>Atualizar Descrição</span>
             </v-tooltip>

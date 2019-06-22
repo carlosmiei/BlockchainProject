@@ -47,12 +47,12 @@ export default {
       this.items.push({ title: 'Consultar Compras', icon: 'touch_app', route:'/compras' })
       this.items.push({ title: 'Minha Equipa', icon: 'location_city', route:'/minhaEquipa/'+this.id })
       this.items.push({ title: 'Equipas', icon: 'group', route:'/equipas' })
-      this.items.push({ title: 'Jogadores', icon: 'person' })
+      // this.items.push({ title: 'Jogadores', icon: 'person' })
       // this.items.push({ title: 'Account', icon: 'account_box' })
       // this.items.push({ title: 'Admin', icon: 'gavel' })
     
     }
-    if(this.typeA==2){
+    if(this.typeA == 2){
       this.items.push({ title: 'Transações', icon: 'list', route:'/banco' })
     }
     if (this.typeA == 3) {

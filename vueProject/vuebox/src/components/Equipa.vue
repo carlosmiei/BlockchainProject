@@ -7,27 +7,30 @@
     </v-dialog>
     <!-- Fim do popup -->
     <v-container class="my-2">
-        <v-layout row wrap >
+        <v-layout row wrap class="h-align">
             <v-flex xs12 sm5 md5 lg4>
-                <v-card flat class="ma-2 grey lighten-3">                    
-                    <h2>{{ this.equipa.nome }}</h2>
-                    <h3 class="grey--text">{{ this.equipa.pais }}</h3>
-                    <h4 class="grey--text">{{ this.equipa.liga }}</h4>
-                    <v-img
-                        class="img mt-3"
-                        :src="equipa.foto"
-                        height="80"
-                        width="80"
-                        contain
-                    >
-                    </v-img>
+                <v-card flat class="mx-4 grey lighten-3">    
+                    <br>
+                    <v-layout class="innerbox img-background mb-3">
+                        <v-img
+                            class="img mt-2"
+                            :src="equipa.foto"
+                            height="80"
+                            width="80"
+                            contain
+                        >
+                        </v-img>
+                    </v-layout>                
+                    <h3 class="subheading">{{ this.equipa.nome }}</h3>
+                    <div class="grey--text">{{ this.equipa.pais }}</div>
+                    <div class="grey--text">{{ this.equipa.liga }}</div>
                     <br>
                 </v-card>
             </v-flex>
             <v-flex xs12 sm6 md7 lg8>
                 <v-layout wrap fill-height h-align>
                     <p>{{ this.equipa.descricao }}</p>
-                    <v-btn target="_blank" depressed color="primary" class="rounded-card" :href="this.equipa.site">Visitar site</v-btn>
+                    <v-btn target="_blank" small depressed color="primary" class="rounded-card" :href="this.equipa.site">Visitar site</v-btn>
                 </v-layout> 
             </v-flex>
         </v-layout>
@@ -36,8 +39,11 @@
         <v-divider></v-divider>
         <v-divider></v-divider>
         <br>
-        <h3 class="ml-3 text-sm-left">Jogadores</h3>
-        <v-layout row wrap class="mt-2">
+        <div class="text-sm-left">
+            <v-icon left class="ml-5">group</v-icon>
+            <span class="title grey--text"><b>Jogadores</b></span>
+        </div>
+        <v-layout row wrap class="my-2">
             <v-flex xs12 sm6 md4 lg3 v-for="jogador in equipa.jogadores" :key="jogador._id">
                 <v-card flat color="grey" @click="clickTable(jogador)" class="clickable jogador-card ma-2 grey lighten-3 rounded-card">
                     <v-layout columns class="h-align" >
@@ -66,7 +72,7 @@
         <v-divider></v-divider>
         <v-divider></v-divider>
 
-        <v-layout mt-2 wrap fill-height h-align>
+        <v-layout v-if="!minhaEquipa()" mt-3 wrap fill-height h-align>
             <v-btn block depressed color="primary" class="rounded-card" href="/#/equipas">Voltar</v-btn>
         </v-layout> 
 
@@ -88,7 +94,7 @@
         return {
             varPassar: '',
             equipa: '',
-            dialog:false
+            dialog:false,
         }
         },
 
@@ -107,6 +113,10 @@
                 return lista.data
 
             },
+            minhaEquipa(){
+                return this.id == window.web3.eth.accounts[0]
+            },
+
             clickTable(elem){
                 this.dialog = true
                 console.dir(elem)
@@ -134,6 +144,12 @@
   width: 40%;
 }
 
+.innerbox {
+   width:100px; /* or whatever width you want. */
+   height:100px; /* or whatever width you want. */
+   display: inline-block;
+}
+
 .rounded-img{
     border-radius:10px;
     border: 2px solid rgb(102, 102, 102);
@@ -155,6 +171,12 @@
 .jogador-card:focus {
   box-shadow: 0 0 5px rgba(35, 93, 211, 0.775); 
   transform: translateY(-0.25em);
+}
+
+.img-background {
+    background-color: white;
+    border-radius:10px;
+    border: 2px solid rgba(194, 194, 194, 0.775); 
 }
 
 </style>
