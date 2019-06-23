@@ -48,15 +48,15 @@ web3.eth.getAccounts().then(accounts => {
             console.log('ERRO: ' + e)
          })
     }
-
+    bancos = [accounts[bancosRank[0]].toLowerCase(),accounts[bancosRank[1]].toLowerCase()]
     //Adicionar as equipas
     for (var eq in equipasRank) {
         var equipa = equipasMeta[eq]
         equipa['_id'] =  accounts[equipasRank[b]].toLowerCase()
+        equipa['bancos'] = bancos
         axios.post('http://localhost:4000/users/',equipa)
         .then(response => {
             console.log('Correu tudo bem' + response)    
-  
         })
         .catch(e => {
             console.log('ERRO: ' + e)
@@ -75,7 +75,6 @@ web3.eth.getAccounts().then(accounts => {
 
             .then(response => {
                 console.log('Correu tudo bem' + response)    
-      
             })
             .catch(e => {
                 console.log('ERRO: ' + e)
