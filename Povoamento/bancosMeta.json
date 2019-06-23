@@ -1,0 +1,22 @@
+[
+    {
+        "tipo": "Banco",
+        "nome": "Santander R",
+        "descricao": "O Banco Santander Portugal, conhecido comercialmente como Santander, é atualmente o maior banco privado em Portugal, tendo sido fundado em 1988. A presença do Grupo Santander em Portugal começou pela compra de 10% do Banco de Comércio e Indústria em 1988 tendo atingido a participação maioritária em 1993.",
+        "cidade": null,
+        "contribuinte": "103679462",
+        "pais": "Portugal",
+        "site": "https://www.santandertotta.pt",
+        "foto": "https://cdn1.imggmi.com/uploads/2019/6/16/ead85174d7eaa8a638165a8126770d55-full.png"
+    }, 
+    {
+
+        "tipo": "Banco",
+        "nome": "Novo Banco",
+        "contribuinte": "123321123",
+        "pais": "Portugal",
+        "site": "bes.pt",
+        "foto": "https://cm-meda.pt/wp-content/uploads/2016/01/NB_V_1c_rgb-700x300.png",
+        "descricao": "O Novo Banco é um banco português, estabelecido a 4 de agosto de 2014, numa intervenção de emergência do Banco de Portugal para salvar os activos bons do anteriormente falido Banco Espírito Santo. O resgate do BES foi precipitado pelos prejuízos históricos de 3.577 milhões de euros."
+    }
+]

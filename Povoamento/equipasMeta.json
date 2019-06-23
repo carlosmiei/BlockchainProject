@@ -1,0 +1,50 @@
+[
+    {
+       
+        "tipo": "Equipa",
+        "nome": "Braga",
+        "contribuinte": "123123123",
+        "pais": "Portugal",
+        "liga": "Primeira Liga Portuguesa",
+        "foto": "http://2.bp.blogspot.com/_LI4lDOsMHhc/TPwpiEyHOuI/AAAAAAAAGyw/_cMNGN8k5_0/s1600/SC_Braga.png",
+        "site": "https://scbraga.pt/",
+        "descricao": "O Sporting Clube de Braga é um clube desportivo fundado oficialmente em 19 de janeiro em 1921 e sediado na cidade de Braga.Trata-se de um clube eclético[1] que, para além do futebol, se distingue em modalidades como o atletismo, natação, futsal, bilhar, taekwondo, basquetebol, etc. tendo já vencido vários troféus nacionais e internacionais. Actualmente milita na Primeira Liga de futebol",
+
+    },
+    {
+        "tipo": "Equipa",
+        "nome": "Porto",
+        "contribuinte": "102749337",
+        "pais": "Portugal",
+        "foto": "https://upload.wikimedia.org/wikipedia/pt/c/c5/F.C._Porto_logo.png",
+        "liga": "Primeira Liga Portuguesa",
+        "cidade": "Porto",
+        "descricao": "Futebol Clube do Porto, mais conhecido como FC Porto ou simplesmente Porto, é um clube multidesportivo português sedeado na cidade do Porto. É mais conhecido pela sua equipa de futebol profissional, que joga atualmente na Primeira Liga, a competição mais importante do futebol português. Fundado a 28 de setembro de 1893, é um dos \"três grandes\" clubes de Portugal, juntamente com o Sporting e o Benfica, os seus grandes rivais. Os seus apoiantes são chamados de \"portistas\". Os seus jogos de futebol em casa são realizados no Estádio do Dragão, inaugurado em 2003 e que tem uma capacidade de 50 035 lugares e que substituiu o antigo Estádio das Antas.",
+        "site": "https://www.fcporto.pt"
+    },
+    {
+
+        "tipo": "Equipa",
+        "nome": "Vitória de Guimarães",
+        "contribuinte": "101736932",
+        "pais": "Portugal",
+        "foto": "https://cdn1.imggmi.com/uploads/2019/6/15/e866bda566b6c6bce179aefe568b9099-full.png",
+        "liga": "Primeira Liga Portuguesa",
+        "cidade": "Guimarães",
+        "descricao": "O Vitória Sport Clube, mais conhecido pelo acrónimo V.S.C, trata-se de um clube ecléctico português fundado em 22 de Setembro de 1922 e sediado na cidade de Guimarães.",
+        "site": "https://www.vitoriasc.pt/"
+    },
+    {
+
+            "nome": "Nacional",
+            "tipo": "Equipa",
+            "contribuinte": "101843825",
+            "pais": "Portugal",
+            "liga": "Primeira Liga Portuguesa",
+            "foto": "https://cdn1.imggmi.com/uploads/2019/6/15/f523b8e6144b06d5cdd10f4f05d87db3-full.gif",        
+            "descricao": "O Clube Desportivo Nacional é um clube português de futebol, fundado na Madeira em 8 de dezembro de 1910. É muitas vezes referido como Nacional da Madeira ou simplesmente Nacional. A principal modalidade do clube é o futebol, contando com várias participações na Primeira Liga, o primeiro escalão português."
+        
+    }
+
+
+]
