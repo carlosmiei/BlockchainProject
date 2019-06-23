@@ -11,13 +11,14 @@ contract Transferencias {
         uint valorTotal;
         string data;
         uint estadoVenda;
+        bool exists;
     }
 
-    address[] KeysFaturas;
-    mapping (address => Fatura) transacoes;
+    address[] public KeysFaturas;
+    mapping (address => Fatura) public transacoes;
     uint public transacoesCount;
     
-    //eventos teste 
+    //eventos teste
     event nextStage(
        address id,
        uint estadoFatura
@@ -41,8 +42,9 @@ contract Transferencias {
 
     function adicionaFatura(uint valor, string memory emitData, address  hash) public  {
         require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].exists == false, "Transaction already exists");
         
-        Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1});
+        Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1, exists:true});
         KeysFaturas.push(hash);
         transacoes[hash] = myStruct;
         transacoesCount++;
@@ -52,46 +54,50 @@ contract Transferencias {
 
     function recebeFatura(address hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].exists == true, "Invalid Address");
         require(transacoes[hash].estadoVenda == 1, "Operation not available");
             
-        transacoes[hash].estadoVenda = 2;  
-        emit nextStage(hash,2);      
+        transacoes[hash].estadoVenda = 2;
+        emit nextStage(hash,2);
     }
 
     function validaFatura(address hash, bool aceitar) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].exists == true, "Invalid Address");
         require(transacoes[hash].estadoVenda == 2, "Operation not available");
-        
         if(aceitar)
-            transacoes[hash].estadoVenda = 3; 
+            transacoes[hash].estadoVenda = 3;
         else
-            transacoes[hash].estadoVenda = 0; 
+            transacoes[hash].estadoVenda = 0;
         emit nextStage(hash,3);
     }
 
     function pagaFatura(address hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].exists == true, "Invalid Address");
         require(transacoes[hash].estadoVenda == 3, "Operation not available");
         
-        transacoes[hash].estadoVenda = 4;  
+        transacoes[hash].estadoVenda = 4;
         emit nextStage(hash,4);
     }
 
 
     function validaPagamento(address hash) public{
         require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].exists == true, "Invalid Address");
         require(transacoes[hash].estadoVenda == 4, "Operation not available");
             
-        transacoes[hash].estadoVenda = 5;  
+        transacoes[hash].estadoVenda = 5;
         emit nextStage(hash,5);
     }
 
 
     function pagaPercentagem(address hash) public{
-        require(isMember(msg.sender) == true,"Sender not authorized.");    
+        require(isMember(msg.sender) == true,"Sender not authorized.");
+        require(transacoes[hash].exists == true, "Invalid Address");
         require(transacoes[hash].estadoVenda == 5, "Operation not available");
 
-        transacoes[hash].estadoVenda = 6;  
+        transacoes[hash].estadoVenda = 6;
         emit nextStage(hash,6);
     }
 
@@ -106,20 +112,20 @@ contract Transferencias {
         require(msg.sender == admin, "Sender not authorized.");
         require(!isMemberCreate(add), "Account already in use");
         equipas.push(add);
-        emit addEquipa(add); 
+        emit addEquipa(add);
     }
 
     function adicionarBanco(address add) public{
         require(msg.sender == admin, "Sender not authorized.");
         require(!isMemberCreate(add), "Account already in use");
         bancos.push(add);
-        emit addBanco(add); 
+        emit addBanco(add);
     }
     function adicionarFederacao(address add) public{
         require(msg.sender == admin, "Sender not authorized.");
         require(!isMemberCreate(add), "Account already in use");
         federacao.push(add);
-        emit addFederacao(add); 
+        emit addFederacao(add);
     }
 
 
@@ -143,10 +149,10 @@ contract Transferencias {
     }
 
     function isTeam(address add) private view returns (bool res) {
-        res=false;
-        for (uint i=0; i<equipas.length; i++) {
+        res = false;
+        for (uint i = 0; i < equipas.length; i++) {
             if (equipas[i] == add) {
-                res=true;
+                res = true;
                 break;
             }
         }
@@ -154,10 +160,10 @@ contract Transferencias {
     }
 
     function isBank(address add) private view returns (bool res) {
-        res=false;
-        for (uint i=0; i<bancos.length; i++) {
+        res = false;
+        for (uint i = 0; i < bancos.length; i++) {
             if (bancos[i] == add) {
-                res=true;
+                res = true;
                 break;
             }
         }
@@ -165,10 +171,10 @@ contract Transferencias {
     }
 
     function isFederation(address add) private view returns (bool res) {
-        res=false;
-        for (uint i=0; i<federacao.length; i++) {
+        res = false;
+        for (uint i = 0; i < federacao.length; i++) {
             if (federacao[i] == add) {
-                res=true;
+                res = true;
                 break;
             }
         }
@@ -176,7 +182,7 @@ contract Transferencias {
     }
 
     function isMember(address add) public view returns (bool res) {
-        return (isTeam(add) || isBank(add) || isFederation(add) ||  add == admin) ;
+        return (isTeam(add) || isBank(add) || isFederation(add) || add == admin);
     }
     function isMemberCreate(address add) public view returns (bool res) {
         return (isTeam(add) || isBank(add) || isFederation(add)) ;
