@@ -14,7 +14,6 @@ contract Transferencias {
         bool exists;
     }
 
-    address[] public KeysFaturas;
     mapping (address => Fatura) public transacoes;
     uint public transacoesCount;
     
@@ -45,7 +44,6 @@ contract Transferencias {
         require(transacoes[hash].exists == false, "Transaction already exists");
         
         Fatura memory myStruct = Fatura({valorTotal:valor, data:emitData, estadoVenda:1, exists:true});
-        KeysFaturas.push(hash);
         transacoes[hash] = myStruct;
         transacoesCount++;
         emit nextStage(hash,1);
@@ -109,14 +107,14 @@ contract Transferencias {
     }
 
     function adicionarEquipa(address add) public{
-        require(msg.sender == admin, "Sender not authorized.");
+        require(msg.sender == admin || isFederation(msg.sender) == true, "Sender not authorized.");
         require(!isMemberCreate(add), "Account already in use");
         equipas.push(add);
         emit addEquipa(add);
     }
 
     function adicionarBanco(address add) public{
-        require(msg.sender == admin, "Sender not authorized.");
+        require(msg.sender == admin || isFederation(msg.sender) == true, "Sender not authorized.");
         require(!isMemberCreate(add), "Account already in use");
         bancos.push(add);
         emit addBanco(add);

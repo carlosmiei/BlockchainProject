@@ -16,11 +16,4 @@ module.exports = {
     catchInvalidAddress    : async function(promise) {await tryCatch(promise, "revert Invalid Address"            );},
     catchOpNotAvailable    : async function(promise) {await tryCatch(promise, "revert Operation not available"    );},
     catchRevertAddrInUse   : async function(promise) {await tryCatch(promise, "revert Transaction already exists" );},
-    //catchRevert            : async function(promise) {await tryCatch(promise, "revert"                      );},
-    //catchOutOfGas          : async function(promise) {await tryCatch(promise, "out of gas"         );},
-    //catchInvalidJump       : async function(promise) {await tryCatch(promise, "invalid JUMP"       );},
-    //catchInvalidOpcode     : async function(promise) {await tryCatch(promise, "invalid opcode"     );},
-    //catchStackOverflow     : async function(promise) {await tryCatch(promise, "stack overflow"     );},
-    //catchStackUnderflow    : async function(promise) {await tryCatch(promise, "stack underflow"    );},
-    //catchStaticStateChange : async function(promise) {await tryCatch(promise, "static state change");},
 };
