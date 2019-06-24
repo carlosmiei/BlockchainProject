@@ -10,9 +10,14 @@ var nacional  = fs.readFileSync('nacional.json')
 var guimaraes  = fs.readFileSync('guimaraes.json')
 var bancosMeta  = fs.readFileSync('bancosMeta.json')
 var equipasMeta  = fs.readFileSync('equipasMeta.json')
+var federacaoMeta  = fs.readFileSync('federacaoMeta.json')
 
+federacaoMeta = JSON.parse(federacaoMeta)
+console.log(1)
 equipasMeta = JSON.parse(equipasMeta)
+console.log(2)
 bancosMeta = JSON.parse(bancosMeta)
+console.log(3)
 bancosRank = [2,3]
 
 var equipasObjeto = [JSON.parse(braga),JSON.parse(porto),JSON.parse(nacional),JSON.parse(guimaraes)]
@@ -35,57 +40,71 @@ if (typeof web3 !== 'undefined') {
 
 web3.eth.getAccounts().then(accounts => {
 
+    //adicionar federacao
+    for (fed in federacaoMeta) {
+        var fedr = federacaoMeta[fed]
+        fedr['_id'] = accounts[1].toLowerCase()
+        //console.dir(fedr)
+         axios.post('http://localhost:4000/users/',fedr)
+         .then(response => {
+             console.log('Aidcionei Federacao' + response)    
+         })
+         .catch(e => {
+             console.log('ERRO: ' + e)
+          })
+    
+
+    }
+
+    
     //Adicionar os bancos
     for (var b in bancosRank) {
         var banco = bancosMeta[b]
         banco['_id'] =  accounts[bancosRank[b]].toLowerCase()
-        axios.post('http://localhost:4000/users/',bancos)
-        .then(response => {
-            console.log('Correu tudo bem' + response)    
-  
-        })
-        .catch(e => {
-            console.log('ERRO: ' + e)
+        //console.dir(banco)
+         axios.post('http://localhost:4000/users/',banco)
+         .then(response => {
+             console.log('Adicionei Banco ' +  banco.nome + response)    
          })
-    }
-    bancos = [accounts[bancosRank[0]].toLowerCase(),accounts[bancosRank[1]].toLowerCase()]
+         .catch(e => {
+             console.log('ERRO: ' + e)
+          })
+    } 
+    var bancosL = [accounts[bancosRank[0]].toLowerCase(),accounts[bancosRank[1]].toLowerCase()]
     //Adicionar as equipas
     for (var eq in equipasRank) {
         var equipa = equipasMeta[eq]
-        equipa['_id'] =  accounts[equipasRank[b]].toLowerCase()
-        equipa['bancos'] = bancos
+        equipa['_id'] =  accounts[equipasRank[eq]].toLowerCase()
+        equipa['bancos'] = bancosL
+        //console.dir(equipa)
         axios.post('http://localhost:4000/users/',equipa)
         .then(response => {
-            console.log('Correu tudo bem' + response)    
+            console.log('Adicionei equipa' + equipa.nome + response)    
         })
         .catch(e => {
             console.log('ERRO: ' + e)
          })
     }
 
-    // Adicionar os jogadores
-    for (var i in equipasNome) {
-        equipa = equipasObjeto[i];
+    // // Adicionar os jogadores
+     for (var i in equipasNome) {
+         equipa = equipasObjeto[i];
 
-        equipa.forEach(function(element) {
-            var enviar ={}
-            enviar['jogador'] = element
-            enviar['_id'] = accounts[equipasRank[i]].toLowerCase() //ID EQUIPA
-            axios.post('http://localhost:4000/users/addJogador/',enviar)
+         equipa.forEach(function(element) {
+             var enviar ={}
+             enviar['jogador'] = element
+             enviar['_id'] = accounts[equipasRank[i]].toLowerCase() //ID EQUIPA
+             axios.post('http://localhost:4000/users/addJogador/',enviar)
 
-            .then(response => {
-                console.log('Correu tudo bem' + response)    
-            })
-            .catch(e => {
-                console.log('ERRO: ' + e)
+             .then(response => {
+                 console.log('Correu tudo bem' + response)    
              })
+             .catch(e => {
+                 console.log('ERRO: ' + e)
+              })
 
-        console.dir(enviar)
-        return
+         });
 
 
-        });
-        
-
-    }
+     }
 });
