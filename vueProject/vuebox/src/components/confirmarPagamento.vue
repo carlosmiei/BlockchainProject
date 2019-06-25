@@ -321,7 +321,7 @@ export default {
     },
 
     transacoesCompletas(){
-      return this.transacoes.filter(elem => elem.estado === 'Pago')
+      return this.transacoes.filter(elem => elem.estado === 'Pago' || elem.estado === 'Completa')
     }
   }
 
