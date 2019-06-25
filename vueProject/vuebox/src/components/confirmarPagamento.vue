@@ -120,11 +120,6 @@
             <v-layout justify-center>
                 {{ props.item.valorT }}
             </v-layout>
-          </td>
-          <td class="text-xs-right">
-            <v-layout justify-center>
-                {{ props.item.nomeJogador }}
-            </v-layout>
           </td>         
           <td class="text-xs-right" >
             <v-layout justify-center>
