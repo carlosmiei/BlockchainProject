@@ -170,6 +170,7 @@ export default {
       headers: [
       {text: 'Id da Venda ',value: '_id', align: 'center'},
       {text: 'Comprador', value: 'to' },
+      {text: 'Jogador', value: 'nomeJogador' },
       {text: 'Valor', value: 'valorT' },
       {text: 'Estado', value: 'estado' }],
       transacoes: [ ],
